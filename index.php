@@ -328,30 +328,60 @@
 </div>
 
 <div class="container">
-	<ul class="nav nav-tabs">
-		<li role="presentation" class="active"><a href="#">三成开走</a></li>
-		<li role="presentation"><a href="#">个人车源</a></li>
-		<li role="presentation"><a href="#">原厂质保</a></li>
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs" role="tablist" id="navtabsFrom">
+		<li role="presentation" class="active"><a href="#threetime" aria-controls="home" role="tab" data-toggle="tab">三成开走</a></li>
+		<li role="presentation"><a href="#owncar" aria-controls="profile" role="tab" data-toggle="tab">个人车源</a></li>
+		<li role="presentation"><a href="#source" aria-controls="messages" role="tab" data-toggle="tab">原厂质保</a></li>
 	</ul>
+
+	<!-- Tab panes -->
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane fade in active" id="threetime">1...</div>
+		<div role="tabpanel" class="tab-pane fade" id="owncar">2...</div>
+		<div role="tabpanel" class="tab-pane fade" id="source">3...</div>
+	</div>
 	这一部分应该是有点广告性质的东西。或者特色频道。
 </div>
 
 <div class="container">
-	<ul class="nav nav-tabs">
-		<li role="presentation" class="active"><a href="#">SUV</a></li>
-		<li role="presentation"><a href="#">豪华商务</a></li>
-		<li role="presentation"><a href="#">混合动力</a></li>
-		<li role="presentation"><a href="#">时尚跑车</a></li>
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs" role="tablist" id="navtabstype">
+		<li role="presentation" class="active"><a href="#suvtype" aria-controls="home" role="tab" data-toggle="tab">SUV<</a></li>
+		<li role="presentation"><a href="#businesstype" aria-controls="profile" role="tab" data-toggle="tab">豪华商务</a></li>
+		<li role="presentation"><a href="#hybird" aria-controls="messages" role="tab" data-toggle="tab">混合动力</a></li>
+		<li role="presentation"><a href="#coupe" aria-controls="messages" role="tab" data-toggle="tab">时尚跑车</a></li>
 	</ul>
+
+	<!-- Tab panes -->
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane fade in active" id="suvtype">1...</div>
+		<div role="tabpanel" class="tab-pane fade" id="businesstype">2...</div>
+		<div role="tabpanel" class="tab-pane fade" id="hybird">3...</div>
+		<div role="tabpanel" class="tab-pane fade" id="coupe">4...</div>
+	</div>
 	各个车型, 图文并茂
 </div>
+<br /><br /><br />
 
 <div class="container-fluid">
 	<div class="container">
-		<div class="col-md-3">闪腾认证1088项检测</div>
-		<div class="col-md-3">一年/两万公里质保</div>
-		<div class="col-md-3">重大问题车15天包退</div>
-		<div class="col-md-3">专业顾问全程陪买</div>
+		<div class="col-md-3">
+			<div class="adtitle">闪腾认证1088项检测</div>
+			<div class="adsubtitle">反馈真实车况杜绝问题车</div>
+		</div>
+		<div class="col-md-3">
+			<div class="adtitle">一年/两万公里质保</div>
+			<div class="adsubtitle">提供主要部件保额内的免费保修</div>
+		</div>
+		<div class="col-md-3">
+			<div class="adtitle">重大问题车15天包退</div>
+			<div class="adsubtitle">杜绝重大问题车，让您买得放心</div>
+		</div>
+		<div class="col-md-3">
+			<div class="adtitle">专业顾问全程陪买</div>
+			<div class="adsubtitle">1对1全程陪您找车、看车、验车</div>
+		</div>
 	</div>
 </div>
 

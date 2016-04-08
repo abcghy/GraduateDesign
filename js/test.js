@@ -1,4 +1,9 @@
 /**
  * Created by sakura on 16/3/28.
  */
-document.getElementById('shit').disabled = '';
+
+// $(function () {
+//     $('#myTab a:last').tab("show");
+// })
+
+document.getElementById("btn-normal").disabled = '';
