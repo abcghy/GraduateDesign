@@ -8,9 +8,6 @@ body {
     margin-bottom: 60px;
 }
 
-.jumbotron {
-    background: #eee url("../images/whitecar.png") no-repeat right top fixed;
-}
 
 .footer {
     position: absolute;
@@ -157,16 +154,4 @@ code {
 a:link, a:visited, a:hover, a:active {
     color: #000000;
     text-decoration: none;
-}
-
-#navtabsFrom {
-    margin-left: 58px;
-}
-
-#navtabstype {
-    margin-left: 15px;
-}
-
-.right-side {
-    margin-top: 30px;
 }

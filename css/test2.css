@@ -1,0 +1,4 @@
+img {
+    position: absolute;
+    clip: rect(140px 60px 200px 0px);
+}
