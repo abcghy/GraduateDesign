@@ -42,19 +42,31 @@
 			</button>
 			<a class="navbar-brand" href="index.php"> 闪腾二手车</a>
 		</div>
-		<!-- 如果已经登录就变成一个自己的个人头像-->
-		<!-- 然后点击变成个人主页, 等等-->
-		<?php
+
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="#">首页</a></li>
+				<li><a href="#">我要买车</a></li>
+				<li><a href="#">我要卖车</a></li>
+			</ul>
+
+			<!-- 如果已经登录就变成一个自己的个人头像-->
+			<!-- 然后点击变成个人主页, 等等-->
+			<?php
 			if (isset($_COOKIE['nickname']) && isset($_COOKIE['email'])) {
-		?>
-		<button type="button" class="btn btn-link navbar-btn navbar-right"><a href="profile_index.php"><?php echo $_COOKIE['nickname'] ?></a></button>
-		<?php
+				?>
+				<button type="button" class="btn btn-link navbar-btn navbar-right"><a href="profile_index.php"><?php echo $_COOKIE['nickname'] ?></a></button>
+				<?php
 			} else {
-		?>
-		<button type="button"  class="btn btn-link navbar-btn navbar-right"><a href="login.html">登录</a></button>
-		<?php
+				?>
+				<button type="button"  class="btn btn-link navbar-btn navbar-right"><a href="login.html">登录</a></button>
+				<?php
 			}
-		?>
+			?>
+
+		</div>
+
+
 
 		<!--<div id="navbar" class="collapse navbar-collapse navbar-right">-->
 
@@ -328,30 +340,541 @@
 </div>
 
 <div class="container">
-	<ul class="nav nav-tabs">
-		<li role="presentation" class="active"><a href="#">三成开走</a></li>
-		<li role="presentation"><a href="#">个人车源</a></li>
-		<li role="presentation"><a href="#">原厂质保</a></li>
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs" role="tablist" id="navtabsFrom">
+		<li role="presentation" class="active"><a href="#threetime" aria-controls="home" role="tab" data-toggle="tab">三成开走</a></li>
+		<li role="presentation"><a href="#owncar" aria-controls="profile" role="tab" data-toggle="tab">个人车源</a></li>
+		<li role="presentation"><a href="#source" aria-controls="messages" role="tab" data-toggle="tab">原厂质保</a></li>
 	</ul>
-	这一部分应该是有点广告性质的东西。或者特色频道。
+
+	<!-- Tab panes -->
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane fade in active" id="threetime">
+			<div class="col-md-4">
+				<img src="images/three_left_side.jpg" alt="左侧展示栏">
+			</div>
+
+			<div class="col-md-8 col-xs-12 right-side">
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/three_car_1.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/three_car_2.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/three_car_3.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/three_car_4.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/three_car_5.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/three_car_6.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		
+		
+		<div role="tabpanel" class="tab-pane fade" id="owncar">
+			<div class="col-md-4">
+				<img src="images/individual_left_side.jpg" alt="左侧展示栏">
+			</div>
+
+			<div class="col-md-8 col-xs-12 right-side">
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/individual_car_1.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/individual_car_2.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/individual_car_3.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/individual_car_4.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/individual_car_5.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/individual_car_6.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div role="tabpanel" class="tab-pane fade" id="source">
+			<div class="col-md-4">
+				<img src="images/left-side.jpg" alt="左侧展示栏">
+			</div>
+
+			<div class="col-md-8 col-xs-12 right-side">
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/car_1.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/car_2.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/car_3.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>s
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/car_4.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/car_5.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/car_6.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
 </div>
 
 <div class="container">
-	<ul class="nav nav-tabs">
-		<li role="presentation" class="active"><a href="#">SUV</a></li>
-		<li role="presentation"><a href="#">豪华商务</a></li>
-		<li role="presentation"><a href="#">混合动力</a></li>
-		<li role="presentation"><a href="#">时尚跑车</a></li>
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs" role="tablist" id="navtabstype">
+		<li role="presentation" class="active"><a href="#suvtype" aria-controls="home" role="tab" data-toggle="tab">SUV</a></li>
+		<li role="presentation"><a href="#businesstype" aria-controls="profile" role="tab" data-toggle="tab">豪华商务</a></li>
+		<li role="presentation"><a href="#forstep" aria-controls="messages" role="tab" data-toggle="tab">经济代步</a></li>
+		<li role="presentation"><a href="#capi" aria-controls="messages" role="tab" data-toggle="tab">格调小资</a></li>
 	</ul>
-	各个车型, 图文并茂
+
+	<!-- Tab panes -->
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane fade in active" id="suvtype">
+			<div class="col-md-4">
+				<img src="images/suv_left_side.jpg" alt="左侧展示栏">
+			</div>
+
+			<div class="col-md-8 col-xs-12 right-side">
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/suv_car_1.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/suv_car_2.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/suv_car_3.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/suv_car_4.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/suv_car_5.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/suv_car_6.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div role="tabpanel" class="tab-pane fade" id="businesstype">
+			<div class="col-md-4">
+				<img src="images/business_left_side.jpg" alt="左侧展示栏">
+			</div>
+
+			<div class="col-md-8 col-xs-12 right-side">
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/business_car_1.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/business_car_2.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/business_car_3.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/business_car_4.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/business_car_5.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/business_car_6.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div role="tabpanel" class="tab-pane fade" id="forstep">
+			<div class="col-md-4">
+				<img src="images/forstep_left_side.jpg" alt="左侧展示栏">
+			</div>
+
+			<div class="col-md-8 col-xs-12 right-side">
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/forstep_car_1.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/forstep_car_2.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/forstep_car_3.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/forstep_car_4.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/forstep_car_5.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/forstep_car_6.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div role="tabpanel" class="tab-pane fade" id="capi">
+			<div class="col-md-4">
+				<img src="images/capi_left_side.jpg" alt="左侧展示栏">
+			</div>
+
+			<div class="col-md-8 col-xs-12 right-side">
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/capi_car_1.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/capi_car_2.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/capi_car_3.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/capi_car_4.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/capi_car_5.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="thumbnail">
+						<a href="#<?php ?>"><img src="images/cars/capi_car_6.jpg" alt="雪弗兰" /></a>
+						<div class="caption">
+							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
+							<p class="priceforcar">￥15.28万</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+<br /><br /><br />
 
 <div class="container-fluid">
 	<div class="container">
-		<div class="col-md-3">闪腾认证1088项检测</div>
-		<div class="col-md-3">一年/两万公里质保</div>
-		<div class="col-md-3">重大问题车15天包退</div>
-		<div class="col-md-3">专业顾问全程陪买</div>
+		<div class="col-md-3">
+			<img class="littletip" src="images/head/quality.png" alt="品质" />
+			<div class="adtitle"><h3>闪腾认证1088项检测</h3></div>
+			<div class="adsubtitle"><p>反馈真实车况杜绝问题车</p></div>
+		</div>
+		<div class="col-md-3">
+			<img class="littletip" src="images/head/ensurance.png" alt="保障" />
+			<div class="adtitle"><h3>一年/两万公里质保</h3></div>
+			<div class="adsubtitle"><p>提供主要部件保额内的免费保修</p></div>
+		</div>
+		<div class="col-md-3">
+			<img class="littletip" src="images/head/dontworry.png" alt="品质" />
+
+			<div class="adtitle"><h3>重大问题车15天包退</h3></div>
+			<div class="adsubtitle"><p>杜绝重大问题车，让您买得放心</p></div>
+		</div>
+		<div class="col-md-3">
+			<img class="littletip" src="images/head/tiexin.png" alt="品质" />
+
+			<div class="adtitle"><h3>专业顾问全程陪买</h3></div>
+			<div class="adsubtitle"><p>1对1全程陪您找车、看车、验车</p></div>
+		</div>
 	</div>
 </div>
 

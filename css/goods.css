@@ -4,7 +4,7 @@ html {
 }
 
 body {
-    margin-top: 50px;
+    margin-top: 70px;
     margin-bottom: 60px;
 }
 
@@ -21,7 +21,7 @@ body {
 }
 
 body > .container {
-    padding: 60px 15px 0;
+    /*padding: 60px 15px 0;*/
 }
 .container .text-muted {
     margin: 20px 0;
@@ -147,26 +147,4 @@ code {
     -webkit-box-shadow: 0 0 50px #DDDDDD;
     -moz-box-shadow:    0 0 50px #DDDDDD;
     box-shadow:         0 0 50px #DDDDDD;
-}
-
-.priceforcar {
-    color: #ff4776;
-    font-weight: 700;
-}
-
-a:link, a:visited, a:hover, a:active {
-    color: #000000;
-    text-decoration: none;
-}
-
-#navtabsFrom {
-    margin-left: 58px;
-}
-
-#navtabstype {
-    margin-left: 15px;
-}
-
-.right-side {
-    margin-top: 30px;
 }

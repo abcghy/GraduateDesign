@@ -5,10 +5,11 @@
  * Date: 16/3/28
  * Time: 上午12:13
  */
+include_once('db.php');
 
 $email = $_GET['email'];
 
-$con = new mysqli('localhost', 'root', 'root', 'test', '8889');
+//$con = new mysqli('localhost', 'root', 'root', 'test', '8889');
 
 /**
  * @param mysqli $connection
