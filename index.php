@@ -42,19 +42,31 @@
 			</button>
 			<a class="navbar-brand" href="index.php"> 闪腾二手车</a>
 		</div>
-		<!-- 如果已经登录就变成一个自己的个人头像-->
-		<!-- 然后点击变成个人主页, 等等-->
-		<?php
+
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="#">首页</a></li>
+				<li><a href="#">我要买车</a></li>
+				<li><a href="#">我要卖车</a></li>
+			</ul>
+
+			<!-- 如果已经登录就变成一个自己的个人头像-->
+			<!-- 然后点击变成个人主页, 等等-->
+			<?php
 			if (isset($_COOKIE['nickname']) && isset($_COOKIE['email'])) {
-		?>
-		<button type="button" class="btn btn-link navbar-btn navbar-right"><a href="profile_index.php"><?php echo $_COOKIE['nickname'] ?></a></button>
-		<?php
+				?>
+				<button type="button" class="btn btn-link navbar-btn navbar-right"><a href="profile_index.php"><?php echo $_COOKIE['nickname'] ?></a></button>
+				<?php
 			} else {
-		?>
-		<button type="button"  class="btn btn-link navbar-btn navbar-right"><a href="login.html">登录</a></button>
-		<?php
+				?>
+				<button type="button"  class="btn btn-link navbar-btn navbar-right"><a href="login.html">登录</a></button>
+				<?php
 			}
-		?>
+			?>
+
+		</div>
+
+
 
 		<!--<div id="navbar" class="collapse navbar-collapse navbar-right">-->
 
