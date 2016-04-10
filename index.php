@@ -521,7 +521,7 @@
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
+							<p class="priceforcar">￥15.28万</p>s
 						</div>
 					</div>
 				</div>
@@ -894,6 +894,6 @@
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 
-<script src="index.js"></script>
+<script src="js/index.js"></script>
 </body>
 </html>
