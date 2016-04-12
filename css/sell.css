@@ -10,7 +10,6 @@ body {
 
 .jumbotron {
     background: #eee url("../images/whitecar.png") no-repeat right top fixed;
-    height: 450px;
 }
 
 .footer {
@@ -144,39 +143,18 @@ code {
     }
 }
 
-.thumbnail:hover {
+#sell_bg {
+    background: url("../images/sell_bg_blured.jpg") no-repeat center;
+    height: 1080px;
+}
+
+#sell_bg > form {
+    background: #FFFFFF;
+    margin-left: 400px;
+    margin-right: 200px;
+    margin-top: 200px;
+    padding: 50px 100px 50px 20px;
     -webkit-box-shadow: 0 0 50px #DDDDDD;
     -moz-box-shadow:    0 0 50px #DDDDDD;
     box-shadow:         0 0 50px #DDDDDD;
-}
-
-.priceforcar {
-    color: #ff4776;
-    font-weight: 700;
-}
-
-a:link, a:visited, a:hover, a:active {
-    color: #000000;
-    text-decoration: none;
-}
-
-#navtabsFrom {
-    margin-left: 58px;
-}
-
-#navtabstype {
-    margin-left: 15px;
-}
-
-.right-side {
-    margin-top: 30px;
-}
-
-#index-littletip {
-    width: 75%;
-}
-
-.littletip {
-    float: left;
-    margin-top: 20px
 }

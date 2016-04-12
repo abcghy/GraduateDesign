@@ -64,8 +64,8 @@
 
 <div class="container">
     <ol class="breadcrumb">
-        <li><a href="#">主页</a></li>
-        <li><a href="#">我要买车</a></li>
+        <li><a href="index.php">主页</a></li>
+        <li><a href="search.php">我要买车</a></li>
         <li class="active">商品详情</li>
     </ol>
 </div>

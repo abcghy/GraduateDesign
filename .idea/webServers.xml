@@ -6,7 +6,7 @@
         <fileTransfer port="0" mountedRoot="$APPLICATION_HOME_DIR$/bin/C:\wamp64\www" accessType="MOUNT" />
       </webServer>
       <webServer id="1fbb4292-b368-4f29-83f2-d39f0213fe24" name="mamp test" url="http://localhost:8888">
-        <fileTransfer port="0" mountedRoot="$APPLICATION_HOME_DIR$/bin" accessType="MOUNT" />
+        <fileTransfer port="0" mountedRoot="/Applications/MAMP/htdocs" accessType="MOUNT" />
       </webServer>
     </option>
   </component>

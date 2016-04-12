@@ -45,9 +45,9 @@
 
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
-				<li><a href="#">首页</a></li>
-				<li><a href="#">我要买车</a></li>
-				<li><a href="#">我要卖车</a></li>
+				<li><a href="index.php">首页</a></li>
+				<li><a href="search.php">我要买车</a></li>
+				<li><a href="sell.php">我要卖车</a></li>
 			</ul>
 
 			<!-- 如果已经登录就变成一个自己的个人头像-->
@@ -181,109 +181,7 @@
 			</ul>
 		</div>
 
-		<a id="make-btn" class="btn btn-primary" role="button" data-toggle="collapse" href="#make-collapse" aria-expanded="false" aria-controls="make-collapse">
-			品牌
-		</a>
-		<a id="model-btn" class="btn btn-primary" role="button" data-toggle="collapse" href="#model-collapse" aria-expanded="false" aria-controls="model-collapse">
-			型号
-		</a>
-		<a id="year-btn" class="btn btn-primary" role="button" data-toggle="collapse" href="#year-collapse" aria-expanded="false" aria-controls="year-collapse">
-			年限
-		</a>
-		<a id="price-btn" class="btn btn-primary" role="button" data-toggle="collapse" href="#price-collapse" aria-expanded="false" aria-controls="price-collapse">
-			价格
-		</a>
 
-		<div class="collapse" id="make-collapse">
-			<div class="well">
-				<ul class="list-inline">
-					<li><a href="#">奥迪</a></li>
-					<li><a href="#">宝马</a></li>
-					<li><a href="#">保时捷</a></li>
-					<li><a href="#">奔驰</a></li>
-					<li><a href="#">本田</a></li>
-					<li><a href="#">比亚迪</a></li>
-					<li><a href="#">别克</a></li>
-					<li><a href="#">宾利</a></li>
-					<li><a href="#">大众</a></li>
-					<li><a href="#">东风</a></li>
-					<li><a href="#">法拉利</a></li>
-					<li><a href="#">丰田</a></li>
-					<li><a href="#">福特</a></li>
-					<li><a href="#">红旗</a></li>
-					<li><a href="#">吉利</a></li>
-					<li><a href="#">江淮</a></li>
-					<li><a href="#">凯迪拉克</a></li>
-					<li><a href="#">劳斯莱斯</a></li>
-					<li><a href="#">雷克萨斯</a></li>
-					<li><a href="#">雷诺</a></li>
-					<li><a href="#">林肯</a></li>
-					<li><a href="#">路虎</a></li>
-					<li><a href="#">马自达</a></li>
-					<li><a href="#">迈巴赫</a></li>
-					<li><a href="#">奇瑞</a></li>
-					<li><a href="#">日产</a></li>
-					<li><a href="#">特斯拉</a></li>
-					<li><a href="#">五菱</a></li>
-					<li><a href="#">夏利</a></li>
-					<li><a href="#">现代</a></li>
-					<li><a href="#">雪佛兰</a></li>
-					<li><a href="#">雪铁龙</a></li>
-					<li><a href="#">一汽</a></li>
-					<li><a href="#">英菲尼迪</a></li>
-				</ul>
-			</div>
-		</div>
-
-		<div class="collapse" id="model-collapse">
-			<div class="well">
-				<ul class="list-inline">
-					<li><a href="#">SUV</a></li>
-					<li><a href="#">轿车</a></li>
-					<li><a href="#">敞篷车</a></li>
-					<li><a href="#">跑车</a></li>
-					<li><a href="#">混合动力</a></li>
-					<li><a href="#">卡车</a></li>
-					<li><a href="#">房车</a></li>
-					<li><a href="#">省油车</a></li>
-					<li><a href="#">经济代步</a></li>
-					<li><a href="#">高性价比</a></li>
-				</ul>
-			</div>
-		</div>
-
-		<div class="collapse" id="year-collapse">
-			<div class="well">
-				<ul class="list-inline">
-					<li><a href="#">2016</a></li>
-					<li><a href="#">2015</a></li>
-					<li><a href="#">2014</a></li>
-					<li><a href="#">2013</a></li>
-					<li><a href="#">2012</a></li>
-					<li><a href="#">2011</a></li>
-					<li><a href="#">2010</a></li>
-					<li><a href="#">2009</a></li>
-					<li><a href="#">2008</a></li>
-					<li><a href="#">2000 - 2007</a></li>
-					<li><a href="#">1993 - 1999</a></li>
-				</ul>
-			</div>
-		</div>
-
-		<div class="collapse" id="price-collapse">
-			<div class="well">
-				<ul class="list-inline">
-					<li><a href="#">低于2万</a></li>
-					<li><a href="#">2-5万</a></li>
-					<li><a href="#">5-8万</a></li>
-					<li><a href="#">8-12万</a></li>
-					<li><a href="#">12-16万</a></li>
-					<li><a href="#">16-20万</a></li>
-					<li><a href="#">20-30万</a></li>
-					<li><a href="#">30万以上</a></li>
-				</ul>
-			</div>
-		</div>
 
 
 <!--		这个部分应该是make type year price几个（中文）按钮，然后使用jquery在下方弹出一个框，是查询了数据库显示有哪些车型什么的。-->
@@ -314,7 +212,7 @@
 				</div>
 			</div>
 			<div class="item">
-				<img class="third-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="...">
+				<img class="third-slide" src="images/whitecar.png" alt="...">
 				<div class="carousel-caption">
 					...
 				</div>
@@ -357,7 +255,7 @@
 			<div class="col-md-8 col-xs-12 right-side">
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/three_car_1.jpg" alt="雪弗兰" /></a>
+						<a href="goods.php<?php ?>"><img src="images/cars/three_car_1.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -851,30 +749,26 @@
 </div>
 <br /><br /><br />
 
-<div class="container-fluid">
-	<div class="container">
-		<div class="col-md-3">
-			<img class="littletip" src="images/head/quality.png" alt="品质" />
-			<div class="adtitle"><h3>闪腾认证1088项检测</h3></div>
-			<div class="adsubtitle"><p>反馈真实车况杜绝问题车</p></div>
-		</div>
-		<div class="col-md-3">
-			<img class="littletip" src="images/head/ensurance.png" alt="保障" />
-			<div class="adtitle"><h3>一年/两万公里质保</h3></div>
-			<div class="adsubtitle"><p>提供主要部件保额内的免费保修</p></div>
-		</div>
-		<div class="col-md-3">
-			<img class="littletip" src="images/head/dontworry.png" alt="品质" />
-
-			<div class="adtitle"><h3>重大问题车15天包退</h3></div>
-			<div class="adsubtitle"><p>杜绝重大问题车，让您买得放心</p></div>
-		</div>
-		<div class="col-md-3">
-			<img class="littletip" src="images/head/tiexin.png" alt="品质" />
-
-			<div class="adtitle"><h3>专业顾问全程陪买</h3></div>
-			<div class="adsubtitle"><p>1对1全程陪您找车、看车、验车</p></div>
-		</div>
+<div id="index-littletip" class="container-fluid">
+	<div class="col-md-3">
+		<img class="littletip" src="images/head/quality.png" alt="品质" />
+		<div class="adtitle"><h3>闪腾认证1088项检测</h3></div>
+		<div class="adsubtitle"><p>反馈真实车况杜绝问题车</p></div>
+	</div>
+	<div class="col-md-3">
+		<img class="littletip" src="images/head/ensurance.png" alt="保障"/>
+		<div class="adtitle"><h3>一年/两万公里质保</h3></div>
+		<div class="adsubtitle"><p>提供主要部件保额内的免费保修</p></div>
+	</div>
+	<div class="col-md-3">
+		<img class="littletip" src="images/head/dontworry.png" alt="品质"/>
+		<div class="adtitle"><h3>重大问题车15天包退</h3></div>
+		<div class="adsubtitle"><p>杜绝重大问题车，让您买得放心</p></div>
+	</div>
+	<div class="col-md-3">
+		<img class="littletip" src="images/head/tiexin.png" alt="品质"/>
+		<div class="adtitle"><h3>专业顾问全程陪买</h3></div>
+		<div class="adsubtitle"><p>1对1全程陪您找车、看车、验车</p></div>
 	</div>
 </div>
 
