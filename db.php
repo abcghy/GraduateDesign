@@ -6,6 +6,6 @@
  * Time: 下午2:50
  */
 
-$con = new mysqli('localhost', 'root', 'root', 'test', 8889);
+$con = new mysqli('localhost', 'root', '', 'test', 3306);
 
 ?>

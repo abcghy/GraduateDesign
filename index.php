@@ -93,7 +93,7 @@
 			<ul class="list-inline">
 				<li>通过</li>
 				<li id="make-search"><a href="#">品牌</a></li>
-				<li id="model-search"><a href="#">型号</a></li>
+				<li id="type-search"><a href="#">类型</a></li>
 				<li id="year-search"><a href="#">年限</a></li>
 				<li id="price-search"><a href="#">价格</a></li>
 				<li>来查询</li>
@@ -139,7 +139,7 @@
 				<li><a href="#">英菲尼迪</a></li>
 			</ul>
 		</div>
-		<div class="model well">
+		<div class="type well">
 			<ul class="list-inline">
 				<li><a href="#">SUV</a></li>
 				<li><a href="#">轿车</a></li>
