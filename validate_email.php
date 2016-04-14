@@ -9,7 +9,6 @@ include_once('db.php');
 
 $email = $_GET['email'];
 
-//$con = new mysqli('localhost', 'root', 'root', 'test', '8889');
 
 /**
  * @param mysqli $connection

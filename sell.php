@@ -78,45 +78,17 @@
         <div class="form-group">
             <label for="sell_make" class="col-sm-2 control-label">品牌</label>
             <div class="col-sm-10 input-group">
-                <select name="make" id="sell_make" class="form-control">
+                <select name="make" id="sell_make" class="form-control" onclick="query_model()">
+                    <option value="0">请选择品牌</option>
                     <?php
                     //            输出数据库中的各种品牌
                     //            value 就是传输过去的值
+                    include_once('db.php');
+                    $result = $con->query('select * from make');
+                    while ($row = $result->fetch_array()) {
+                        echo '<option value="'.$row['id'].'">'.$row['make'].'</option>';
+                    }
                     ?>
-                    <option value="0">请选择品牌</option>
-                    <option value="1">奥迪</option>
-                    <option value="2">宝马</option>
-                    <option value="3">保时捷</option>
-                    <option value="4">奔驰</option>
-                    <option value="5">本田</option>
-                    <option value="6">比亚迪</option>
-                    <option value="7">别克</option>
-                    <option value="8">宾利</option>
-                    <option value="9">大众</option>
-                    <option value="">东风</option>
-                    <option value="">法拉利</option>
-                    <option value="">丰田</option>
-                    <option value="">福特</option>
-                    <option value="">红旗</option>
-                    <option value="">吉利</option>
-                    <option value="">江淮</option>
-                    <option value="">凯迪拉克</option>
-                    <option value="">劳斯莱斯</option>
-                    <option value="">雷克萨斯</option>
-                    <option value="">雷诺</option>
-                    <option value="">林肯</option>
-                    <option value="">路虎</option>
-                    <option value="">马自达</option>
-                    <option value="">迈巴赫</option>
-                    <option value="">奇瑞</option>
-                    <option value="">日产</option>
-                    <option value="">特斯拉</option>
-                    <option value="">五菱</option>
-                    <option value="">夏利</option>
-                    <option value="">现代</option>
-                    <option value="">雪佛兰</option>
-                    <option value="">雪铁龙</option>
-                    <option value="">一汽</option>
                 </select>
             </div>
         </div>
@@ -128,16 +100,6 @@
                     <!--            根据上面选的 make 来确定下面的型号-->
                     <!--            这对数据库来说无疑不是一个挑战-->
                     <option value="0">请选择型号</option>
-                    <option value="1">奥迪A3</option>
-                    <option value="2">奥迪A4</option>
-                    <option value="3">奥迪A4L</option>
-                    <option value="4">奥迪A6</option>
-                    <option value="5">奥迪A6L</option>
-                    <option value="6">奥迪Q3</option>
-                    <option value="7">奥迪Q5</option>
-                    <option value="8">奥迪A1</option>
-                    <option value="9">奥迪A5</option>
-                    <option value="0">奥迪A7</option>
                 </select>
             </div>
         </div>
