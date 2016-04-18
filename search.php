@@ -30,6 +30,28 @@
 
 <body>
 
+<?php
+include_once('db.php');
+
+$make = $price = $type = $year = '';
+
+if ($_SERVER['REQUEST_METHOD'] == "GET") {
+    if (isset($_GET['make'])) {
+        $make  = $_GET['make'];
+    }
+    if (isset($_GET['price'])) {
+        $price = $_GET['price'];
+    }
+    if (isset($_GET['type'])) {
+        $type  = $_GET['type'];
+    }
+    if (isset($_GET['year'])) {
+        $year  = $_GET['year'];
+    }
+}
+
+?>
+
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -46,7 +68,7 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li><a href="index.php">首页</a></li>
-                <li><a href="buy.php">我要买车</a></li>
+                <li><a href="search.php">我要买车</a></li>
                 <li><a href="sell.php">我要卖车</a></li>
             </ul>
 
@@ -76,58 +98,139 @@
     <div class="col-md-10">
         <ul class="list-group">
             <li class="list-group-item">
-                已选条件：
+                <ul class="list-inline">
+                    <li>已选条件：</li>
+                    <?php
+                    if ($make) {
+                        // 如果有品牌，就从数据库里读取品牌数据
+                        $result = $con->query("select * from make where id = '".$make."';");
+                        if ($row = $result->fetch_array()) {
+                            echo '<li><a href="javascript:;">'.$row['make'].'</a></li>';
+                        }
+                    }
+                    if ($price) {
+                        $result = $con->query("select * from price where id = '".$price."';");
+                        if ($row = $result->fetch_array()) {
+                            echo '<li><a href="javascript:;">'.$row['description'].'</a></li>';
+                        }
+                    }
+                    if ($type) {
+                        $result = $con->query("select * from type where id = '".$type."';");
+                        if ($row = $result->fetch_array()) {
+                            echo '<li><a href="javascript:;">'.$row['description'].'</a></li>';
+                        }
+                    }
+                    if ($year) {
+                        $result = $con->query("select * from year where id = '".$year."';");
+                        if ($row = $result->fetch_array()) {
+                            echo '<li><a href="javascript:;">'.$row['description'].'</a></li>';
+                        }
+                    }
+//                    echo $_SERVER["REQUEST_METHOD"];
+                    ?>
+                </ul>
             </li>
             <li class="list-group-item">
                 <ul class="list-inline">
                     <li>品牌：&nbsp;&nbsp;&nbsp;&nbsp;</li>
-                    <li><a href="#">宝马</a></li>
-                    <li><a href="#">大众</a></li>
-                    <li><a href="#">奥迪</a></li>
-                    <li><a href="#">奔驰</a></li>
+                    <?php
+                    $result = $con->query("select * from make");
+                    while ($row = $result->fetch_array()) {
+                        if ($make) {
+                            echo '<li>'.$row['make'].'</li>';
+                        } else {
+                            echo '<li><a href="search.php?make='.$row['id'].'&';
+                            if ($price) {
+                                echo 'price='.$price.'&';
+                            }
+                            if ($type) {
+                                echo 'type='.$type.'&';
+                            }
+                            if ($year) {
+                                echo 'year='.$year.'&';
+                            }
+                            echo '">'.$row['make'].'</a></li>';
+                        }
+                    }
+                    ?>
                 </ul>
             </li>
             <li class="list-group-item">
                 <ul class="list-inline">
                     <li>价格：&nbsp;&nbsp;&nbsp;&nbsp;</li>
-                    <li><a href="#">低于2万</a></li>
-                    <li><a href="#">2-5万</a></li>
-                    <li><a href="#">5-8万</a></li>
-                    <li><a href="#">8-12万</a></li>
-                    <li><a href="#">12-16万</a></li>
-                    <li><a href="#">16-20万</a></li>
-                    <li><a href="#">20-30万</a></li>
+                    <?php
+                    $result = $con->query('select * from price;');
+                    while ($row = $result->fetch_array()) {
+                        if ($price) {
+                            echo '<li>'.$row['description'].'</li>';
+                        }
+                        else {
+                            echo '<li><a href="search.php?price='.$row['id'].'&';
+                            if ($make) {
+                                echo 'make='.$make.'&';
+                            }
+                            if ($type) {
+                                echo 'type='.$type.'&';
+                            }
+                            if ($year) {
+                                echo 'year='.$year.'&';
+                            }
+                            echo '">'.$row['description'].'</a></li>';
+                        }
+                    }
+                    ?>
                 </ul>
             </li>
             <li class="list-group-item">
                 <ul class="list-inline">
                     <li>类型：&nbsp;&nbsp;&nbsp;&nbsp;</li>
-                    <li><a href="#">SUV</a></li>
-                    <li><a href="#">轿车</a></li>
-                    <li><a href="#">敞篷车</a></li>
-                    <li><a href="#">跑车</a></li>
-                    <li><a href="#">混合动力</a></li>
-                    <li><a href="#">卡车</a></li>
-                    <li><a href="#">房车</a></li>
-                    <li><a href="#">省油车</a></li>
-                    <li><a href="#">经济代步</a></li>
-                    <li><a href="#">高性价比</a></li>
+                    <?php
+                    $result = $con->query('select * from type;');
+                    while ($row = $result->fetch_array()) {
+                        if ($type) {
+                            echo '<li>'.$row['description'].'</li>';
+                        }
+                        else {
+                            echo '<li><a href="search.php?type='.$row['id'].'&';
+                            if ($make) {
+                                echo 'make='.$make.'&';
+                            }
+                            if ($price) {
+                                echo 'price='.$price.'&';
+                            }
+                            if ($year) {
+                                echo 'year='.$year.'&';
+                            }
+                            echo '">'.$row['description'].'</a></li>';
+                        }
+                    }
+                    ?>
                 </ul>
             </li>
             <li class="list-group-item">
                 <ul class="list-inline">
                     <li>车龄：&nbsp;&nbsp;&nbsp;&nbsp;</li>
-                    <li><a href="#">2016</a></li>
-                    <li><a href="#">2015</a></li>
-                    <li><a href="#">2014</a></li>
-                    <li><a href="#">2013</a></li>
-                    <li><a href="#">2012</a></li>
-                    <li><a href="#">2011</a></li>
-                    <li><a href="#">2010</a></li>
-                    <li><a href="#">2009</a></li>
-                    <li><a href="#">2008</a></li>
-                    <li><a href="#">2000 - 2007</a></li>
-                    <li><a href="#">1993 - 1999</a></li>
+                    <?php
+                    $result = $con->query('select * from year;');
+                    while ($row = $result->fetch_array()) {
+                        if ($year) {
+                            echo '<li>'.$row['description'].'</li>';
+                        }
+                        else {
+                            echo '<li><a href="search.php?year='.$row['id'].'&';
+                            if ($make) {
+                                echo 'make='.$make.'&';
+                            }
+                            if ($price) {
+                                echo 'price='.$price.'&';
+                            }
+                            if ($type) {
+                                echo 'type='.$type.'&';
+                            }
+                            echo '">'.$row['description'].'</a></li>';
+                        }
+                    }
+                    ?>
                 </ul>
             </li>
         </ul>
