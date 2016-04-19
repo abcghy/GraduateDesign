@@ -236,6 +236,24 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         </ul>
 
         <div id="search_column">
+            <?php
+            $result = $con->query("select * from car");
+            while ($row = $result->fetch_array()) {
+            ?>
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <a href="#<?php ?>"><img src="images/cars/three_car_2.jpg" alt="雪弗兰" /></a>
+                    <div class="caption">
+                        <a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
+                        <a href="#<?php ?>"><p><?php $row['price'];?></p></a>
+                        <p class="priceforcar">￥<?php $row['price'];?></p>
+                    </div>
+                </div>
+            </div>
+            <?php
+            }
+            ?>
+
             <div class="col-md-4">
                 <div class="thumbnail">
                     <a href="#<?php ?>"><img src="images/cars/three_car_2.jpg" alt="雪弗兰" /></a>
