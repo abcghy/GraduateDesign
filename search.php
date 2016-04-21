@@ -33,22 +33,39 @@
 <?php
 include_once('db.php');
 
-$make = $price = $type = $year = '';
+$carperpage = 6;
+
+function changemile($length) {
+    $llength = $length / 10000;
+    return $llength.'万';
+}
+
+$make = $price = $type = $year = $page = '';
+$mmake = $pprice = $ttype = $yyear = $ppage = '';
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
     if (isset($_GET['make'])) {
-        $make  = $_GET['make'];
+        $make = $_GET['make'];
+        $mmake = '='.$make;
     }
     if (isset($_GET['price'])) {
         $price = $_GET['price'];
+        $pprice = '='.$price;
     }
     if (isset($_GET['type'])) {
-        $type  = $_GET['type'];
+        $type = $_GET['type'];
+        $ttype = '='.$type;
     }
     if (isset($_GET['year'])) {
-        $year  = $_GET['year'];
+        $year = $_GET['year'];
+        $yyear = '='.$year;
+    }
+    if (isset($_GET['page'])) {
+        $page = $_GET['page'];
+        $ppage = '='.$page;
     }
 }
+
 
 ?>
 
@@ -237,113 +254,31 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
         <div id="search_column">
             <?php
-            $result = $con->query("select * from car");
-            while ($row = $result->fetch_array()) {
-            ?>
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <a href="#<?php ?>"><img src="images/cars/three_car_2.jpg" alt="雪弗兰" /></a>
-                    <div class="caption">
-                        <a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-                        <a href="#<?php ?>"><p><?php $row['price'];?></p></a>
-                        <p class="priceforcar">￥<?php $row['price'];?></p>
-                    </div>
-                </div>
-            </div>
-            <?php
+//            echo "select car.* from car, model, make where car.model = model.id and make.id = model.make and make.id".$mmake.";";
+            $result = $con->query("select car.* from car, model, make, price, year where car.model = model.id and make.id = model.make and make.id".$mmake." and car.price < price.end and car.price > price.start and price.id ".$pprice." and car.type ".$ttype." and car.year <= year.end and car.year >= year.start and year.id ".$yyear." ;");
+            if ($result != null) {
+                while ($row = $result->fetch_array()) {
+                    echo '<div class="col-md-4">
+                        <div class="thumbnail">
+                            <a href="#<?php ?>"><img src="images/cars/three_car_2.jpg" alt="雪弗兰" /></a>
+                            <div class="caption">
+                                <a href="#"><p>'.$row['title'].'</p></a>
+                                <p>'.$row['year'].'上牌 | '.changemile($row['mile']);
+                    $userresult = $con->query("select * from user where id=".$row['user']);
+                    $userrow = $userresult->fetch_array();
+                    if ($userrow['city']) {
+                        echo ' | '.$userrow['city'];
+                    }
+                    echo '</p>
+                                <p class="priceforcar">￥'.changemile($row['price']).'</p>
+                            </div>
+                        </div>
+                    </div>';
+                }
             }
             ?>
 
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <a href="#<?php ?>"><img src="images/cars/three_car_2.jpg" alt="雪弗兰" /></a>
-                    <div class="caption">
-                        <a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-                        <a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-                        <p class="priceforcar">￥15.28万</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <a href="#<?php ?>"><img src="images/cars/three_car_2.jpg" alt="雪弗兰" /></a>
-                    <div class="caption">
-                        <a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-                        <a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-                        <p class="priceforcar">￥15.28万</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <a href="#<?php ?>"><img src="images/cars/three_car_2.jpg" alt="雪弗兰" /></a>
-                    <div class="caption">
-                        <a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-                        <a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-                        <p class="priceforcar">￥15.28万</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <a href="#<?php ?>"><img src="images/cars/three_car_2.jpg" alt="雪弗兰" /></a>
-                    <div class="caption">
-                        <a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-                        <a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-                        <p class="priceforcar">￥15.28万</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <a href="#<?php ?>"><img src="images/cars/three_car_2.jpg" alt="雪弗兰" /></a>
-                    <div class="caption">
-                        <a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-                        <a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-                        <p class="priceforcar">￥15.28万</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <a href="#<?php ?>"><img src="images/cars/three_car_2.jpg" alt="雪弗兰" /></a>
-                    <div class="caption">
-                        <a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-                        <a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-                        <p class="priceforcar">￥15.28万</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <a href="#<?php ?>"><img src="images/cars/three_car_2.jpg" alt="雪弗兰" /></a>
-                    <div class="caption">
-                        <a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-                        <a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-                        <p class="priceforcar">￥15.28万</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <a href="#<?php ?>"><img src="images/cars/three_car_2.jpg" alt="雪弗兰" /></a>
-                    <div class="caption">
-                        <a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-                        <a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-                        <p class="priceforcar">￥15.28万</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <a href="#<?php ?>"><img src="images/cars/three_car_2.jpg" alt="雪弗兰" /></a>
-                    <div class="caption">
-                        <a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-                        <a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-                        <p class="priceforcar">￥15.28万</p>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
 </div>
