@@ -29,7 +29,17 @@
 </head>
 
 <body>
+<?php
+include_once('db.php');
 
+$email = $nickname = '';
+if (isset($_COOKIE['email'])) {
+    $email = $_COOKIE['email'];
+}
+if (isset($_COOKIE['nickname'])) {
+    $nickname = $_COOKIE['nickname'];
+}
+?>
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -42,23 +52,35 @@
             </button>
             <a class="navbar-brand" href="index.php"> 闪腾二手车</a>
         </div>
-        <!-- 如果已经登录就变成一个自己的个人头像-->
-        <!-- 然后点击变成个人主页, 等等-->
-        <?php
-        if (isset($_COOKIE['nickname']) && isset($_COOKIE['email'])) {
-            ?>
-            <button type="button" class="btn btn-link navbar-btn navbar-right"><a href="profile_index.php"><?php echo $_COOKIE['nickname'] ?></a></button>
-            <?php
-        } else {
-            ?>
-            <button type="button"  class="btn btn-link navbar-btn navbar-right"><a href="login.html">登录</a></button>
-            <?php
-        }
-        ?>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="index.php">首页</a></li>
+                <li><a href="search.php">我要买车</a></li>
+                <li><a href="sell.php">我要卖车</a></li>
+            </ul>
 
-        <!--<div id="navbar" class="collapse navbar-collapse navbar-right">-->
+            <!-- 如果已经登录就变成一个自己的个人头像-->
+            <!-- 然后点击变成个人主页, 等等-->
+            <?php
+            if ($email && $nickname) {
+                $result = $con->query('select * from user where email="'.$email.'";');
+                $row = $result->fetch_array();
 
-        <!--</div>&lt;!&ndash;/.nav-collapse &ndash;&gt;-->
+                ?>
+                <button type="button" class="btn btn-link navbar-btn navbar-right"><a href="profile_index.php"><?php echo $_COOKIE['nickname'] ?></a></button>
+                <?php
+                if ($row['rate'] == 1) {
+                    ?>
+                    <button type="button" class="btn btn-link navbar-btn navbar-right"><a href="dashboard.php">后台管理</a></button>
+                    <?php
+                }
+            } else {
+                ?>
+                <button type="button"  class="btn btn-link navbar-btn navbar-right"><a href="login.html">登录</a></button>
+                <?php
+            }
+            ?>
+        </div>
     </div>
 </nav>
 

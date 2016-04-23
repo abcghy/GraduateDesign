@@ -71,7 +71,7 @@ if (isset($_COOKIE['nickname'])) {
 				?>
 				<button type="button" class="btn btn-link navbar-btn navbar-right"><a href="profile_index.php"><?php echo $_COOKIE['nickname'] ?></a></button>
 				<?php
-				if ($row['rate'] = 1) {
+				if ($row['rate'] == 1) {
 					?>
 					<button type="button" class="btn btn-link navbar-btn navbar-right"><a href="dashboard.php">后台管理</a></button>
 					<?php

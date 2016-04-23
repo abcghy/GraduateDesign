@@ -40,7 +40,8 @@ function changemile($length) {
     return $llength.'万';
 }
 
-$make = $price = $type = $year = $page = '';
+$make = $price = $type = $year = '';
+$page = 1;
 $mmake = $pprice = $ttype = $yyear = $ppage = '';
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
@@ -66,7 +67,13 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     }
 }
 
-
+$email = $nickname = '';
+if (isset($_COOKIE['email'])) {
+    $email = $_COOKIE['email'];
+}
+if (isset($_COOKIE['nickname'])) {
+    $nickname = $_COOKIE['nickname'];
+}
 ?>
 
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -92,10 +99,18 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             <!-- 如果已经登录就变成一个自己的个人头像-->
             <!-- 然后点击变成个人主页, 等等-->
             <?php
-            if (isset($_COOKIE['nickname']) && isset($_COOKIE['email'])) {
+            if ($email && $nickname) {
+                $result = $con->query('select * from user where email="'.$email.'";');
+                $row = $result->fetch_array();
+
                 ?>
                 <button type="button" class="btn btn-link navbar-btn navbar-right"><a href="profile_index.php"><?php echo $_COOKIE['nickname'] ?></a></button>
                 <?php
+                if ($row['rate'] == 1) {
+                    ?>
+                    <button type="button" class="btn btn-link navbar-btn navbar-right"><a href="dashboard.php">后台管理</a></button>
+                    <?php
+                }
             } else {
                 ?>
                 <button type="button"  class="btn btn-link navbar-btn navbar-right"><a href="login.html">登录</a></button>
@@ -252,17 +267,225 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             </li>
         </ul>
 
+        <?php
+        $result = $con->query("select count(*) from car, model, make, price, year where car.model = model.id and make.id = model.make and make.id".$mmake." and car.price < price.end and car.price > price.start and price.id ".$pprice." and car.type ".$ttype." and car.year <= year.end and car.year >= year.start and year.id ".$yyear." ;");
+        $row = $result->fetch_array();
+        // 总共 $num 个
+        $num = $row['count(*)'];
+        $allPage = ceil($num / $carperpage);
+        ?>
+
+        <nav>
+            <ul class="pagination">
+                <li class="<?php if ($page == 1) echo 'disabled'; ?>" aria-disabled="true">
+                    <a href="search.php?<?php
+                    if ($make) {
+                        echo 'make='.$make.'&';
+                    }
+                    if ($price) {
+                        echo 'price='.$price.'&';
+                    }
+                    if ($type) {
+                        echo 'type='.$type.'&';
+                    }
+                    if ($year) {
+                        echo 'year='.$year.'&';
+                    }
+                    echo 'page=';
+                    if ($page - 1 >= 1) {
+                        echo $page-1;
+                    } else {
+                        echo 1;
+                    }
+                    echo '&';
+                    ?>" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                <!-- 有几个就循环几个 当前页面disabled-->
+
+                <?php
+
+                if ($allPage <= 5) {
+                    for ( $thePage = 1; $thePage <= $allPage; $thePage++ ) {
+                        echo "<li class='";
+                        if ($page == $thePage) {
+                            echo 'active';
+                        }
+                        echo "'><a href='search.php?";
+                        if ($make) {
+                            echo 'make='.$make.'&';
+                        }
+                        if ($price) {
+                            echo 'price='.$price.'&';
+                        }
+                        if ($type) {
+                            echo 'type='.$type.'&';
+                        }
+                        if ($year) {
+                            echo 'year='.$year.'&';
+                        }
+                        if ($thePage) {
+                            echo 'page='.$thePage.'&';
+                        }
+                        echo "'>".$thePage."</a></li>";
+                    }
+                } else {
+                    if ($page > 3) {
+                        echo "<li><a href='search.php?";
+                        if ($make) {
+                            echo 'make='.$make.'&';
+                        }
+                        if ($price) {
+                            echo 'price='.$price.'&';
+                        }
+                        if ($type) {
+                            echo 'type='.$type.'&';
+                        }
+                        if ($year) {
+                            echo 'year='.$year.'&';
+                        }
+                        echo 'page=1&';
+                        echo "'>...</a></li>";
+                    }
+                    if ($page == 1 || $page == 2) {
+                        for ( $thePage = 1; $thePage <= 5; $thePage++ ) {
+                            echo "<li class='";
+                            if ($page == $thePage) {
+                                echo 'active';
+                            }
+                            echo "'><a href='search.php?";
+                            if ($make) {
+                                echo 'make='.$make.'&';
+                            }
+                            if ($price) {
+                                echo 'price='.$price.'&';
+                            }
+                            if ($type) {
+                                echo 'type='.$type.'&';
+                            }
+                            if ($year) {
+                                echo 'year='.$year.'&';
+                            }
+                            if ($thePage) {
+                                echo 'page='.$thePage.'&';
+                            }
+                            echo "'>".$thePage."</a></li>";
+                        }
+                    } elseif ($page == $allPage || $page == $allPage - 1) {
+                        for ( $thePage = $allPage - 4; $thePage <= $allPage; $thePage++ ) {
+                            echo "<li class='";
+                            if ($page == $thePage) {
+                                echo 'active';
+                            }
+                            echo "'><a href='search.php?";
+                            if ($make) {
+                                echo 'make='.$make.'&';
+                            }
+                            if ($price) {
+                                echo 'price='.$price.'&';
+                            }
+                            if ($type) {
+                                echo 'type='.$type.'&';
+                            }
+                            if ($year) {
+                                echo 'year='.$year.'&';
+                            }
+                            if ($thePage) {
+                                echo 'page='.$thePage.'&';
+                            }
+                            echo "'>".$thePage."</a></li>";
+                        }
+                    } else {
+                        for ( $thePage = $page - 2; $thePage <= $page + 2; $thePage++ ) {
+                            echo "<li class='";
+                            if ($page == $thePage) {
+                                echo 'active';
+                            }
+                            echo "'><a href='search.php?";
+                            if ($make) {
+                                echo 'make='.$make.'&';
+                            }
+                            if ($price) {
+                                echo 'price='.$price.'&';
+                            }
+                            if ($type) {
+                                echo 'type='.$type.'&';
+                            }
+                            if ($year) {
+                                echo 'year='.$year.'&';
+                            }
+                            if ($thePage) {
+                                echo 'page='.$thePage.'&';
+                            }
+                            echo "'>".$thePage."</a></li>";
+                        }
+                    }
+                    if ($page < $allPage - 2) {
+                        echo "<li><a href='search.php?";
+                        if ($make) {
+                            echo 'make='.$make.'&';
+                        }
+                        if ($price) {
+                            echo 'price='.$price.'&';
+                        }
+                        if ($type) {
+                            echo 'type='.$type.'&';
+                        }
+                        if ($year) {
+                            echo 'year='.$year.'&';
+                        }
+                        echo 'page='.$allPage.'&';
+                        echo "'>...</a></li>";
+                    }
+                }
+
+                ?>
+                <li class="<?php if ($page == $allPage) echo 'disabled'; ?>">
+                    <a href="search.php?<?php
+                    if ($make) {
+                        echo 'make='.$make.'&';
+                    }
+                    if ($price) {
+                        echo 'price='.$price.'&';
+                    }
+                    if ($type) {
+                        echo 'type='.$type.'&';
+                    }
+                    if ($year) {
+                        echo 'year='.$year.'&';
+                    }
+                    echo 'page=';
+                    if ($page + 1 <= $allPage) {
+                        echo $page+1;
+                    } else {
+                        echo $allPage;
+                    }
+                    echo '&';
+                    ?>" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
         <div id="search_column">
             <?php
 //            echo "select car.* from car, model, make where car.model = model.id and make.id = model.make and make.id".$mmake.";";
-            $result = $con->query("select car.* from car, model, make, price, year where car.model = model.id and make.id = model.make and make.id".$mmake." and car.price < price.end and car.price > price.start and price.id ".$pprice." and car.type ".$ttype." and car.year <= year.end and car.year >= year.start and year.id ".$yyear." ;");
+            $result = $con->query("select car.* from car, model, make, price, year where car.model = model.id and make.id = model.make and make.id".$mmake." and car.price < price.end and car.price > price.start and price.id ".$pprice." and car.type ".$ttype." and car.year <= year.end and car.year >= year.start and year.id ".$yyear." limit ".($page-1)*$carperpage.", ".$carperpage.";");
             if ($result != null) {
+
                 while ($row = $result->fetch_array()) {
                     echo '<div class="col-md-4">
                         <div class="thumbnail">
-                            <a href="#<?php ?>"><img src="images/cars/three_car_2.jpg" alt="雪弗兰" /></a>
+                            <a href="';
+                    echo 'goods.php?id='.$row['id'];
+                    echo '"><img src="images/cars/three_car_2.jpg" alt="雪弗兰" /></a>
                             <div class="caption">
-                                <a href="#"><p>'.$row['title'].'</p></a>
+                                <a href="';
+                    echo 'goods.php?id='.$row['id'];
+                    echo '"><p>'.$row['title'].'</p></a>
                                 <p>'.$row['year'].'上牌 | '.changemile($row['mile']);
                     $userresult = $con->query("select * from user where id=".$row['user']);
                     $userrow = $userresult->fetch_array();
@@ -277,9 +500,203 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 }
             }
             ?>
-
-
         </div>
+
+        <nav class="col-md-12">
+            <ul class="pagination">
+                <li class="<?php if ($page == 1) echo 'disabled'; ?>" aria-disabled="true">
+                    <a href="search.php?<?php
+                    if ($make) {
+                        echo 'make='.$make.'&';
+                    }
+                    if ($price) {
+                        echo 'price='.$price.'&';
+                    }
+                    if ($type) {
+                        echo 'type='.$type.'&';
+                    }
+                    if ($year) {
+                        echo 'year='.$year.'&';
+                    }
+                    echo 'page=';
+                    if ($page - 1 >= 1) {
+                        echo $page-1;
+                    } else {
+                        echo 1;
+                    }
+                    echo '&';
+                    ?>" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                <!-- 有几个就循环几个 当前页面disabled-->
+
+                <?php
+
+                if ($allPage <= 5) {
+                    for ( $thePage = 1; $thePage <= $allPage; $thePage++ ) {
+                        echo "<li class='";
+                        if ($page == $thePage) {
+                            echo 'active';
+                        }
+                        echo "'><a href='search.php?";
+                        if ($make) {
+                            echo 'make='.$make.'&';
+                        }
+                        if ($price) {
+                            echo 'price='.$price.'&';
+                        }
+                        if ($type) {
+                            echo 'type='.$type.'&';
+                        }
+                        if ($year) {
+                            echo 'year='.$year.'&';
+                        }
+                        if ($thePage) {
+                            echo 'page='.$thePage.'&';
+                        }
+                        echo "'>".$thePage."</a></li>";
+                    }
+                } else {
+                    if ($page > 3) {
+                        echo "<li><a href='search.php?";
+                        if ($make) {
+                            echo 'make='.$make.'&';
+                        }
+                        if ($price) {
+                            echo 'price='.$price.'&';
+                        }
+                        if ($type) {
+                            echo 'type='.$type.'&';
+                        }
+                        if ($year) {
+                            echo 'year='.$year.'&';
+                        }
+                        echo 'page=1&';
+                        echo "'>...</a></li>";
+                    }
+                    if ($page == 1 || $page == 2) {
+                        for ( $thePage = 1; $thePage <= 5; $thePage++ ) {
+                            echo "<li class='";
+                            if ($page == $thePage) {
+                                echo 'active';
+                            }
+                            echo "'><a href='search.php?";
+                            if ($make) {
+                                echo 'make='.$make.'&';
+                            }
+                            if ($price) {
+                                echo 'price='.$price.'&';
+                            }
+                            if ($type) {
+                                echo 'type='.$type.'&';
+                            }
+                            if ($year) {
+                                echo 'year='.$year.'&';
+                            }
+                            if ($thePage) {
+                                echo 'page='.$thePage.'&';
+                            }
+                            echo "'>".$thePage."</a></li>";
+                        }
+                    } elseif ($page == $allPage || $page == $allPage - 1) {
+                        for ( $thePage = $allPage - 4; $thePage <= $allPage; $thePage++ ) {
+                            echo "<li class='";
+                            if ($page == $thePage) {
+                                echo 'active';
+                            }
+                            echo "'><a href='search.php?";
+                            if ($make) {
+                                echo 'make='.$make.'&';
+                            }
+                            if ($price) {
+                                echo 'price='.$price.'&';
+                            }
+                            if ($type) {
+                                echo 'type='.$type.'&';
+                            }
+                            if ($year) {
+                                echo 'year='.$year.'&';
+                            }
+                            if ($thePage) {
+                                echo 'page='.$thePage.'&';
+                            }
+                            echo "'>".$thePage."</a></li>";
+                        }
+                    } else {
+                        for ( $thePage = $page - 2; $thePage <= $page + 2; $thePage++ ) {
+                            echo "<li class='";
+                            if ($page == $thePage) {
+                                echo 'active';
+                            }
+                            echo "'><a href='search.php?";
+                            if ($make) {
+                                echo 'make='.$make.'&';
+                            }
+                            if ($price) {
+                                echo 'price='.$price.'&';
+                            }
+                            if ($type) {
+                                echo 'type='.$type.'&';
+                            }
+                            if ($year) {
+                                echo 'year='.$year.'&';
+                            }
+                            if ($thePage) {
+                                echo 'page='.$thePage.'&';
+                            }
+                            echo "'>".$thePage."</a></li>";
+                        }
+                    }
+                    if ($page < $allPage - 2) {
+                        echo "<li><a href='search.php?";
+                        if ($make) {
+                            echo 'make='.$make.'&';
+                        }
+                        if ($price) {
+                            echo 'price='.$price.'&';
+                        }
+                        if ($type) {
+                            echo 'type='.$type.'&';
+                        }
+                        if ($year) {
+                            echo 'year='.$year.'&';
+                        }
+                        echo 'page='.$allPage.'&';
+                        echo "'>...</a></li>";
+                    }
+                }
+
+                ?>
+                <li class="<?php if ($page == $allPage) echo 'disabled'; ?>">
+                    <a href="search.php?<?php
+                    if ($make) {
+                        echo 'make='.$make.'&';
+                    }
+                    if ($price) {
+                        echo 'price='.$price.'&';
+                    }
+                    if ($type) {
+                        echo 'type='.$type.'&';
+                    }
+                    if ($year) {
+                        echo 'year='.$year.'&';
+                    }
+                    echo 'page=';
+                    if ($page + 1 <= $allPage) {
+                        echo $page+1;
+                    } else {
+                        echo $allPage;
+                    }
+                    echo '&';
+                    ?>" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
     </div>
 </div>
 
