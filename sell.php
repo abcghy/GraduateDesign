@@ -78,7 +78,7 @@
         <div class="form-group">
             <label for="sell_make" class="col-sm-2 control-label">品牌</label>
             <div class="col-sm-10 input-group">
-                <select name="make" id="sell_make" class="form-control" onclick="query_model()">
+                <select name="make" id="sell_make" class="form-control" onchange="query_model()">
                     <option value="0">请选择品牌</option>
                     <?php
                     //            输出数据库中的各种品牌

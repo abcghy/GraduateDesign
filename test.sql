@@ -23,6 +23,18 @@ create table car (
     description text not null
 );
 
+create table Make (
+    id INT(20) primary key auto_increment,
+    make varchar(20) not null
+);
+
+create table Model (
+  id int(20) primary key auto_increment,
+    model varchar(20) not null,
+    make int(20),
+    foreign key (make) references Make(id)
+);
+
 create database test;
 
 select * from user;
