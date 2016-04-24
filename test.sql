@@ -1,3 +1,5 @@
+create database test;
+
 create table user (
 	id INT(20) primary key auto_increment,
     email varchar(50) not null unique,
@@ -13,25 +15,50 @@ create table user (
 
 create table car (
 	id INT(20) primary key auto_increment,
-    make varchar(20) not null,
     model varchar(20) not null,
     type varchar(20) not null,
     price INT(10) not null,
-    year DATE not null,
+    year year not null,
     mile INT(10) not null,
     fixed TINYINT(4) not null,
-    description text not null
+    title text not null,
+    description text not null,
+    user int(20) not null,
+    foreign key (model) references model(id),
+    foreign key (type) references type(id),
+    foreign key (user) references user(id)
 );
 
-create database test;
+create table Make (
+	id int(20) primary key auto_increment,
+    make varchar(20) not null
+);
 
-select * from user;
-select * from car;
+create table Model (
+	id int(20) primary key auto_increment,
+    model varchar(20) not null,
+    make int(20),
+    foreign key (make) references Make(id)
+);
 
-drop table user;
+create table Price (
+	id int(20) primary key auto_increment,
+    start int(20) not null,
+    end int(20) not null,
+    description varchar(20) not null
+);
 
-insert into user(email, password, nickname, rate) values("beatbox_gao@hotmail.com", "19941024Abc", "beatbox_gao", 1);
-insert into user(email, password, nickname, rate) values("452941120@qq.com", "19941024Abc", "高惠宇", 1);
+create table Type (
+	id int(20) primary key auto_increment,
+    description varchar(20) not null
+);
+
+create table Year (
+	id int(20) primary key auto_increment,
+    start int(20) not null,
+    end int(20) not null,
+    description varchar(20) not null
+);
 
 show variables like 'character%';
 
@@ -679,3 +706,55 @@ insert into model (model, make) values ('英菲尼迪QX70', 34);
 insert into model (model, make) values ('英菲尼迪QX80(QX56)', 34);
 insert into model (model, make) values ('英菲尼迪Q50L', 34);
 insert into model (model, make) values ('英菲尼迪QX50', 34);
+
+insert into price (start, end, description) values (0, 20000, '低于2万');
+insert into price (start, end, description) values (20000, 50000, '2-5万');
+insert into price (start, end, description) values (50000, 80000, '5-8万');
+insert into price (start, end, description) values (80000, 120000, '8-12万');
+insert into price (start, end, description) values (120000, 160000, '12-16万');
+insert into price (start, end, description) values (160000, 200000, '16-20万');
+insert into price (start, end, description) values (200000, 300000, '20-30万');
+insert into price (start, end, description) values (300000, 400000, '30-40万');
+insert into price (start, end, description) values (400000, 500000, '40-50万');
+insert into price (start, end, description) values (500000, 1000000, '50-100万');
+
+insert into type (id, description) values (1, 'SUV');
+insert into type (id, description) values (2, '轿车');
+insert into type (id, description) values (3, '敞篷车');
+insert into type (id, description) values (4, '跑车');
+insert into type (id, description) values (5, '混合动力');
+insert into type (id, description) values (6, '卡车');
+insert into type (id, description) values (7, '房车');
+insert into type (id, description) values (8, '省油车');
+insert into type (id, description) values (9, '经济代步');
+insert into type (id, description) values (10, '高性价比');
+
+insert into year (start, end, description) values (2016, 2016, '2016');
+insert into year (start, end, description) values (2015, 2015, '2015');
+insert into year (start, end, description) values (2014, 2014, '2014');
+insert into year (start, end, description) values (2013, 2013, '2013');
+insert into year (start, end, description) values (2012, 2012, '2012');
+insert into year (start, end, description) values (2011, 2011, '2011');
+insert into year (start, end, description) values (2010, 2010, '2010');
+insert into year (start, end, description) values (2009, 2009, '2009');
+insert into year (start, end, description) values (2008, 2008, '2008');
+insert into year (start, end, description) values (2000, 2007, '2000 - 2007');
+insert into year (start, end, description) values (1993, 1999, '1993 - 1999');
+
+insert into car (model, type, price, year, mile, fixed, title, description, user) values (439, 2, 62800, 2008, 121100, 0, "哈哈哈", 4);
+insert into car (model, type, price, year, mile, fixed, title, description, user) values (11, 2, 378500, 2014, 14400, 0, "奥迪 2014年款 A5 Coupe 2.0TFSI 无级 45TFSI", "奥迪 2014年款 A5 Coupe 2.0TFSI 无级 45TFSI", 3);
+insert into car (model, type, price, year, mile, fixed, title, description, user) values (65, 2, 248900, 2013, 40700, 0, "奔驰 2013年款 C 260 1.8T 手自一体 时尚型Grand Edition", "奔驰 2013年款 C 260 1.8T 手自一体 时尚型Grand Edition", 5);
+insert into car (model, type, price, year, mile, fixed, title, description, user) values (66, 2, 366800, 2015, 37200, 0, "奔驰 2015年款 E 260 L 2.0T 手自一体(改款)", "奔驰 2015年款 E 260 L 2.0T 手自一体(改款)", 5);
+insert into car (model, type, price, year, mile, fixed, title, description, user) values (419, 9, 22000, 2012, 12300, 0, "奇瑞 2012年款 QQ3 1.0 手动 时尚版启航型", "奇瑞 2012年款 QQ3 1.0 手动 时尚版启航型", 4);
+insert into car (model, type, price, year, mile, fixed, title, description, user) values (514, 2, 78000, 2014, 22100, 0, "雪佛兰 2013年款 科鲁兹 1.6 手动 SE", "雪佛兰 2013年款 科鲁兹 1.6 手动 SE", 3);
+insert into car (model, type, price, year, mile, fixed, title, description, user) values (154, 2, 163800, 2015, 15800, 0, "比亚迪 2015年款 秦 1.5T 双离合 双冠旗舰版", "比亚迪 2015年款 秦 1.5T 双离合 双冠旗舰版", 3);
+insert into car (model, type, price, year, mile, fixed, title, description, user) values (169, 2, 99800, 2015, 15000, 0, "别克 2014年款 英朗XT 1.6 手自一体 时尚版", "别克 2014年款 英朗XT 1.6 手自一体 时尚版", 5);
+insert into car (model, type, price, year, mile, fixed, title, description, user) values (62, 4, 665800, 2015, 6300, 0, "X2.7T自动涡轮增压。 出售2015年6月上牌保时捷，2.7V6发动机，电动车窗，电动调节后视镜，自动调节空调，自动大灯，大灯清洗装置，倒车雷达，真皮坐椅，前排电动座椅，前排座椅电加热，多安全气囊。公里数少，车主当时加装十几万，类似新车。。本公司购车可贷款，不限年限，利率低。您所购买的任何车型均可享受（发动机、变速箱、差速器、涡轮增压器、冷却系统、制动系统、电气系统、转向系统）质保1年（不限地区），本车经过车易拍268V行认证， 让您买的称心，用的放心.", 4);
+insert into car (model, type, price, year, mile, fixed, title, description, user) values (63, 1, 596000, 2014, 25000, 0, "保时捷 2014年款 Macan 2.0T 双离合", "", 5);
+insert into car (model, type, price, year, mile, fixed, title, description, user) values (197, 1, 108900, 2012, 48500, 0, "大众 2011年款 途安 1.4TSI 双离合 5座智雅版", "", 3);
+insert into car (model, type, price, year, mile, fixed, title, description, user) values (159, 1, 179800, 2011, 163700, 0, "别克 2011年款 GL8 豪华商务车 2.4 手自一体 LT 行政版", "", 3);
+insert into car (model, type, price, year, mile, fixed, title, description, user) values (388, 9, 123800, 2012, 57100, 0, "马自达 2011年款 睿翼 2.0 手自一体 精英版", "", 4);
+insert into car (model, type, price, year, mile, fixed, title, description, user) values (277, 1, 183800, 2014, 20400, 0, "福特 2013年款 翼虎 1.6GTDi 手自一体 四驱精英型", "", 5);
+insert into car (model, type, price, year, mile, fixed, title, description, user) values (572, 1, 428000, 2014, 13000, 0, "英菲尼迪 2014年款 QX60 Hybrid [QX60 油电混合] 2.5T 无级 两驱卓越版", "", 2);
+insert into car (model, type, price, year, mile, fixed, title, description, user) values (563, 1, 318000, 2010, 13000, 0, "英菲尼迪 2010年款 FX35 3.5 手自一体 标准版", "X3.5T自动涡轮增压。 私家一手车保养好成色新，无泡水无事故，全程4S店保养，全国可以上牌，支持按揭。欢迎询价来店看车有优惠。上海歆顺精品二手车承诺： 1. 本公司从事汽车行业多年，主要经营精品二手车, 秉承收购车辆严谨，车况实事求实；诚信为本、只做精品、不做泡水车、事故车、手续不全和 营运车；2. 所有发布的车辆照片都是真车实照，客户可以要求实时传送照片鉴别。所有车型都经过严格检测认证后进入网站销售。3. 所有车型均可享受 发动机、变速箱 质保3个月。4. 所有购车者免费赠送牌照，按国家政策上牌，因为我们的专业致使你们的放心！5. 贷款分期购车，可以享受免月供、免利息优惠。无担保，无需任何抵押。", 2);
+insert into car (model, type, price, year, mile, fixed, title, description, user) values (127, 9, 133800, 2012, 74100, 0, "英菲尼迪 2014年款 QX60 Hybrid [QX60 油电混合] 2.5T 无级 两驱卓越版", "", 4);
