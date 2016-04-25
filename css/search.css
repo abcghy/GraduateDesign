@@ -143,6 +143,10 @@ code {
     }
 }
 
+.thumbnail {
+    height: 350px;
+}
+
 .thumbnail:hover {
     -webkit-box-shadow: 0 0 50px #DDDDDD;
     -moz-box-shadow:    0 0 50px #DDDDDD;
@@ -152,6 +156,7 @@ code {
 .priceforcar {
     color: #ff4776;
     font-weight: 700;
+    font-size: large;
 }
 
 a:link, a:visited, a:hover, a:active {

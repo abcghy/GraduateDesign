@@ -29,6 +29,17 @@
 </head>
 
 <body>
+<?php
+include_once('db.php');
+
+$email = $nickname = '';
+if (isset($_COOKIE['email'])) {
+	$email = $_COOKIE['email'];
+}
+if (isset($_COOKIE['nickname'])) {
+	$nickname = $_COOKIE['nickname'];
+}
+?>
 
 <nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container">
@@ -53,10 +64,18 @@
 			<!-- 如果已经登录就变成一个自己的个人头像-->
 			<!-- 然后点击变成个人主页, 等等-->
 			<?php
-			if (isset($_COOKIE['nickname']) && isset($_COOKIE['email'])) {
+			if ($email && $nickname) {
+				$result = $con->query('select * from user where email="'.$email.'";');
+				$row = $result->fetch_array();
+
 				?>
 				<button type="button" class="btn btn-link navbar-btn navbar-right"><a href="profile_index.php"><?php echo $_COOKIE['nickname'] ?></a></button>
 				<?php
+				if ($row['rate'] == 1) {
+					?>
+					<button type="button" class="btn btn-link navbar-btn navbar-right"><a href="dashboard/dashboard.php">后台管理</a></button>
+					<?php
+				}
 			} else {
 				?>
 				<button type="button"  class="btn btn-link navbar-btn navbar-right"><a href="login.html">登录</a></button>
