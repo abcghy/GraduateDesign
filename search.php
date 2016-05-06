@@ -108,7 +108,7 @@ if (isset($_COOKIE['nickname'])) {
                 <?php
                 if ($row['rate'] == 1) {
                     ?>
-                    <button type="button" class="btn btn-link navbar-btn navbar-right"><a href="dashboard.php">后台管理</a></button>
+                    <button type="button" class="btn btn-link navbar-btn navbar-right"><a href="dashboard/dashboard.php">后台管理</a></button>
                     <?php
                 }
             } else {
@@ -137,25 +137,29 @@ if (isset($_COOKIE['nickname'])) {
                         // 如果有品牌，就从数据库里读取品牌数据
                         $result = $con->query("select * from make where id = '".$make."';");
                         if ($row = $result->fetch_array()) {
-                            echo '<li><a href="javascript:;">'.$row['make'].'</a></li>';
+//                            echo '<li><a href="javascript:;">'.$row['make'].'</a></li>';
+                            echo '<li><span class="label label-danger">'.$row['make'].'</span></li>';
                         }
                     }
                     if ($price) {
                         $result = $con->query("select * from price where id = '".$price."';");
                         if ($row = $result->fetch_array()) {
-                            echo '<li><a href="javascript:;">'.$row['description'].'</a></li>';
+//                            echo '<li><a href="javascript:;">'.$row['description'].'</a></li>';
+                            echo '<li><span class="label label-success">'.$row['description'].'</span></li>';
                         }
                     }
                     if ($type) {
                         $result = $con->query("select * from type where id = '".$type."';");
                         if ($row = $result->fetch_array()) {
-                            echo '<li><a href="javascript:;">'.$row['description'].'</a></li>';
+//                            echo '<li><a href="javascript:;">'.$row['description'].'</a></li>';
+                            echo '<li><span class="label label-info">'.$row['description'].'</span></li>';
                         }
                     }
                     if ($year) {
                         $result = $con->query("select * from year where id = '".$year."';");
                         if ($row = $result->fetch_array()) {
-                            echo '<li><a href="javascript:;">'.$row['description'].'</a></li>';
+//                            echo '<li><a href="javascript:;">'.$row['description'].'</a></li>';
+                            echo '<li><span class="label label-warning">'.$row['description'].'</span></li>';
                         }
                     }
 //                    echo $_SERVER["REQUEST_METHOD"];
@@ -275,7 +279,7 @@ if (isset($_COOKIE['nickname'])) {
         $allPage = ceil($num / $carperpage);
         ?>
 
-        <nav>
+        <nav class="col-md-12">
             <ul class="pagination">
                 <li class="<?php if ($page == 1) echo 'disabled'; ?>" aria-disabled="true">
                     <a href="search.php?<?php
@@ -481,7 +485,9 @@ if (isset($_COOKIE['nickname'])) {
                         <div class="thumbnail">
                             <a href="';
                     echo 'goods.php?id='.$row['id'];
-                    echo '"><img src="images/cars/three_car_2.jpg" alt="雪弗兰" /></a>
+                    $image_result = $con->query("select * from image where car = ".$row['id'].";");
+                    $image_row = $image_result->fetch_array();
+                    echo '"><img src="'.$image_row['src'].'" alt="雪弗兰" /></a>
                             <div class="caption">
                                 <a href="';
                     echo 'goods.php?id='.$row['id'];

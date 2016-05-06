@@ -11,8 +11,23 @@
 
     <title>闪腾二手车•主页</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+
+    <link rel="stylesheet" href="dist/css/balloon.min.css">
 
     <!-- Custom styles for this template -->
     <link href="css/goods.css" rel="stylesheet">
@@ -49,8 +64,12 @@ if (isset($_GET['id'])) {
 
 function changemile($length) {
     $llength = $length / 10000;
-    return $llength.'万';
+    return $llength;
 }
+
+$user_result = $con->query('select * from user WHERE email="'.$email.'";');
+$user_row = $user_result->fetch_array();
+$user_id = $user_row['id'];
 ?>
 
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -84,7 +103,7 @@ function changemile($length) {
                 <?php
                 if ($row['rate'] == 1) {
                     ?>
-                    <button type="button" class="btn btn-link navbar-btn navbar-right"><a href="dashboard.php">后台管理</a></button>
+                    <button type="button" class="btn btn-link navbar-btn navbar-right"><a href="dashboard/dashboard.php">后台管理</a></button>
                     <?php
                 }
             } else {
@@ -113,37 +132,43 @@ function changemile($length) {
 <?php
 $result = $con->query('select * from car where id = '.$id.';');
 $row = $result->fetch_array();
+$image_result = $con->query('select * from image where car = '.$row['id'].';');
 ?>
 
 <div class="container">
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
-            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            <?php
+            $data_slide = 0;
+            $image_row = $image_result->fetch_array();
+            echo '<li data-target="#carousel-example-generic" data-slide-to="'.$data_slide.'" class="active"></li>';
+            while ($image_row = $image_result->fetch_array()) {
+                $data_slide++;
+                echo '<li data-target="#carousel-example-generic" data-slide-to="'.$data_slide.'"></li>';
+            }
+            ?>
         </ol>
+
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
-            <div class="item active">
-                <img class="first-slide" src="images/background.jpg" alt="...">
-                <div class="carousel-caption">
-                    ...
-                </div>
-            </div>
-            <div class="item">
-                <img class="second-slide" src="images/whitecar.png" alt="...">
-                <div class="carousel-caption">
-                    ...
-                </div>
-            </div>
-            <div class="item">
-                <img class="third-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="...">
-                <div class="carousel-caption">
-                    ...
-                </div>
-            </div>
+            <?php
+            $image_result = $con->query('select * from image where car = '.$row['id'].';');
+            $image_row = $image_result->fetch_array();
+            echo '<div class="item active">';
+            echo '<img class="first-slide" src="'.$image_row['src'].'" alt="...">';
+            echo '<div class="carousel-caption">';
+            echo '</div>';
+            echo '</div>';
+            while ($image_row = $image_result->fetch_array()) {
+                echo '<div class="item">';
+                echo '<img class="first-slide" src="'.$image_row['src'].'" alt="...">';
+                echo '<div class="carousel-caption">';
+                echo '</div>';
+                echo '</div>';
+            }
+            ?>
         </div>
 
         <!-- Controls -->
@@ -159,16 +184,165 @@ $row = $result->fetch_array();
 </div>
 
 <div class="container">
-    <h1><?php echo $row['title']; ?></h1>
+    <div class="col-md-8">
+        <h1><?php echo $row['title']; ?></h1>
+    </div>
+    <div class="col-md-4">
+        <button type="button" class="btn btn-lg btn-danger">
+            <i class="fa fa-phone"></i>
+            预约看车
+        </button>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="favorite.php?user=<?php echo $user_id;?>&car=<?php echo $id;?>" type="button" class="btn btn-lg btn-primary">
+            <i class="fa fa-heart"></i>
+            收藏该车
+        </a>
+    </div>
 </div>
 
-<div class="container">
-    <?php echo changemile($row['price']); ?>，背景灰色
+<div class="container" id="price_zone">
+    闪腾价:  <span id="price_tag"><?php echo changemile($row['price']); ?></span><span id="price_wan">万</span>
 </div>
 
+<div class="container" id="four_thing">
+    <div class="col-md-3">
+        <div class="box box-solid box-default">
+            <div class="box-header">
+                <h3 class="box-title">上牌时间</h3>
+            </div>
+            <div class="box-body"><?php echo $row['year']; ?>年</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="box box-solid box-default">
+            <div class="box-header">
+                <h3 class="box-title">表显里程</h3>
+            </div>
+            <div class="box-body"><?php echo changemile($row['mile']); ?>万</div>
+        </div>
+    </div>
+    <?php
+    $type_result = $con->query('select * from type where id ='.$row['type'].';');
+    $type_row = $type_result->fetch_array();
+    ?>
+    <div class="col-md-3">
+        <div class="box box-solid box-default">
+            <div class="box-header">
+                <h3 class="box-title">车辆类型</h3>
+            </div>
+            <div class="box-body"><?php echo $type_row['description'];?></div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="box box-solid box-default">
+            <div class="box-header">
+                <h3 class="box-title">车主信息</h3>
+            </div>
+            <div class="box-body">
+                <?php
+                $owner_result = $con->query('select * from user where id ='.$row['user'].';');
+                $own_row = $owner_result->fetch_array();
+                echo '姓名:'.$own_row['nickname'].'&nbsp;&nbsp;城市:';
+                if ($own_row['city'] == '') {
+                    echo '无';
+                } else {
+                    echo $own_row['city'];
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <div class="container">
-    配置表格
-    卖主基本信息
+    <h1>车况介绍</h1>
+    <h3 style="text-align: center">发动机舱</h3>
+    <div class="col-md-12">
+    <ul class="col-md-8" style="list-style: none" >
+        <?php
+        $detail_result = $con->query("select * from detail where id = ".$row['detail'].";");
+        $detail_row = $detail_result->fetch_array();
+        $part_result = $con->query('select * from part;');
+        $i = 0;
+        while ($part_row = $part_result->fetch_array()) {
+            if ($detail_row['a'.$i] == '') {
+                echo '<li class="col-md-4">';
+                echo '<i class="fa fa-check"></i> ';
+            } else {
+                echo '<li class="col-md-4" data-balloon="'.$detail_row['a'.$i].'" data-balloon-pos="up">';
+                echo '<i class="fa fa-times"></i> ';
+            }
+            echo $part_row['description'].'</li>';
+            $i++;
+            if ($i >= 8) {
+                break;
+            }
+        }
+        echo '</ul><img class="col-md-4" src="images/goods_1.png"/></div><h3 style="text-align: center">内饰及电器</h3><div class="col-md-12"><ul class="col-md-8" style="list-style: none" >';
+        while ($part_row = $part_result->fetch_array()) {
+            if ($detail_row['a'.$i] == '') {
+                echo '<li class="col-md-4">';
+                echo '<i class="fa fa-check"></i> ';
+            } else {
+                echo '<li class="col-md-4" data-balloon="'.$detail_row['a'.$i].'" data-balloon-pos="up">';
+                echo '<i class="fa fa-times"></i> ';
+            }
+            echo $part_row['description'].'</li>';
+            $i++;
+            if ($i >= 39) {
+                break;
+            }
+        }
+        echo '</ul><img class="col-md-4" src="images/goods_2.png"/></div><h3 style="text-align: center">底盘大梁</h3><div class="col-md-12"><ul class="col-md-8" style="list-style: none" >';
+        while ($part_row = $part_result->fetch_array()) {
+            if ($detail_row['a'.$i] == '') {
+                echo '<li class="col-md-4">';
+                echo '<i class="fa fa-check"></i> ';
+            } else {
+                echo '<li class="col-md-4" data-balloon="'.$detail_row['a'.$i].'" data-balloon-pos="up">';
+                echo '<i class="fa fa-times"></i> ';
+            }
+            echo $part_row['description'].'</li>';
+            $i++;
+            if ($i >= 58) {
+                break;
+            }
+        }
+        echo '</ul><img class="col-md-4" src="images/goods_3.png"/></div><h3 style="text-align: center">外观</h3><div class="col-md-12"><ul class="col-md-8" style="list-style: none" >';
+        while ($part_row = $part_result->fetch_array()) {
+            if ($detail_row['a'.$i] == '') {
+                echo '<li class="col-md-4">';
+                echo '<i class="fa fa-check"></i> ';
+            } else {
+                echo '<li class="col-md-4" data-balloon="'.$detail_row['a'.$i].'" data-balloon-pos="up">';
+                echo '<i class="fa fa-times"></i> ';
+            }
+            echo $part_row['description'].'</li>';
+            $i++;
+            if ($i >= 95) {
+                break;
+            }
+        }
+        echo '</ul><img class="col-md-4" src="images/goods_4.png"/></div><h3 style="text-align: center">其他</h3><div class="col-md-12"><ul class="col-md-12" style="list-style: none" >';
+        while ($part_row = $part_result->fetch_array()) {
+            if ($detail_row['a'.$i] == '') {
+                echo '<li class="col-md-3">';
+                echo '<i class="fa fa-check"></i> ';
+            } else {
+                echo '<li class="col-md-3" data-balloon="'.$detail_row['a'.$i].'" data-balloon-pos="up">';
+                echo '<i class="fa fa-times"></i> ';
+            }
+            echo $part_row['description'].'</li>';
+            $i++;
+            if ($i >= 105) {
+                break;
+            }
+        }
+        ?>
+    </ul>
+    </div>
 </div>
 
 <footer class="footer">
@@ -179,14 +353,34 @@ $row = $result->fetch_array();
 
 
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-
-<script src="js/index.js"></script>
+</div><!-- ./wrapper -->
+<!-- jQuery 2.1.4 -->
+<script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<!-- Bootstrap 3.3.5 -->
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="plugins/fastclick/fastclick.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/app.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+<script>
+    $(function () {
+        $("#example1").DataTable();
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false
+        });
+    });
+</script>
 </body>
 </html>

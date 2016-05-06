@@ -30,12 +30,25 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <?php
 include_once('../../db.php');
+
+$userid = null;
+
+if (isset($_GET['id'])) {
+    $userid = $_GET['id'];
+}
+
+// 创建一个字典, 存储类型 ID 与 description 的关系
+$result = $con->query("select * from type;");
+$type = null;
+while ($row = $result->fetch_array()) {
+    $type[$row['id']] = $row['description'];
+}
 ?>
 <div class="wrapper">
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="../dashboard.php" class="logo">
+        <a href="../../index.php" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>闪腾</b></span>
             <!-- logo for regular state and mobile devices -->
@@ -133,7 +146,7 @@ include_once('../../db.php');
                 <li class="header">导航</li>
                 <li class="">
                     <!--todo:网页需要修改-->
-                    <a href="../../index.html">
+                    <a href="../dashboard.php">
                         <i class="fa fa-dashboard"></i>
                         <span>信息概览</span>
                     </a>
@@ -233,17 +246,16 @@ include_once('../../db.php');
                             echo '<td>'.$row['city'].'</td>';
                             echo '<td>'.$row['address'].'</td>';
                             echo    '<td>
-                                        <!-- <button type="button" class="btn-xs btn-info"> -->
-                                            <!-- <i class="fa fa-car"></i> -->
-                                        <!-- </button> -->
-                                        <form method="post" action="deleteuser.php">
-                                            <input name="deleteid" class="sr-only" value="';
+                                        <a href="userinfo.php?id=';
                             echo $row['id'];
-                            echo '" />
-                                            <button type="submit" class="btn-xs btn-danger">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </form>
+                            echo '"><button type="button" class="btn-xs btn-info">
+                                        <i class="fa fa-car"></i>
+                                        </button></a>
+                                        <a href="deleteuser.php?deleteid=';
+                            echo $row['id'];
+                            echo '"><button type="button" class="btn-xs btn-danger">
+                                            <i class="fa fa-trash"></i>
+                                        </button></a>
                                     </td></tr>';
                         }
                         ?>
@@ -263,6 +275,60 @@ include_once('../../db.php');
                     </table>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
+
+            <?php
+            if (isset($userid)) {
+            ?>
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">用户车辆表 <small>车主 ID:<?php echo $userid;?></small></h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>车辆 ID</th>
+                                <th>品牌</th>
+                                <th>型号</th>
+                                <th>类型</th>
+                                <th>价格</th>
+                                <th>年份</th>
+                                <th>距离</th>
+                                <th>维修</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                            $result = $con->query('select * from car where user ='.$userid.';');
+                            while ($row = $result->fetch_array()) {
+                                $modelresult = $con->query('select * from model where id ='.$row['model']);
+                                $modelrow = $modelresult->fetch_array();
+                                $makeresult = $con->query('select * from make where id ='.$modelrow['make']);
+                                $makerow = $makeresult->fetch_array();
+                                echo '<tr><td>'.$row['id'].'</td>';
+                                echo '<td>'.$makerow['make'].'</td>';
+                                echo '<td>'.$modelrow['model'].'</td>';
+                                echo '<td>'.$type[$row['type']].'</td>';
+                                echo '<td>'.$row['price'].'</td>';
+                                echo '<td>'.$row['year'].'</td>';
+                                echo '<td>'.$row['mile'].'</td>';
+                                echo '<td>';
+                                if ($row['fixed'] == 0) {
+                                    echo '无';
+                                } else {
+                                    echo '有';
+                                }
+                                echo '</td>';
+
+                            }
+                            ?>
+                            </tbody>
+                        </table>
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
+            <?php
+            }
+            ?>
 
 
 

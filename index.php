@@ -16,16 +16,6 @@
 
 	<!-- Custom styles for this template -->
 	<link href="css/index.css" rel="stylesheet">
-
-	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-	<script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	<!--[if lt IE 9]>
-	<script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-	<script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-	<![endif]-->
 </head>
 
 <body>
@@ -122,81 +112,42 @@ if (isset($_COOKIE['nickname'])) {
 		<!-- todo:之后改成从数据库读取响应数据,可用 ajax ,也可不用 -->
 		<div class="make well">
 			<ul class="list-inline">
-				<li><a href="#">奥迪</a></li>
-				<li><a href="#">宝马</a></li>
-				<li><a href="#">保时捷</a></li>
-				<li><a href="#">奔驰</a></li>
-				<li><a href="#">本田</a></li>
-				<li><a href="#">比亚迪</a></li>
-				<li><a href="#">别克</a></li>
-				<li><a href="#">宾利</a></li>
-				<li><a href="#">大众</a></li>
-				<li><a href="#">东风</a></li>
-				<li><a href="#">法拉利</a></li>
-				<li><a href="#">丰田</a></li>
-				<li><a href="#">福特</a></li>
-				<li><a href="#">红旗</a></li>
-				<li><a href="#">吉利</a></li>
-				<li><a href="#">江淮</a></li>
-				<li><a href="#">凯迪拉克</a></li>
-				<li><a href="#">劳斯莱斯</a></li>
-				<li><a href="#">雷克萨斯</a></li>
-				<li><a href="#">雷诺</a></li>
-				<li><a href="#">林肯</a></li>
-				<li><a href="#">路虎</a></li>
-				<li><a href="#">马自达</a></li>
-				<li><a href="#">迈巴赫</a></li>
-				<li><a href="#">奇瑞</a></li>
-				<li><a href="#">日产</a></li>
-				<li><a href="#">特斯拉</a></li>
-				<li><a href="#">五菱</a></li>
-				<li><a href="#">夏利</a></li>
-				<li><a href="#">现代</a></li>
-				<li><a href="#">雪佛兰</a></li>
-				<li><a href="#">雪铁龙</a></li>
-				<li><a href="#">一汽</a></li>
-				<li><a href="#">英菲尼迪</a></li>
+				<?php
+				$result = $con->query("select * from make");
+				while ($row = $result->fetch_array()) {
+					echo '<li><a href="search.php?make='.$row['id'].'">'.$row['make'].'</a></li>';
+				}
+				?>
 			</ul>
 		</div>
 		<div class="type well">
 			<ul class="list-inline">
-				<li><a href="#">SUV</a></li>
-				<li><a href="#">轿车</a></li>
-				<li><a href="#">敞篷车</a></li>
-				<li><a href="#">跑车</a></li>
-				<li><a href="#">混合动力</a></li>
-				<li><a href="#">卡车</a></li>
-				<li><a href="#">房车</a></li>
-				<li><a href="#">省油车</a></li>
-				<li><a href="#">经济代步</a></li>
-				<li><a href="#">高性价比</a></li>
+				<?php
+				$result = $con->query("select * from type");
+				while ($row = $result->fetch_array()) {
+					echo '<li><a href="search.php?type='.$row['id'].'">'.$row['description'].'</a></li>';
+				}
+				?>
 			</ul>
 		</div>
 		<div class="year well">
 			<ul class="list-inline">
-				<li><a href="#">2016</a></li>
-				<li><a href="#">2015</a></li>
-				<li><a href="#">2014</a></li>
-				<li><a href="#">2013</a></li>
-				<li><a href="#">2012</a></li>
-				<li><a href="#">2011</a></li>
-				<li><a href="#">2010</a></li>
-				<li><a href="#">2009</a></li>
-				<li><a href="#">2008</a></li>
-				<li><a href="#">2000 - 2007</a></li>
-				<li><a href="#">1993 - 1999</a></li>
+				<?php
+				$result = $con->query("select * from year");
+				while ($row = $result->fetch_array()) {
+					echo '<li><a href="search.php?year='.$row['id'].'">'.$row['description'].'</a></li>';
+				}
+				?>
 			</ul>
 		</div>
 		<div class="price well">
 			<ul class="list-inline">
-				<li><a href="#">低于2万</a></li>
-				<li><a href="#">2-5万</a></li>
-				<li><a href="#">5-8万</a></li>
-				<li><a href="#">8-12万</a></li>
-				<li><a href="#">12-16万</a></li>
-				<li><a href="#">16-20万</a></li>
-				<li><a href="#">20-30万</a></li>
-				<li><a href="#">30万以上</a></li>
+				<?php
+				$result = $con->query("select * from price");
+				while ($row = $result->fetch_array()) {
+					echo '<li><a href="search.php?price='.$row['id'].'">'.$row['description'].'</a></li>';
+				}
+				?>
 			</ul>
 		</div>
 

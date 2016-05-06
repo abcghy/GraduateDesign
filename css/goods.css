@@ -148,3 +148,23 @@ code {
     -moz-box-shadow:    0 0 50px #DDDDDD;
     box-shadow:         0 0 50px #DDDDDD;
 }
+
+#price_zone {
+    background-color: #F6F6F6;
+    font-size: 25pt;
+    vertical-align: middle;
+    margin-top: 20px;
+}
+
+#price_tag {
+    color: tomato;
+}
+
+#price_wan {
+    color: tomato;
+    font-size: 15pt;
+}
+
+#four_thing {
+    margin-top: 20px;
+}

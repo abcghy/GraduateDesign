@@ -42,7 +42,7 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="dashboard.php" class="logo">
+        <a href="../index.php" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>闪腾</b></span>
             <!-- logo for regular state and mobile devices -->
@@ -201,7 +201,7 @@
                 <small>信息概览</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="index.php"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li><a href="../index.php"><i class="fa fa-dashboard"></i> 首页</a></li>
                 <li class="active">后台管理</li>
             </ol>
         </section>

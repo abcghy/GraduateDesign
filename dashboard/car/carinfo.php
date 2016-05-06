@@ -43,7 +43,7 @@ while ($row = $result->fetch_array()) {
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="../dashboard.php" class="logo">
+        <a href="../../index.php" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>闪腾</b></span>
             <!-- logo for regular state and mobile devices -->
@@ -141,7 +141,7 @@ while ($row = $result->fetch_array()) {
                 <li class="header">导航</li>
                 <li class="">
                     <!--todo:网页需要修改-->
-                    <a href="../../index.html">
+                    <a href="../dashboard.php">
                         <i class="fa fa-dashboard"></i>
                         <span>信息概览</span>
                     </a>
@@ -158,26 +158,26 @@ while ($row = $result->fetch_array()) {
                         <li><a href="../../pages/layout/fixed.html"><i class="fa fa-circle-o"></i> 栏目修改</a></li>
                     </ul>
                 </li>
-                <li class="active treeview">
+                <li class="treeview">
                     <a href="#">
                         <i class="fa fa-user"></i>
                         <span>用户管理</span>
                         <span class="label label-primary pull-right">2</span>
                     </a>
                     <ul class="treeview-menu">
-                        <li class="active"><a href="../user/userinfo.php"><i class="fa fa-circle-o"></i> 用户信息</a></li>
+                        <li><a href="../user/userinfo.php"><i class="fa fa-circle-o"></i> 用户信息</a></li>
                         <li><a href="../../pages/layout/boxed.html"><i class="fa fa-circle-o"></i> 用户查询</a></li>
                         <li><a href="../user/admininfo.php"><i class="fa fa-circle-o"></i> 管理员信息</a></li>
                     </ul>
                 </li>
-                <li class="treeview">
+                <li class="active treeview">
                     <a href="#">
                         <i class="fa fa-car"></i>
                         <span>车辆管理</span>
                         <span class="label label-primary pull-right">2</span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="../car/carinfo.php"><i class="fa fa-circle-o"></i> 车辆信息</a></li>
+                        <li class="active"><a href="../car/carinfo.php"><i class="fa fa-circle-o"></i> 车辆信息</a></li>
                         <li><a href="../car/carsearch.php"><i class="fa fa-circle-o"></i> 车辆查询</a></li>
                     </ul>
                 </li>

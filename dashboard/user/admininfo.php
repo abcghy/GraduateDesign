@@ -35,7 +35,7 @@ include_once('../../db.php');
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="../../index.php" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>闪腾</b></span>
             <!-- logo for regular state and mobile devices -->
@@ -133,7 +133,7 @@ include_once('../../db.php');
                 <li class="header">导航</li>
                 <li class="">
                     <!--todo:网页需要修改-->
-                    <a href="../../index.html">
+                    <a href="../dashboard.php">
                         <i class="fa fa-dashboard"></i>
                         <span>信息概览</span>
                     </a>

@@ -10,8 +10,8 @@ include_once('../../db.php');
 
 $deleteid = '';
 
-if (isset($_POST['deleteid'])) {
-    $deleteid = $_POST['deleteid'];
+if (isset($_GET['deleteid'])) {
+    $deleteid = $_GET['deleteid'];
 }
 
 $result = $con->query('delete from user where id = '.$deleteid.';');
