@@ -16,9 +16,9 @@
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
     <!-- Theme style -->
@@ -187,16 +187,33 @@ $image_result = $con->query('select * from image where car = '.$row['id'].';');
     <div class="col-md-8">
         <h1><?php echo $row['title']; ?></h1>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4" style="margin-top: 15px">
         <button type="button" class="btn btn-lg btn-danger">
             <i class="fa fa-phone"></i>
             预约看车
         </button>
         &nbsp;&nbsp;&nbsp;&nbsp;
+<!--        如果没收藏就是收藏该车-->
+        <?php
+        $favourite_result = $con->query("select * from favourite where user = ".$user_id." and car = ".$id.";");
+        if ($favourite_result->num_rows == 0) {
+        ?>
         <a href="favorite.php?user=<?php echo $user_id;?>&car=<?php echo $id;?>" type="button" class="btn btn-lg btn-primary">
             <i class="fa fa-heart"></i>
             收藏该车
         </a>
+        <?php
+        } else {
+        ?>
+        <a type="button" class="btn btn-lg btn-primary">
+            <i class="fa fa-heart"></i>
+            已收藏
+        </a>
+        <?php
+        }
+        ?>
+
+<!--        如果收藏了就是 已收藏-->
     </div>
 </div>
 
@@ -257,7 +274,36 @@ $image_result = $con->query('select * from image where car = '.$row['id'].';');
 
 
 <div class="container">
-    <h1>车况介绍</h1>
+    <div class="col-md-12">
+        <div class="col-md-3">
+            <h1>车况介绍</h1>
+        </div>
+        <div class="col-md-9">
+            <?php
+            $first_compare = '';
+            if (isset($_COOKIE['first_compare'])) {
+                $first_compare = $_COOKIE['first_compare'];
+            }
+
+            if (isset($first_compare)) {
+            ?>
+                <a type="button" class="btn btn-lg btn-info" style="margin-top: 15px" onclick="add_compare(<?php echo $id;?>)">
+                    <i class="fa fa-arrows-h"></i>
+                    查看对比
+                </a>
+            <?php
+            } else {
+            ?>
+                <a type="button" class="btn btn-lg btn-info" style="margin-top: 15px" onclick="add_compare(<?php echo $id;?>)">
+                    <i class="fa fa-arrows-h"></i>
+                    参数对比
+                </a>
+            <?php
+            }
+            ?>
+
+        </div>
+    </div>
     <h3 style="text-align: center">发动机舱</h3>
     <div class="col-md-12">
     <ul class="col-md-8" style="list-style: none" >
@@ -369,6 +415,7 @@ $image_result = $con->query('select * from image where car = '.$row['id'].';');
 <script src="dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+<script src="dist/js/goods.js"></script>
 <script>
     $(function () {
         $("#example1").DataTable();

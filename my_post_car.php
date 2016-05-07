@@ -39,6 +39,22 @@ if (isset($_COOKIE['email'])) {
 if (isset($_COOKIE['nickname'])) {
     $nickname = $_COOKIE['nickname'];
 }
+
+// 创建一个字典, 存储类型 ID 与 description 的关系
+$result = $con->query("select * from type;");
+$type = null;
+while ($row = $result->fetch_array()) {
+    $type[$row['id']] = $row['description'];
+}
+
+function changemile($length) {
+    $llength = $length / 10000;
+    return $llength;
+}
+
+$user_result = $con->query('select * from user WHERE email="'.$email.'";');
+$user_row = $user_result->fetch_array();
+$user_id = $user_row['id'];
 ?>
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -95,7 +111,53 @@ if (isset($_COOKIE['nickname'])) {
         </div>
     </div>
     <div class="col-xs-12 col-sm-9">
-        这里放我发布的车辆
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>标题</th>
+                <th>品牌</th>
+                <th>型号</th>
+                <th>类型</th>
+                <th>价格</th>
+                <th>年份</th>
+                <th>距离</th>
+                <th>维修</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            $result = $con->query('select * from car where user = '.$user_id.';');
+            while ($row = $result->fetch_array()) {
+                $modelresult = $con->query('select * from model where id ='.$row['model']);
+                $modelrow = $modelresult->fetch_array();
+                $makeresult = $con->query('select * from make where id ='.$modelrow['make']);
+                $makerow = $makeresult->fetch_array();
+                echo '<tr><td><a href="goods.php?id='.$row['id'].'">'.$row['title'].'</a></td>';
+                echo '<td>'.$makerow['make'].'</td>';
+                echo '<td>'.$modelrow['model'].'</td>';
+                echo '<td>'.$type[$row['type']].'</td>';
+                echo '<td>'.$row['price'].'</td>';
+                echo '<td>'.$row['year'].'</td>';
+                echo '<td>'.$row['mile'].'</td>';
+                echo '<td>';
+                if ($row['fixed'] == 0) {
+                    echo '无';
+                } else {
+                    echo '有';
+                }
+                echo '</td></tr>';
+//                            echo    '<td>
+//                                        <button type="button" class="btn-xs btn-info">
+//                                            <i class="fa fa-car"></i>
+//                                        </button>
+//                                        <button type="button" class="btn-xs btn-danger">
+//                                            <i class="fa fa-trash"></i>
+//                                        </button>
+//                                    </td></tr>';
+            }
+            ?>
+            </tbody>
+        </table>
     </div>
 
 </div>
