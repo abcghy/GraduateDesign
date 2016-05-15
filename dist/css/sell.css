@@ -9,7 +9,7 @@ body {
 }
 
 .jumbotron {
-    background: #eee url("../images/whitecar.png") no-repeat right top fixed;
+    background: #eee url("../img/whitecar.png") no-repeat right top fixed;
 }
 
 .footer {
@@ -144,7 +144,7 @@ code {
 }
 
 #sell_bg {
-    background: url("../images/sell_bg_blured.jpg") no-repeat center;
+    background: url("../img/sell_bg_blured.jpg") no-repeat center;
     height: 1080px;
 }
 

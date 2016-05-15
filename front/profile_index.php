@@ -15,7 +15,7 @@
     <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/index.css" rel="stylesheet">
+    <link href="../dist/css/index.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -87,7 +87,7 @@ $user_id = $user_row['id'];
                 <?php
                 if ($row['rate'] == 1) {
                     ?>
-                    <button type="button" class="btn btn-link navbar-btn navbar-right"><a href="dashboard.php">后台管理</a></button>
+                    <button type="button" class="btn btn-link navbar-btn navbar-right"><a href="../dashboard.php">后台管理</a></button>
                     <?php
                 }
             } else {

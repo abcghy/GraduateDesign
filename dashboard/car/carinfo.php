@@ -29,7 +29,7 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <?php
-include_once('../../db.php');
+include_once('../../front/db.php');
 
 // 创建一个字典, 存储类型 ID 与 description 的关系
 $result = $con->query("select * from type;");
@@ -37,13 +37,19 @@ $type = null;
 while ($row = $result->fetch_array()) {
     $type[$row['id']] = $row['description'];
 }
-
+$email = $nickname = '';
+if (isset($_COOKIE['email'])) {
+    $email = $_COOKIE['email'];
+}
+if (isset($_COOKIE['nickname'])) {
+    $nickname = $_COOKIE['nickname'];
+}
 ?>
 <div class="wrapper">
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="../../index.php" class="logo">
+        <a href="../../front/index.php" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>闪腾</b></span>
             <!-- logo for regular state and mobile devices -->
@@ -56,7 +62,7 @@ while ($row = $result->fetch_array()) {
                 <span class="sr-only">Toggle navigation</span>
             </a>
             <div class="navbar-custom-menu">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav navbar-right">
                     <!-- Messages: style can be found in dropdown.less-->
 
                     <!-- Notifications: style can be found in dropdown.less -->
@@ -68,7 +74,7 @@ while ($row = $result->fetch_array()) {
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!--todo:这里放用户的照片,和用户名-->
                             <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                            <span class="hidden-xs">高大帅</span>
+                            <span class="hidden-xs"><?php echo $nickname;?></span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
@@ -76,36 +82,32 @@ while ($row = $result->fetch_array()) {
                                 <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                                 <p>
                                     <!--todo:用户名和职位-->
-                                    高大帅 - 网页全栈
+                                    <?php echo $nickname;?>
                                     <small>Nov. 2012 注册</small>
                                 </p>
                             </li>
                             <!-- Menu Body -->
                             <li class="user-body">
                                 <div class="col-xs-4 text-center">
-                                    <a href="#">收藏</a>
+                                    <a href="../../front/my_favourite.php">收藏</a>
                                 </div>
                                 <div class="col-xs-4 text-center">
-                                    <a href="#">发布</a>
+                                    <a href="../../front/my_post_car.php">发布</a>
                                 </div>
                                 <div class="col-xs-4 text-center">
-                                    <a href="#">购买</a>
+                                    <a href="../../front/search.php">购买</a>
                                 </div>
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">资料</a>
+                                    <a href="../../front/profile_index.php" class="btn btn-default btn-flat">资料</a>
                                 </div>
                                 <div class="pull-right">
                                     <a href="#" class="btn btn-default btn-flat">退出</a>
                                 </div>
                             </li>
                         </ul>
-                    </li>
-                    <!-- Control Sidebar Toggle Button -->
-                    <li>
-                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                     </li>
                 </ul>
             </div>
@@ -122,7 +124,7 @@ while ($row = $result->fetch_array()) {
                 </div>
                 <div class="pull-left info">
                     <!--todo:用户名-->
-                    <p>高大帅</p>
+                    <p><?php echo $nickname;?></p>
                     <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
                 </div>
             </div>
@@ -202,7 +204,7 @@ while ($row = $result->fetch_array()) {
                 <small>车辆信息</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="../../index.php"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li><a href="../../front/index.php"><i class="fa fa-dashboard"></i> 首页</a></li>
                 <li class="active"><a href="#">后台管理</a></li>
                 <li class="active">车辆信息</li>
             </ol>

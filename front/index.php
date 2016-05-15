@@ -9,13 +9,36 @@
 	<meta name="author" content="">
 	<link rel="icon" href="../../favicon.ico">
 
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<!-- Ionicons -->
+	<link rel="stylesheet" href="//cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css">
+	<!-- Theme style -->
+	<link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+	<!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+	<link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
+	<!-- iCheck -->
+	<link rel="stylesheet" href="../plugins/iCheck/flat/blue.css">
+	<!-- Morris chart -->
+	<link rel="stylesheet" href="../plugins/morris/morris.css">
+	<!-- jvectormap -->
+	<link rel="stylesheet" href="../plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+	<!-- Date Picker -->
+	<link rel="stylesheet" href="../plugins/datepicker/datepicker3.css">
+	<!-- Daterange picker -->
+	<link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker-bs3.css">
+	<!-- bootstrap wysihtml5 - text editor -->
+	<link rel="stylesheet" href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
 	<title>闪腾二手车•主页</title>
 
-	<!-- Bootstrap core CSS -->
-	<link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap 3.3.5 -->
+	<link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
 
 	<!-- Custom styles for this template -->
-	<link href="css/index.css" rel="stylesheet">
+	<link href="../dist/css/index.css" rel="stylesheet">
 </head>
 
 <body>
@@ -59,11 +82,61 @@ if (isset($_COOKIE['nickname'])) {
 				$row = $result->fetch_array();
 
 				?>
-				<button type="button" class="btn btn-link navbar-btn navbar-right"><a href="profile_index.php"><?php echo $_COOKIE['nickname'] ?></a></button>
+<!--				<button type="button" class="btn btn-link navbar-btn navbar-right"><a href="profile_index.php">--><?php //echo $_COOKIE['nickname'] ?><!--</a></button>-->
+				<div class="navbar-custom-menu">
+					<ul class="nav navbar-nav navbar-right">
+						<!-- Messages: style can be found in dropdown.less-->
+
+						<!-- Notifications: style can be found in dropdown.less -->
+
+						<!-- Tasks: style can be found in dropdown.less -->
+
+						<!-- User Account: style can be found in dropdown.less -->
+						<li class="dropdown user user-menu">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<!--todo:这里放用户的照片,和用户名-->
+								<img src="../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+								<span class="hidden-xs"><?php echo $nickname;?></span>
+							</a>
+							<ul class="dropdown-menu">
+								<!-- User image -->
+								<li class="user-header">
+									<img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+									<p style="color: #000;">
+										<!--todo:用户名和职位-->
+										<?php echo $nickname;?>
+										<small>Nov. 2012 注册</small>
+									</p>
+								</li>
+								<!-- Menu Body -->
+								<li class="user-body">
+									<div class="col-xs-4 text-center">
+										<a href="my_favourite.php">收藏</a>
+									</div>
+									<div class="col-xs-4 text-center">
+										<a href="my_post_car.php">发布</a>
+									</div>
+									<div class="col-xs-4 text-center">
+										<a href="search.php">购买</a>
+									</div>
+								</li>
+								<!-- Menu Footer-->
+								<li class="user-footer">
+									<div class="pull-left">
+										<a href="profile_index.php" class="btn btn-default btn-flat">资料</a>
+									</div>
+									<div class="pull-right">
+										<a href="#" class="btn btn-default btn-flat">退出</a>
+									</div>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
 				<?php
 				if ($row['rate'] == 1) {
 					?>
-					<button type="button" class="btn btn-link navbar-btn navbar-right"><a href="dashboard/dashboard.php">后台管理</a></button>
+					<button type="button" class="btn btn-link navbar-btn navbar-right"><a href="../dashboard/dashboard.php">后台管理</a></button>
 					<?php
 				}
 			} else {
@@ -74,8 +147,6 @@ if (isset($_COOKIE['nickname'])) {
 			?>
 
 		</div>
-
-
 
 		<!--<div id="navbar" class="collapse navbar-collapse navbar-right">-->
 
@@ -170,19 +241,19 @@ if (isset($_COOKIE['nickname'])) {
 		<!-- Wrapper for slides -->
 		<div class="carousel-inner" role="listbox">
 			<div class="item active">
-				<img class="first-slide" src="images/background.jpg" alt="...">
+				<img class="first-slide" src="../dist/img/background.jpg" alt="...">
 				<div class="carousel-caption">
 					...
 				</div>
 			</div>
 			<div class="item">
-				<img class="second-slide" src="images/whitecar.png" alt="...">
+				<img class="second-slide" src="../dist/img/whitecar.png" alt="...">
 				<div class="carousel-caption">
 					...
 				</div>
 			</div>
 			<div class="item">
-				<img class="third-slide" src="images/whitecar.png" alt="...">
+				<img class="third-slide" src="../dist/img/whitecar.png" alt="...">
 				<div class="carousel-caption">
 					...
 				</div>
@@ -219,13 +290,13 @@ if (isset($_COOKIE['nickname'])) {
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane fade in active" id="threetime">
 			<div class="col-md-4">
-				<img src="images/three_left_side.jpg" alt="左侧展示栏">
+				<img src="../dist/img/three_left_side.jpg" alt="左侧展示栏">
 			</div>
 
-			<div class="col-md-8 col-xs-12 right-side">
+			<div class="col-md-8 col-xs-12">
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="goods.php<?php ?>"><img src="images/cars/three_car_1.jpg" alt="雪弗兰" /></a>
+						<a href="goods.php<?php ?>"><img src="../dist/img/cars/three_car_1.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -235,7 +306,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/three_car_2.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/three_car_2.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -245,7 +316,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/three_car_3.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/three_car_3.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -255,7 +326,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/three_car_4.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/three_car_4.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -265,7 +336,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/three_car_5.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/three_car_5.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -275,7 +346,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/three_car_6.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/three_car_6.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -290,13 +361,13 @@ if (isset($_COOKIE['nickname'])) {
 		
 		<div role="tabpanel" class="tab-pane fade" id="owncar">
 			<div class="col-md-4">
-				<img src="images/individual_left_side.jpg" alt="左侧展示栏">
+				<img src="../dist/img/individual_left_side.jpg" alt="左侧展示栏">
 			</div>
 
-			<div class="col-md-8 col-xs-12 right-side">
+			<div class="col-md-8 col-xs-12">
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/individual_car_1.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/individual_car_1.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -306,7 +377,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/individual_car_2.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/individual_car_2.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -316,7 +387,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/individual_car_3.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/individual_car_3.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -326,7 +397,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/individual_car_4.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/individual_car_4.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -336,7 +407,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/individual_car_5.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/individual_car_5.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -346,7 +417,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/individual_car_6.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/individual_car_6.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -359,13 +430,13 @@ if (isset($_COOKIE['nickname'])) {
 		</div>
 		<div role="tabpanel" class="tab-pane fade" id="source">
 			<div class="col-md-4">
-				<img src="images/left-side.jpg" alt="左侧展示栏">
+				<img src="../dist/img/left-side.jpg" alt="左侧展示栏">
 			</div>
 
-			<div class="col-md-8 col-xs-12 right-side">
+			<div class="col-md-8 col-xs-12">
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/car_1.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/car_1.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -375,7 +446,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/car_2.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/car_2.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -385,7 +456,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/car_3.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/car_3.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -395,7 +466,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/car_4.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/car_4.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -405,7 +476,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/car_5.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/car_5.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -415,7 +486,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/car_6.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/car_6.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -442,13 +513,13 @@ if (isset($_COOKIE['nickname'])) {
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane fade in active" id="suvtype">
 			<div class="col-md-4">
-				<img src="images/suv_left_side.jpg" alt="左侧展示栏">
+				<img src="../dist/img/suv_left_side.jpg" alt="左侧展示栏">
 			</div>
 
-			<div class="col-md-8 col-xs-12 right-side">
+			<div class="col-md-8 col-xs-12">
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/suv_car_1.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/suv_car_1.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -458,7 +529,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/suv_car_2.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/suv_car_2.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -468,7 +539,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/suv_car_3.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/suv_car_3.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -478,7 +549,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/suv_car_4.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/suv_car_4.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -488,7 +559,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/suv_car_5.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/suv_car_5.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -498,7 +569,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/suv_car_6.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/suv_car_6.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -511,13 +582,13 @@ if (isset($_COOKIE['nickname'])) {
 		</div>
 		<div role="tabpanel" class="tab-pane fade" id="businesstype">
 			<div class="col-md-4">
-				<img src="images/business_left_side.jpg" alt="左侧展示栏">
+				<img src="../dist/img/business_left_side.jpg" alt="左侧展示栏">
 			</div>
 
-			<div class="col-md-8 col-xs-12 right-side">
+			<div class="col-md-8 col-xs-12">
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/business_car_1.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/business_car_1.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -527,7 +598,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/business_car_2.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/business_car_2.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -537,7 +608,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/business_car_3.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/business_car_3.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -547,7 +618,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/business_car_4.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/business_car_4.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -557,7 +628,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/business_car_5.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/business_car_5.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -567,7 +638,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/business_car_6.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/business_car_6.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -580,13 +651,13 @@ if (isset($_COOKIE['nickname'])) {
 		</div>
 		<div role="tabpanel" class="tab-pane fade" id="forstep">
 			<div class="col-md-4">
-				<img src="images/forstep_left_side.jpg" alt="左侧展示栏">
+				<img src="../dist/img/forstep_left_side.jpg" alt="左侧展示栏">
 			</div>
 
-			<div class="col-md-8 col-xs-12 right-side">
+			<div class="col-md-8 col-xs-12">
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/forstep_car_1.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/forstep_car_1.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -596,7 +667,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/forstep_car_2.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/forstep_car_2.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -606,7 +677,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/forstep_car_3.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/forstep_car_3.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -616,7 +687,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/forstep_car_4.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/forstep_car_4.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -626,7 +697,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/forstep_car_5.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/forstep_car_5.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -636,7 +707,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/forstep_car_6.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/forstep_car_6.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -649,13 +720,13 @@ if (isset($_COOKIE['nickname'])) {
 		</div>
 		<div role="tabpanel" class="tab-pane fade" id="capi">
 			<div class="col-md-4">
-				<img src="images/capi_left_side.jpg" alt="左侧展示栏">
+				<img src="../dist/img/capi_left_side.jpg" alt="左侧展示栏">
 			</div>
 
-			<div class="col-md-8 col-xs-12 right-side">
+			<div class="col-md-8 col-xs-12">
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/capi_car_1.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/capi_car_1.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -665,7 +736,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/capi_car_2.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/capi_car_2.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -675,7 +746,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/capi_car_3.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/capi_car_3.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -685,7 +756,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/capi_car_4.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/capi_car_4.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -695,7 +766,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/capi_car_5.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/capi_car_5.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -705,7 +776,7 @@ if (isset($_COOKIE['nickname'])) {
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="images/cars/capi_car_6.jpg" alt="雪弗兰" /></a>
+						<a href="#<?php ?>"><img src="../dist/img/cars/capi_car_6.jpg" alt="雪弗兰" /></a>
 						<div class="caption">
 							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
 							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
@@ -721,22 +792,22 @@ if (isset($_COOKIE['nickname'])) {
 
 <div id="index-littletip" class="container-fluid">
 	<div class="col-md-3">
-		<img class="littletip" src="images/head/quality.png" alt="品质" />
+		<img class="littletip" src="../dist/img/head/quality.png" alt="品质" />
 		<div class="adtitle"><h3>闪腾认证1088项检测</h3></div>
 		<div class="adsubtitle"><p>反馈真实车况杜绝问题车</p></div>
 	</div>
 	<div class="col-md-3">
-		<img class="littletip" src="images/head/ensurance.png" alt="保障"/>
+		<img class="littletip" src="../dist/img/head/ensurance.png" alt="保障"/>
 		<div class="adtitle"><h3>一年/两万公里质保</h3></div>
 		<div class="adsubtitle"><p>提供主要部件保额内的免费保修</p></div>
 	</div>
 	<div class="col-md-3">
-		<img class="littletip" src="images/head/dontworry.png" alt="品质"/>
+		<img class="littletip" src="../dist/img/head/dontworry.png" alt="品质"/>
 		<div class="adtitle"><h3>重大问题车15天包退</h3></div>
 		<div class="adsubtitle"><p>杜绝重大问题车，让您买得放心</p></div>
 	</div>
 	<div class="col-md-3">
-		<img class="littletip" src="images/head/tiexin.png" alt="品质"/>
+		<img class="littletip" src="../dist/img/head/tiexin.png" alt="品质"/>
 		<div class="adtitle"><h3>专业顾问全程陪买</h3></div>
 		<div class="adsubtitle"><p>1对1全程陪您找车、看车、验车</p></div>
 	</div>
@@ -758,6 +829,6 @@ if (isset($_COOKIE['nickname'])) {
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 
-<script src="js/index.js"></script>
+<script src="../dist/js/index.js"></script>
 </body>
 </html>

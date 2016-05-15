@@ -4,12 +4,12 @@ html {
 }
 
 body {
-    /*margin-top: 50px;*/
+    margin-top: 70px;
     margin-bottom: 60px;
 }
 
 .jumbotron {
-    background: #eee url("../images/whitecar.png") no-repeat right top fixed;
+    background: #eee url("../img/whitecar.png") no-repeat right top fixed;
 }
 
 .footer {
@@ -21,7 +21,7 @@ body {
 }
 
 body > .container {
-    padding: 60px 15px 0;
+    /*padding: 60px 15px 0;*/
 }
 .container .text-muted {
     margin: 20px 0;
@@ -143,35 +143,28 @@ code {
     }
 }
 
-.thumbnail {
-    height: 350px;
-}
-
 .thumbnail:hover {
     -webkit-box-shadow: 0 0 50px #DDDDDD;
     -moz-box-shadow:    0 0 50px #DDDDDD;
     box-shadow:         0 0 50px #DDDDDD;
 }
 
-.priceforcar {
-    color: #ff4776;
-    font-weight: 700;
-    font-size: large;
+#price_zone {
+    background-color: #F6F6F6;
+    font-size: 25pt;
+    vertical-align: middle;
+    margin-top: 20px;
 }
 
-a:link, a:visited, a:hover, a:active {
-    color: #000000;
-    text-decoration: none;
+#price_tag {
+    color: tomato;
 }
 
-#navtabsFrom {
-    margin-left: 58px;
+#price_wan {
+    color: tomato;
+    font-size: 15pt;
 }
 
-#navtabstype {
-    margin-left: 15px;
-}
-
-.right-side {
-    margin-top: 30px;
+#four_thing {
+    margin-top: 20px;
 }

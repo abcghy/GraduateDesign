@@ -28,6 +28,6 @@ function stateChanged() {
         //     emailValidate = true;
         //     validate_button();
         // }
-        alert('success');
+        // alert('success');
     }
 }

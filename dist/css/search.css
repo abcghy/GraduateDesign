@@ -4,13 +4,12 @@ html {
 }
 
 body {
-    margin-top: 50px;
+    /*margin-top: 50px;*/
     margin-bottom: 60px;
 }
 
 .jumbotron {
-    background: #eee url("../images/whitecar.png") no-repeat right top fixed;
-    height: 450px;
+    background: #eee url("../img/whitecar.png") no-repeat right top fixed;
 }
 
 .footer {
@@ -37,7 +36,7 @@ code {
     font-size: 80%;
 }
 
-.make, .type, .year, .price{
+.make, .model, .year, .price{
     display: none;
     background: #fff;
     width: 50%;
@@ -144,6 +143,10 @@ code {
     }
 }
 
+.thumbnail {
+    height: 350px;
+}
+
 .thumbnail:hover {
     -webkit-box-shadow: 0 0 50px #DDDDDD;
     -moz-box-shadow:    0 0 50px #DDDDDD;
@@ -153,6 +156,7 @@ code {
 .priceforcar {
     color: #ff4776;
     font-weight: 700;
+    font-size: large;
 }
 
 a:link, a:visited, a:hover, a:active {
@@ -170,13 +174,4 @@ a:link, a:visited, a:hover, a:active {
 
 .right-side {
     margin-top: 30px;
-}
-
-#index-littletip {
-    width: 75%;
-}
-
-.littletip {
-    float: left;
-    margin-top: 20px
 }

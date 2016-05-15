@@ -9,13 +9,27 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>闪腾二手车•个人•资料管理</title>
+    <title>闪腾二手车•主页</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
 
+    <link rel="stylesheet" href="../dist/css/balloon.min.css">
     <!-- Custom styles for this template -->
-    <link href="css/index.css" rel="stylesheet">
+    <link href="../dist/css/index.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -29,19 +43,8 @@
 </head>
 
 <body>
-
 <?php
-$email = $_COOKIE['email'];
-
 include_once('db.php');
-$result = $con->query("select * from user where email = '".$email."';");
-$row = $result->fetch_array();
-$nickname = $row['nickname'];
-$phone = $row['phone'];
-$province = $row['province'];
-$city = $row['city'];
-$address = $row['address'];
-$motto = $row['motto'];
 
 $email = $nickname = '';
 if (isset($_COOKIE['email'])) {
@@ -50,8 +53,23 @@ if (isset($_COOKIE['email'])) {
 if (isset($_COOKIE['nickname'])) {
     $nickname = $_COOKIE['nickname'];
 }
-?>
 
+// 创建一个字典, 存储类型 ID 与 description 的关系
+$result = $con->query("select * from type;");
+$type = null;
+while ($row = $result->fetch_array()) {
+    $type[$row['id']] = $row['description'];
+}
+
+function changemile($length) {
+    $llength = $length / 10000;
+    return $llength;
+}
+
+$user_result = $con->query('select * from user WHERE email="'.$email.'";');
+$user_row = $user_result->fetch_array();
+$user_id = $user_row['id'];
+?>
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -64,7 +82,6 @@ if (isset($_COOKIE['nickname'])) {
             </button>
             <a class="navbar-brand" href="index.php"> 闪腾二手车</a>
         </div>
-
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li><a href="index.php">首页</a></li>
@@ -84,7 +101,7 @@ if (isset($_COOKIE['nickname'])) {
                 <?php
                 if ($row['rate'] == 1) {
                     ?>
-                    <button type="button" class="btn btn-link navbar-btn navbar-right"><a href="dashboard.php">后台管理</a></button>
+                    <button type="button" class="btn btn-link navbar-btn navbar-right"><a href="../dashboard/dashboard.php">后台管理</a></button>
                     <?php
                 }
             } else {
@@ -93,66 +110,66 @@ if (isset($_COOKIE['nickname'])) {
                 <?php
             }
             ?>
-
         </div>
     </div>
 </nav>
 
 
 <div class="container">
-<!--    <p class="pull-right visible-xs">-->
-<!--        <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>-->
-<!--    </p>-->
     <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
         <div class="list-group">
             <a href="profile_index.php" class="list-group-item">个人主页</a>
-            <a href="my_favourite.php" class="list-group-item">我的收藏</a>
+            <a href="my_favourite.php" class="list-group-item active">我的收藏</a>
             <a href="my_post_car.php" class="list-group-item">我发布的车辆</a>
-            <a href="profile_manage.php" class="list-group-item active">资料管理</a>
+            <a href="profile_manage.php" class="list-group-item">资料管理</a>
         </div>
     </div>
-    <form action="change_profile.php" method="post">
-        <div class="col-xs-12 col-sm-9">
-            <div class="nickname">
-                <div class="col-md-2 col-sm-2 text-right">昵称:</div>
-                <div class="col-md-3 col-sm-3"><input name="nickname" value="<?php if (isset($nickname)) echo $nickname; ?>" /></div>
-                <div class="col-md-7 col-sm-7">取一个你喜欢的昵称吧!（请勿频繁更换,否则会影响您的正常交易）</div>
-            </div><br /><br />
-            <div class="email">
-                <div class="col-md-2 col-sm-2 text-right">邮箱:</div>
-                <div class="col-md-3 col-sm-3"><?php if (isset($email)) echo $email; ?></div>
-                <div class="col-md-7 col-sm-7">邮箱可以用于登录,找回密码,接受重要信息</div>
-            </div><br /><br />
-            <div class="phone">
-                <div class="col-md-2 col-sm-2 text-right">手机:</div>
-                <div class="col-md-3 col-sm-3"><input name="phone" value="<?php if (isset($phone)) echo $phone; ?>" /></div>
-                <div class="col-md-7 col-sm-7">必须得绑定手机号码后,才可以进行交易</div>
-            </div><br /><br />
-            <div class="province">
-                <div class="col-md-2 col-sm-2 text-right">省份:</div>
-                <div class="col-md-3 col-sm-3"><input name="province" value="<?php if (isset($province)) echo $province; ?>" /></div>
-                <div class="col-md-7 col-sm-7">您的居住地所在的省份</div>
-            </div><br /><br />
-            <div class="city">
-                <div class="col-md-2 col-sm-2 text-right">城市:</div>
-                <div class="col-md-3 col-sm-3"><input name="city" value="<?php if (isset($city)) echo $city; ?>" /></div>
-                <div class="col-md-7 col-sm-7">您的居住地所在的城市</div>
-            </div><br /><br />
-            <div class="address">
-                <div class="col-md-2 col-sm-2 text-right">详细地址:</div>
-                <div class="col-md-3 col-sm-3"><input name="address" value="<?php if (isset($address)) echo $address; ?>" /></div>
-                <div class="col-md-7 col-sm-7">您的居住地的详细地址</div>
-            </div><br /><br />
-            <div class="motto">
-                <div class="col-md-2 col-sm-2 text-right">个人宣言:</div>
-                <div class="col-md-3 col-sm-3"><textarea name="motto"><?php if (isset($motto)) echo $motto; ?></textarea></div>
-                <div class="col-md-7 col-sm-7">在别人查看您的资料时,会展现您的个人宣言</div>
-            </div><br /><br /><br /><br /><br />
-            <div>
-                <button class="btn btn-danger" type="submit">提交</button>
-            </div>
-        </div>
-    </form>
+    <div class="col-xs-12 col-sm-9">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>标题</th>
+                <th>品牌</th>
+                <th>型号</th>
+                <th>类型</th>
+                <th>价格</th>
+                <th>年份</th>
+                <th>距离</th>
+                <th>维修</th>
+                <th>车主 ID</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            $favourite_result = $con->query("select * from favourite where user = ".$user_id.";");
+            while ($favourite_row = $favourite_result->fetch_array()) {
+                $car_result = $con->query("select * from car where id = ".$user_id.";");
+                $car_row = $car_result->fetch_array();
+                $modelresult = $con->query('select * from model where id ='.$car_row['model']);
+                $modelrow = $modelresult->fetch_array();
+                $makeresult = $con->query('select * from make where id ='.$modelrow['make']);
+                $makerow = $makeresult->fetch_array();
+                echo '<tr><td><a href="goods.php?id='.$car_row['id'].'">'.$car_row['title'].'</a></td>';
+                echo '<td>'.$makerow['make'].'</td>';
+                echo '<td>'.$modelrow['model'].'</td>';
+                echo '<td>'.$type[$car_row['type']].'</td>';
+                echo '<td>'.changemile($car_row['price']).'万</td>';
+                echo '<td>'.$car_row['year'].'</td>';
+                echo '<td>'.changemile($car_row['mile']).'万</td>';
+                echo '<td>';
+                if ($car_row['fixed'] == 0) {
+                    echo '无';
+                } else {
+                    echo '有';
+                }
+                echo '</td>';
+                echo '<td>'.$car_row['user'].'</td>';
+            }
+            ?>
+            </tbody>
+        </table>
+    </div>
+
 </div>
 
 

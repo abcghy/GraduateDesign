@@ -14,23 +14,23 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="//cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- DataTables -->
-    <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
 
-    <link rel="stylesheet" href="dist/css/balloon.min.css">
+    <link rel="stylesheet" href="../dist/css/balloon.min.css">
 
     <!-- Custom styles for this template -->
-    <link href="css/goods.css" rel="stylesheet">
+    <link href="../dist/css/goods.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -77,6 +77,14 @@ $type = null;
 while ($row = $result->fetch_array()) {
     $type[$row['id']] = $row['description'];
 }
+
+$first_id = $second_id = '';
+if (isset($_GET['first'])) {
+    $first_id = $_GET['first'];
+}
+if (isset($_GET['second'])) {
+    $second_id = $_GET['second'];
+}
 ?>
 
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -106,11 +114,61 @@ while ($row = $result->fetch_array()) {
                 $row = $result->fetch_array();
 
                 ?>
-                <button type="button" class="btn btn-link navbar-btn navbar-right"><a href="profile_index.php"><?php echo $_COOKIE['nickname'] ?></a></button>
+<!--                <button type="button" class="btn btn-link navbar-btn navbar-right"><a href="profile_index.php">--><?php //echo $_COOKIE['nickname'] ?><!--</a></button>-->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- Messages: style can be found in dropdown.less-->
+
+                        <!-- Notifications: style can be found in dropdown.less -->
+
+                        <!-- Tasks: style can be found in dropdown.less -->
+
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <!--todo:这里放用户的照片,和用户名-->
+                                <img src="../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                                <span class="hidden-xs"><?php echo $nickname;?></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header">
+                                    <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                    <p style="color: #000;">
+                                        <!--todo:用户名和职位-->
+                                        <?php echo $nickname;?>
+                                        <small>Nov. 2012 注册</small>
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+                                <li class="user-body">
+                                    <div class="col-xs-4 text-center">
+                                        <a href="my_favourite.php">收藏</a>
+                                    </div>
+                                    <div class="col-xs-4 text-center">
+                                        <a href="my_post_car.php">发布</a>
+                                    </div>
+                                    <div class="col-xs-4 text-center">
+                                        <a href="search.php">购买</a>
+                                    </div>
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="profile_index.php" class="btn btn-default btn-flat">资料</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="#" class="btn btn-default btn-flat">退出</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
                 <?php
                 if ($row['rate'] == 1) {
                     ?>
-                    <button type="button" class="btn btn-link navbar-btn navbar-right"><a href="dashboard/dashboard.php">后台管理</a></button>
+                    <button type="button" class="btn btn-link navbar-btn navbar-right"><a href="../dashboard/dashboard.php">后台管理</a></button>
                     <?php
                 }
             } else {
@@ -130,7 +188,7 @@ while ($row = $result->fetch_array()) {
 
 <div class="container">
     <?php
-    $car_result = $con->query("select * from car where id = "."2".";");
+    $car_result = $con->query("select * from car where id = ".$first_id.";");
     $car_row = $car_result->fetch_array();
     $model_result = $con->query("select * from model where id = ".$car_row['model'].";");
     $model_row = $model_result->fetch_array();
@@ -140,7 +198,7 @@ while ($row = $result->fetch_array()) {
     $detail_result = $con->query("select * from detail where id =".$car_row['detail'].";");
     $detail_row = $detail_result->fetch_array();
 
-    $image_result = $con->query("select * from image where id = "."2".";");
+    $image_result = $con->query("select * from image where id = ".$first_id.";");
     $image_row = $image_result->fetch_array();
     ?>
     <div class="col-md-6">
@@ -183,7 +241,7 @@ while ($row = $result->fetch_array()) {
     </div>
 
     <?php
-    $car_result = $con->query("select * from car where id = "."3".";");
+    $car_result = $con->query("select * from car where id = ".$second_id.";");
     $car_row = $car_result->fetch_array();
     $model_result = $con->query("select * from model where id = ".$car_row['model'].";");
     $model_row = $model_result->fetch_array();
@@ -193,7 +251,7 @@ while ($row = $result->fetch_array()) {
     $detail_result = $con->query("select * from detail where id =".$car_row['detail'].";");
     $detail_row = $detail_result->fetch_array();
 
-    $image_result = $con->query("select * from image where id = "."3".";");
+    $image_result = $con->query("select * from image where id = ".$second_id.";");
     $image_row = $image_result->fetch_array();
     ?>
     <div class="col-md-6">
@@ -246,20 +304,20 @@ while ($row = $result->fetch_array()) {
 
 </div><!-- ./wrapper -->
 <!-- jQuery 2.1.4 -->
-<script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="../plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <!-- Bootstrap 3.3.5 -->
-<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="../bootstrap/js/bootstrap.min.js"></script>
 <!-- DataTables -->
-<script src="plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
 <!-- SlimScroll -->
-<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="plugins/fastclick/fastclick.min.js"></script>
+<script src="../plugins/fastclick/fastclick.min.js"></script>
 <!-- AdminLTE App -->
-<script src="dist/js/app.min.js"></script>
+<script src="../dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
+<script src="../dist/js/demo.js"></script>
 <script>
     $(function () {
         $("#example1").DataTable();
