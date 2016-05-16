@@ -58,6 +58,11 @@ if (isset($_COOKIE['email'])) {
 if (isset($_COOKIE['nickname'])) {
     $nickname = $_COOKIE['nickname'];
 }
+
+$success = '';
+if (isset($_GET['success'])) {
+    $success = $_GET['success'];
+}
 ?>
 
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -162,6 +167,14 @@ if (isset($_COOKIE['nickname'])) {
 
 <div id="sell_bg" class="container-fluid">
     <form action="sell_car.php" method="POST" class="form-horizontal">
+        <p style="font-size: 20px; color: red;">
+        <?php
+        if ($success == 1) {
+            echo '成功录入,请等候管理员与您联系';
+        } else if ($success == 0) {
+            echo '刚才的信息有错误';
+        }
+        ?></p>
         <p>请填写您的车辆基本信息</p>
         <div class="form-group">
             <label for="sell_make" class="col-sm-2 control-label">品牌</label>
@@ -218,7 +231,7 @@ if (isset($_COOKIE['nickname'])) {
 
         <div class="checkbox" style="float: left;">
             <label>
-                <input name="fixed" type="checkbox" value="">
+                <input name="fixed" type="checkbox" value="1">
                 是否修过
             </label>
         </div>
@@ -231,7 +244,7 @@ if (isset($_COOKIE['nickname'])) {
 
 <footer class="footer">
     <div class="container">
-        <p class="text-muted">这是footer,写一些版权信息什么的</p>
+        <p class="text-muted"><?php include_once ('footer.php');?></p>
     </div>
 </footer>
 

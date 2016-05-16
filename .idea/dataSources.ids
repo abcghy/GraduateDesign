@@ -150,182 +150,695 @@
       <table id="4" parent="1" name="price"/>
       <table id="5" parent="1" name="type"/>
       <table id="6" parent="1" name="year"/>
-      <column id="7" parent="2" name="id">
+      <table id="7" parent="1" name="detail"/>
+      <table id="8" parent="1" name="evaluate"/>
+      <table id="9" parent="1" name="favourite"/>
+      <table id="10" parent="1" name="image"/>
+      <table id="11" parent="1" name="make"/>
+      <table id="12" parent="1" name="model"/>
+      <table id="13" parent="1" name="part"/>
+      <column id="14" parent="2" name="id">
         <mandatory>1</mandatory>
         <data-type>int(20)</data-type>
         <sequence-identity>1</sequence-identity>
       </column>
-      <column id="8" parent="2" name="model">
+      <column id="15" parent="2" name="model">
         <mandatory>1</mandatory>
         <data-type>int(20)</data-type>
       </column>
-      <column id="9" parent="2" name="type">
+      <column id="16" parent="2" name="type">
         <mandatory>1</mandatory>
         <data-type>int(20)</data-type>
       </column>
-      <column id="10" parent="2" name="price">
+      <column id="17" parent="2" name="price">
         <mandatory>1</mandatory>
         <data-type>int(10)</data-type>
       </column>
-      <column id="11" parent="2" name="year">
+      <column id="18" parent="2" name="year">
         <mandatory>1</mandatory>
         <data-type>year(4)</data-type>
       </column>
-      <column id="12" parent="2" name="mile">
+      <column id="19" parent="2" name="mile">
         <mandatory>1</mandatory>
         <data-type>int(10)</data-type>
       </column>
-      <column id="13" parent="2" name="fixed">
+      <column id="20" parent="2" name="fixed">
         <mandatory>1</mandatory>
         <data-type>tinyint(4)</data-type>
       </column>
-      <column id="14" parent="2" name="title">
+      <column id="21" parent="2" name="title">
         <mandatory>1</mandatory>
         <data-type>text</data-type>
       </column>
-      <column id="15" parent="2" name="description">
+      <column id="22" parent="2" name="description">
         <mandatory>1</mandatory>
         <data-type>text</data-type>
       </column>
-      <column id="16" parent="2" name="user">
+      <column id="23" parent="2" name="user">
         <mandatory>1</mandatory>
         <data-type>int(20)</data-type>
       </column>
-      <index id="17" parent="2" name="model">
+      <column id="24" parent="2" name="detail">
+        <mandatory>1</mandatory>
+        <data-type>int(20)</data-type>
+      </column>
+      <index id="25" parent="2" name="detail">
+        <columns>detail</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="26" parent="2" name="model">
         <columns>model</columns>
         <desc-columns></desc-columns>
       </index>
-      <index id="18" parent="2" name="type">
+      <index id="27" parent="2" name="type">
         <columns>type</columns>
         <desc-columns></desc-columns>
       </index>
-      <index id="19" parent="2" name="user">
+      <index id="28" parent="2" name="user">
         <columns>user</columns>
         <desc-columns></desc-columns>
       </index>
-      <key id="20" parent="2" name="PRIMARY">
+      <key id="29" parent="2" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
-      <foreign-key id="21" parent="2" name="car_ibfk_1">
+      <foreign-key id="30" parent="2" name="car_ibfk_1">
         <columns>model</columns>
-        <ref-key>test.model(id)</ref-key>
+        <ref-key>~.model.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="22" parent="2" name="car_ibfk_2">
+      <foreign-key id="31" parent="2" name="car_ibfk_2">
         <columns>type</columns>
         <ref-key>~.type.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="23" parent="2" name="car_ibfk_3">
+      <foreign-key id="32" parent="2" name="car_ibfk_3">
         <columns>user</columns>
         <ref-key>~.user.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <column id="24" parent="3" name="id">
+      <foreign-key id="33" parent="2" name="car_ibfk_4">
+        <columns>detail</columns>
+        <ref-key>~.detail.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="34" parent="3" name="id">
         <mandatory>1</mandatory>
         <data-type>int(20)</data-type>
         <sequence-identity>1</sequence-identity>
       </column>
-      <column id="25" parent="3" name="email">
+      <column id="35" parent="3" name="email">
         <mandatory>1</mandatory>
         <data-type>varchar(50)</data-type>
       </column>
-      <column id="26" parent="3" name="password">
+      <column id="36" parent="3" name="password">
         <mandatory>1</mandatory>
         <data-type>varchar(20)</data-type>
       </column>
-      <column id="27" parent="3" name="nickname">
+      <column id="37" parent="3" name="nickname">
         <mandatory>1</mandatory>
         <data-type>varchar(20)</data-type>
       </column>
-      <column id="28" parent="3" name="phone">
+      <column id="38" parent="3" name="phone">
         <data-type>varchar(12)</data-type>
       </column>
-      <column id="29" parent="3" name="rate">
+      <column id="39" parent="3" name="rate">
         <mandatory>1</mandatory>
         <data-type>tinyint(4)</data-type>
       </column>
-      <column id="30" parent="3" name="province">
+      <column id="40" parent="3" name="province">
         <data-type>varchar(10)</data-type>
       </column>
-      <column id="31" parent="3" name="city">
+      <column id="41" parent="3" name="city">
         <data-type>varchar(10)</data-type>
       </column>
-      <column id="32" parent="3" name="address">
+      <column id="42" parent="3" name="address">
         <data-type>varchar(30)</data-type>
       </column>
-      <column id="33" parent="3" name="motto">
+      <column id="43" parent="3" name="motto">
         <data-type>text</data-type>
       </column>
-      <index id="34" parent="3" name="email">
+      <index id="44" parent="3" name="email">
         <columns>email</columns>
         <desc-columns></desc-columns>
         <unique>1</unique>
       </index>
-      <key id="35" parent="3" name="email">
+      <key id="45" parent="3" name="email">
         <columns>email</columns>
         <underlying-index>email</underlying-index>
       </key>
-      <key id="36" parent="3" name="PRIMARY">
+      <key id="46" parent="3" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
-      <column id="37" parent="4" name="id">
+      <column id="47" parent="4" name="id">
         <mandatory>1</mandatory>
         <data-type>int(20)</data-type>
         <sequence-identity>1</sequence-identity>
       </column>
-      <column id="38" parent="4" name="start">
+      <column id="48" parent="4" name="start">
         <mandatory>1</mandatory>
         <data-type>int(20)</data-type>
       </column>
-      <column id="39" parent="4" name="end">
+      <column id="49" parent="4" name="end">
         <mandatory>1</mandatory>
         <data-type>int(20)</data-type>
       </column>
-      <column id="40" parent="4" name="description">
+      <column id="50" parent="4" name="description">
         <mandatory>1</mandatory>
         <data-type>varchar(20)</data-type>
       </column>
-      <key id="41" parent="4" name="PRIMARY">
+      <key id="51" parent="4" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
-      <column id="42" parent="5" name="id">
+      <column id="52" parent="5" name="id">
         <mandatory>1</mandatory>
         <data-type>int(20)</data-type>
         <sequence-identity>1</sequence-identity>
       </column>
-      <column id="43" parent="5" name="description">
+      <column id="53" parent="5" name="description">
         <mandatory>1</mandatory>
         <data-type>varchar(20)</data-type>
       </column>
-      <key id="44" parent="5" name="PRIMARY">
+      <key id="54" parent="5" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
-      <column id="45" parent="6" name="id">
+      <column id="55" parent="6" name="id">
         <mandatory>1</mandatory>
         <data-type>int(20)</data-type>
         <sequence-identity>1</sequence-identity>
       </column>
-      <column id="46" parent="6" name="start">
+      <column id="56" parent="6" name="start">
         <mandatory>1</mandatory>
         <data-type>int(20)</data-type>
       </column>
-      <column id="47" parent="6" name="end">
+      <column id="57" parent="6" name="end">
         <mandatory>1</mandatory>
         <data-type>int(20)</data-type>
       </column>
-      <column id="48" parent="6" name="description">
+      <column id="58" parent="6" name="description">
         <mandatory>1</mandatory>
         <data-type>varchar(20)</data-type>
       </column>
-      <key id="49" parent="6" name="PRIMARY">
+      <key id="59" parent="6" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="60" parent="7" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="61" parent="7" name="a0">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="62" parent="7" name="a1">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="63" parent="7" name="a2">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="64" parent="7" name="a3">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="65" parent="7" name="a4">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="66" parent="7" name="a5">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="67" parent="7" name="a6">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="68" parent="7" name="a7">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="69" parent="7" name="a8">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="70" parent="7" name="a9">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="71" parent="7" name="a10">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="72" parent="7" name="a11">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="73" parent="7" name="a12">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="74" parent="7" name="a13">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="75" parent="7" name="a14">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="76" parent="7" name="a15">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="77" parent="7" name="a16">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="78" parent="7" name="a17">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="79" parent="7" name="a18">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="80" parent="7" name="a19">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="81" parent="7" name="a20">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="82" parent="7" name="a21">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="83" parent="7" name="a22">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="84" parent="7" name="a23">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="85" parent="7" name="a24">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="86" parent="7" name="a25">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="87" parent="7" name="a26">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="88" parent="7" name="a27">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="89" parent="7" name="a28">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="90" parent="7" name="a29">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="91" parent="7" name="a30">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="92" parent="7" name="a31">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="93" parent="7" name="a32">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="94" parent="7" name="a33">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="95" parent="7" name="a34">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="96" parent="7" name="a35">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="97" parent="7" name="a36">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="98" parent="7" name="a37">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="99" parent="7" name="a38">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="100" parent="7" name="a39">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="101" parent="7" name="a40">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="102" parent="7" name="a41">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="103" parent="7" name="a42">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="104" parent="7" name="a43">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="105" parent="7" name="a44">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="106" parent="7" name="a45">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="107" parent="7" name="a46">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="108" parent="7" name="a47">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="109" parent="7" name="a48">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="110" parent="7" name="a49">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="111" parent="7" name="a50">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="112" parent="7" name="a51">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="113" parent="7" name="a52">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="114" parent="7" name="a53">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="115" parent="7" name="a54">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="116" parent="7" name="a55">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="117" parent="7" name="a56">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="118" parent="7" name="a57">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="119" parent="7" name="a58">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="120" parent="7" name="a59">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="121" parent="7" name="a60">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="122" parent="7" name="a61">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="123" parent="7" name="a62">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="124" parent="7" name="a63">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="125" parent="7" name="a64">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="126" parent="7" name="a65">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="127" parent="7" name="a66">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="128" parent="7" name="a67">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="129" parent="7" name="a68">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="130" parent="7" name="a69">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="131" parent="7" name="a70">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="132" parent="7" name="a71">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="133" parent="7" name="a72">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="134" parent="7" name="a73">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="135" parent="7" name="a74">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="136" parent="7" name="a75">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="137" parent="7" name="a76">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="138" parent="7" name="a77">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="139" parent="7" name="a78">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="140" parent="7" name="a79">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="141" parent="7" name="a80">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="142" parent="7" name="a81">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="143" parent="7" name="a82">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="144" parent="7" name="a83">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="145" parent="7" name="a84">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="146" parent="7" name="a85">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="147" parent="7" name="a86">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="148" parent="7" name="a87">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="149" parent="7" name="a88">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="150" parent="7" name="a89">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="151" parent="7" name="a90">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="152" parent="7" name="a91">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="153" parent="7" name="a92">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="154" parent="7" name="a93">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="155" parent="7" name="a94">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="156" parent="7" name="a95">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="157" parent="7" name="a96">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="158" parent="7" name="a97">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="159" parent="7" name="a98">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="160" parent="7" name="a99">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="161" parent="7" name="a100">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="162" parent="7" name="a101">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="163" parent="7" name="a102">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="164" parent="7" name="a103">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <column id="165" parent="7" name="a104">
+        <data-type>varchar(40)</data-type>
+      </column>
+      <key id="166" parent="7" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="167" parent="8" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="168" parent="8" name="model">
+        <mandatory>1</mandatory>
+        <data-type>int(20)</data-type>
+      </column>
+      <column id="169" parent="8" name="year">
+        <mandatory>1</mandatory>
+        <data-type>year(4)</data-type>
+      </column>
+      <column id="170" parent="8" name="mile">
+        <mandatory>1</mandatory>
+        <data-type>int(10)</data-type>
+      </column>
+      <column id="171" parent="8" name="evaluate_price">
+        <mandatory>1</mandatory>
+        <data-type>int(10)</data-type>
+      </column>
+      <column id="172" parent="8" name="fixed">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(4)</data-type>
+      </column>
+      <column id="173" parent="8" name="user">
+        <mandatory>1</mandatory>
+        <data-type>int(20)</data-type>
+      </column>
+      <index id="174" parent="8" name="model">
+        <columns>model</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="175" parent="8" name="user">
+        <columns>user</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="176" parent="8" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="177" parent="8" name="evaluate_ibfk_1">
+        <columns>model</columns>
+        <ref-key>~.model.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="178" parent="8" name="evaluate_ibfk_2">
+        <columns>user</columns>
+        <ref-key>~.user.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="179" parent="9" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="180" parent="9" name="user">
+        <mandatory>1</mandatory>
+        <data-type>int(20)</data-type>
+      </column>
+      <column id="181" parent="9" name="car">
+        <mandatory>1</mandatory>
+        <data-type>int(20)</data-type>
+      </column>
+      <index id="182" parent="9" name="car">
+        <columns>car</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="183" parent="9" name="user">
+        <columns>user</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="184" parent="9" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="185" parent="9" name="favourite_ibfk_1">
+        <columns>user</columns>
+        <ref-key>~.user.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="186" parent="9" name="favourite_ibfk_2">
+        <columns>car</columns>
+        <ref-key>~.car.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="187" parent="10" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="188" parent="10" name="src">
+        <mandatory>1</mandatory>
+        <data-type>varchar(100)</data-type>
+      </column>
+      <column id="189" parent="10" name="car">
+        <data-type>int(20)</data-type>
+      </column>
+      <index id="190" parent="10" name="car">
+        <columns>car</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="191" parent="10" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="192" parent="10" name="image_ibfk_1">
+        <columns>car</columns>
+        <ref-key>~.car.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="193" parent="11" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="194" parent="11" name="make">
+        <mandatory>1</mandatory>
+        <data-type>varchar(20)</data-type>
+      </column>
+      <key id="195" parent="11" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="196" parent="12" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(20)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="197" parent="12" name="model">
+        <mandatory>1</mandatory>
+        <data-type>varchar(20)</data-type>
+      </column>
+      <column id="198" parent="12" name="make">
+        <data-type>int(20)</data-type>
+      </column>
+      <index id="199" parent="12" name="make">
+        <columns>make</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="200" parent="12" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="201" parent="12" name="model_ibfk_1">
+        <columns>make</columns>
+        <ref-key>~.make.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="202" parent="13" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(10)</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="203" parent="13" name="description">
+        <mandatory>1</mandatory>
+        <data-type>varchar(40)</data-type>
+      </column>
+      <key id="204" parent="13" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>

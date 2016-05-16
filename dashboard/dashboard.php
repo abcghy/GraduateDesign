@@ -47,6 +47,10 @@
     if (isset($_COOKIE['nickname'])) {
         $nickname = $_COOKIE['nickname'];
     }
+    include_once ('../front/db.php');
+    $evaluate_num_result = $con->query('select COUNT(*) from evaluate;');
+    $evaluate_num_row = $evaluate_num_result->fetch_array();
+
     ?>
     <header class="main-header">
         <!-- Logo -->
@@ -181,7 +185,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="car/carinfo.php"><i class="fa fa-circle-o"></i> 车辆信息</a></li>
-                        <li><a href="car/carsearch.php"><i class="fa fa-circle-o"></i> 车辆查询</a></li>
+                        <li><a href="car/evaluate_car.php"><i class="fa fa-circle-o"></i> 车辆评估</a></li>
                     </ul>
                 </li>
 
@@ -247,8 +251,8 @@
                     <!-- small box -->
                     <div class="small-box bg-red">
                         <div class="inner">
-                            <h3>65</h3>
-                            <p>新入库车辆</p>
+                            <h3><?php echo $evaluate_num_row['0'];?></h3>
+                            <p>新申请认证车辆</p>
                         </div>
                         <div class="icon">
                             <i class="fa fa-car"></i>

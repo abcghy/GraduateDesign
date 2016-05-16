@@ -31,10 +31,10 @@
 <?php
 include_once('../../front/db.php');
 
-$userid = null;
+$evaluate_id = null;
 
 if (isset($_GET['id'])) {
-    $userid = $_GET['id'];
+    $evaluate_id = $_GET['id'];
 }
 
 // 创建一个字典, 存储类型 ID 与 description 的关系
@@ -43,13 +43,17 @@ $type = null;
 while ($row = $result->fetch_array()) {
     $type[$row['id']] = $row['description'];
 }
-
 $email = $nickname = '';
 if (isset($_COOKIE['email'])) {
     $email = $_COOKIE['email'];
 }
 if (isset($_COOKIE['nickname'])) {
     $nickname = $_COOKIE['nickname'];
+}
+
+function changemile($length) {
+    $llength = $length / 10000;
+    return $llength.'万';
 }
 ?>
 <div class="wrapper">
@@ -69,7 +73,7 @@ if (isset($_COOKIE['nickname'])) {
                 <span class="sr-only">Toggle navigation</span>
             </a>
             <div class="navbar-custom-menu">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav navbar-right">
                     <!-- Messages: style can be found in dropdown.less-->
 
                     <!-- Notifications: style can be found in dropdown.less -->
@@ -96,29 +100,25 @@ if (isset($_COOKIE['nickname'])) {
                             <!-- Menu Body -->
                             <li class="user-body">
                                 <div class="col-xs-4 text-center">
-                                    <a href="#">收藏</a>
+                                    <a href="../../front/my_favourite.php">收藏</a>
                                 </div>
                                 <div class="col-xs-4 text-center">
-                                    <a href="#">发布</a>
+                                    <a href="../../front/my_post_car.php">发布</a>
                                 </div>
                                 <div class="col-xs-4 text-center">
-                                    <a href="#">购买</a>
+                                    <a href="../../front/search.php">购买</a>
                                 </div>
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">资料</a>
+                                    <a href="../../front/profile_index.php" class="btn btn-default btn-flat">资料</a>
                                 </div>
                                 <div class="pull-right">
                                     <a href="#" class="btn btn-default btn-flat">退出</a>
                                 </div>
                             </li>
                         </ul>
-                    </li>
-                    <!-- Control Sidebar Toggle Button -->
-                    <li>
-                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                     </li>
                 </ul>
             </div>
@@ -171,19 +171,19 @@ if (isset($_COOKIE['nickname'])) {
                         <li><a href="../../pages/layout/fixed.html"><i class="fa fa-circle-o"></i> 栏目修改</a></li>
                     </ul>
                 </li>
-                <li class="active treeview">
+                <li class="treeview">
                     <a href="#">
                         <i class="fa fa-user"></i>
                         <span>用户管理</span>
                         <span class="label label-primary pull-right">2</span>
                     </a>
                     <ul class="treeview-menu">
-                        <li class="active"><a href="userinfo.php"><i class="fa fa-circle-o"></i> 用户信息</a></li>
+                        <li><a href="../user/userinfo.php"><i class="fa fa-circle-o"></i> 用户信息</a></li>
                         <li><a href="../../pages/layout/boxed.html"><i class="fa fa-circle-o"></i> 用户查询</a></li>
-                        <li><a href="admininfo.php"><i class="fa fa-circle-o"></i> 管理员信息</a></li>
+                        <li><a href="../user/admininfo.php"><i class="fa fa-circle-o"></i> 管理员信息</a></li>
                     </ul>
                 </li>
-                <li class="treeview">
+                <li class="active treeview">
                     <a href="#">
                         <i class="fa fa-car"></i>
                         <span>车辆管理</span>
@@ -191,7 +191,7 @@ if (isset($_COOKIE['nickname'])) {
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="../car/carinfo.php"><i class="fa fa-circle-o"></i> 车辆信息</a></li>
-                        <li><a href="../car/evaluate_car.php"><i class="fa fa-circle-o"></i> 车辆评估</a></li>
+                        <li class="active"><a href="evaluate_car.php"><i class="fa fa-circle-o"></i> 车辆评估</a></li>
                     </ul>
                 </li>
 
@@ -211,13 +211,13 @@ if (isset($_COOKIE['nickname'])) {
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                用户管理
-                <small>用户信息</small>
+                车辆管理
+                <small>车辆评估</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="../../front/index.php"><i class="fa fa-dashboard"></i> 首页</a></li>
                 <li class="active"><a href="#">后台管理</a></li>
-                <li class="active">用户信息</li>
+                <li class="active">车辆评估</li>
             </ol>
         </section>
 
@@ -226,57 +226,66 @@ if (isset($_COOKIE['nickname'])) {
 
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">普通用户表</h3>
+                    <h3 class="box-title">车辆表</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>用户 ID</th>
-                            <th>Email</th>
-                            <th>昵称</th>
-                            <th>手机</th>
-                            <th>省份</th>
-                            <th>城市</th>
-                            <th>地址</th>
+                            <th>评估 ID</th>
+                            <th>品牌</th>
+                            <th>型号</th>
+                            <th>价格</th>
+                            <th>年份</th>
+                            <th>距离</th>
+                            <th>维修</th>
+                            <th>车主 ID</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
                         <?php
-                        $result = $con->query('select * from user where rate = 0;');
+
+
+                        $result = $con->query('select * from evaluate;');
                         while ($row = $result->fetch_array()) {
+                            $modelresult = $con->query('select * from model where id ='.$row['model']);
+                            $modelrow = $modelresult->fetch_array();
+                            $makeresult = $con->query('select * from make where id ='.$modelrow['make']);
+                            $makerow = $makeresult->fetch_array();
                             echo '<tr><td>'.$row['id'].'</td>';
-                            echo '<td>'.$row['email'].'</td>';
-                            echo '<td>'.$row['nickname'].'</td>';
-                            echo '<td>'.$row['phone'].'</td>';
-                            echo '<td>'.$row['province'].'</td>';
-                            echo '<td>'.$row['city'].'</td>';
-                            echo '<td>'.$row['address'].'</td>';
+                            echo '<td>'.$makerow['make'].'</td>';
+                            echo '<td>'.$modelrow['model'].'</td>';
+                            echo '<td>'.changemile($row['evaluate_price']).'</td>';
+                            echo '<td>'.$row['year'].'</td>';
+                            echo '<td>'.changemile($row['mile']).'</td>';
+                            echo '<td>';
+                            if ($row['fixed'] == 0) {
+                                echo '无';
+                            } else {
+                                echo '有';
+                            }
+                            echo '</td>';
+                            echo '<td>'.$row['user'].'</td>';
                             echo    '<td>
-                                        <a href="userinfo.php?id=';
+                                        <a href="evaluate_car.php?id=';
                             echo $row['id'];
                             echo '"><button type="button" class="btn-xs btn-info">
                                         <i class="fa fa-car"></i>
-                                        </button></a>
-                                        <a href="deleteuser.php?deleteid=';
-                            echo $row['id'];
-                            echo '"><button type="button" class="btn-xs btn-danger">
-                                            <i class="fa fa-trash"></i>
-                                        </button></a>
-                                    </td></tr>';
+                                        </button></a>';
                         }
                         ?>
                         </tbody>
                         <tfoot>
                         <tr>
-                            <th>用户 ID</th>
-                            <th>Email</th>
-                            <th>昵称</th>
-                            <th>手机</th>
-                            <th>省份</th>
-                            <th>城市</th>
-                            <th>地址</th>
+                            <th>车辆 ID</th>
+                            <th>品牌</th>
+                            <th>型号</th>
+                            <th>价格</th>
+                            <th>年份</th>
+                            <th>距离</th>
+                            <th>维修</th>
+                            <th>车主 ID</th>
                             <th>操作</th>
                         </tr>
                         </tfoot>
@@ -285,59 +294,79 @@ if (isset($_COOKIE['nickname'])) {
             </div><!-- /.box -->
 
             <?php
-            if (isset($userid)) {
-            ?>
+            if (isset($evaluate_id)) {
+                ?>
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">用户车辆表 <small>车主 ID:<?php echo $userid;?></small></h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                            <tr>
-                                <th>车辆 ID</th>
-                                <th>品牌</th>
-                                <th>型号</th>
-                                <th>类型</th>
-                                <th>价格</th>
-                                <th>年份</th>
-                                <th>距离</th>
-                                <th>维修</th>
-                            </tr>
-                            </thead>
-                            <tbody>
+                        <form action="evaluate_detail.php" method="post">
+                            <input class="sr-only" name="evaluate_id" value="<?php echo $evaluate_id?>" />
+                            <div class="form-group">
+                                <label for="sell_price" class="col-sm-2 control-label">图片url</label>
+                                <div class="col-sm-10 input-group">
+                                    <input name="image" id="sell_price" type="text" class="form-control">
+                                </div>
+                            </div>
                             <?php
-                            $result = $con->query('select * from car where user ='.$userid.';');
-                            while ($row = $result->fetch_array()) {
-                                $modelresult = $con->query('select * from model where id ='.$row['model']);
-                                $modelrow = $modelresult->fetch_array();
-                                $makeresult = $con->query('select * from make where id ='.$modelrow['make']);
-                                $makerow = $makeresult->fetch_array();
-                                echo '<tr><td>'.$row['id'].'</td>';
-                                echo '<td>'.$makerow['make'].'</td>';
-                                echo '<td>'.$modelrow['model'].'</td>';
-                                echo '<td>'.$type[$row['type']].'</td>';
-                                echo '<td>'.$row['price'].'</td>';
-                                echo '<td>'.$row['year'].'</td>';
-                                echo '<td>'.$row['mile'].'</td>';
-                                echo '<td>';
-                                if ($row['fixed'] == 0) {
-                                    echo '无';
-                                } else {
-                                    echo '有';
-                                }
-                                echo '</td>';
-
+                            $part_result = $con->query('select * from part;');
+                            while ($part_row = $part_result->fetch_array()) {
+                                echo    '<div class="form-group">
+                                            <label for="sell_price" class="col-sm-2 control-label">'.$part_row['description'].'</label>
+                                            <div class="col-sm-10 input-group">
+                                                <input name="a'.$part_row['id'].'" id="sell_price" type="text" class="form-control">
+                                            </div>
+                                        </div>';
                             }
                             ?>
-                            </tbody>
-                        </table>
+                            <button type="submit" class="btn btn-primary" style="margin-left: 20px">提交</button>
+                        </form>
+<!--                        <table id="example1" class="table table-bordered table-striped">-->
+<!--                            <thead>-->
+<!--                            <tr>-->
+<!--                                <th>车辆 ID</th>-->
+<!--                                <th>品牌</th>-->
+<!--                                <th>型号</th>-->
+<!--                                <th>类型</th>-->
+<!--                                <th>价格</th>-->
+<!--                                <th>年份</th>-->
+<!--                                <th>距离</th>-->
+<!--                                <th>维修</th>-->
+<!--                            </tr>-->
+<!--                            </thead>-->
+<!--                            <tbody>-->
+<!--                            --><?php
+//                            $result = $con->query('select * from car where user ='.$userid.';');
+//                            while ($row = $result->fetch_array()) {
+//                                $modelresult = $con->query('select * from model where id ='.$row['model']);
+//                                $modelrow = $modelresult->fetch_array();
+//                                $makeresult = $con->query('select * from make where id ='.$modelrow['make']);
+//                                $makerow = $makeresult->fetch_array();
+//                                echo '<tr><td>'.$row['id'].'</td>';
+//                                echo '<td>'.$makerow['make'].'</td>';
+//                                echo '<td>'.$modelrow['model'].'</td>';
+//                                echo '<td>'.$type[$row['type']].'</td>';
+//                                echo '<td>'.$row['price'].'</td>';
+//                                echo '<td>'.$row['year'].'</td>';
+//                                echo '<td>'.$row['mile'].'</td>';
+//                                echo '<td>';
+//                                if ($row['fixed'] == 0) {
+//                                    echo '无';
+//                                } else {
+//                                    echo '有';
+//                                }
+//                                echo '</td>';
+//
+//                            }
+//                            ?>
+<!--                            </tbody>-->
+<!--                        </table>-->
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
-            <?php
+                <?php
             }
             ?>
-
 
 
         </section><!-- /.content -->

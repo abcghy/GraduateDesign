@@ -180,7 +180,7 @@ if (isset($_COOKIE['nickname'])) {
                     </a>
                     <ul class="treeview-menu">
                         <li class="active"><a href="../car/carinfo.php"><i class="fa fa-circle-o"></i> 车辆信息</a></li>
-                        <li><a href="../car/carsearch.php"><i class="fa fa-circle-o"></i> 车辆查询</a></li>
+                        <li><a href="evaluate_car.php"><i class="fa fa-circle-o"></i> 车辆评估</a></li>
                     </ul>
                 </li>
 

@@ -6,22 +6,42 @@
  * Time: 23:38
  */
 
-$make = $_POST['make'];
+$make  = $_POST['make'];
 $model = $_POST['model'];
-$year = $_POST['year'];
-$mile = $_POST['mile'];
+$year  = $_POST['year'];
+$mile  = $_POST['mile'];
 $price = $_POST['price'];
 $fixed = $_POST['fixed'];
 
-echo $fixed;
+$mile *= 10000;
+$price *= 10000;
+
+if ($fixed == '1') {
+    $fixed = 1;
+} else {
+    $fixed = 0;
+}
+
+$email = '';
+if (isset($_COOKIE['email'])) {
+    $email = $_COOKIE['email'];
+}
+
+//echo $fixed;
 
 include_once('db.php');
 
-$result = $con->query("insert into car (make, model, year, mile, price, fixed, type, description) values ('".$make."','".$model."','".$year."-1-1','".$mile."','".$price."','".$fixed."','eof', 'nothing here');");
+$id_result = $con->query('select * from user where email = "'.$email.'";');
+$id_row = $id_result->fetch_array();
+$user = $id_row['id'];
 
+//$str = "insert into evaluate (model, year, mile, evaluate_price, fixed, user) values ('".$model."','".$year."','".$mile."','".$price."','".$fixed."','".$user."');";
+$result = $con->query("insert into evaluate (model, year, mile, evaluate_price, fixed, user) values ('".$model."','".$year."','".$mile."','".$price."','".$fixed."','".$user."');");
+
+//echo $str;
 if ($result != null) {
-    echo 'success';
+    header('Location: sell.php?success=1');
 } else {
-    echo 'failed';
+    header('Location: sell.php?success=0');
 }
 

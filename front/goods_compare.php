@@ -296,7 +296,7 @@ if (isset($_GET['second'])) {
 
 <footer class="footer">
     <div class="container">
-        <p class="text-muted">这是footer,写一些版权信息什么的</p>
+        <p class="text-muted"><?php include_once ('footer.php')?></p>
     </div>
 </footer>
 
