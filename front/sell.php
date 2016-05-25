@@ -171,7 +171,7 @@ if (isset($_GET['success'])) {
         <?php
         if ($success == 1) {
             echo '成功录入,请等候管理员与您联系';
-        } else if ($success == 0) {
+        } else if ($success == 2) {
             echo '刚才的信息有错误';
         }
         ?></p>

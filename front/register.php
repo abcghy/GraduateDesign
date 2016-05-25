@@ -51,8 +51,20 @@ $result = $con->query("insert into user (email, password, nickname, rate) values
 if ($result != null) {
     // 首先有一段动画
     // 再跳转到登录界面,给人一种
-    header('Location: login.html');
+//    header('Location: login.html');
 //    echo 'success';
+    $arr = range(1, 8);
+    shuffle($arr);
+
+    include_once ("../wait/wait".$arr[0].".html");
 } else {
     echo 'fail';
 }
+
+?>
+
+<script>
+    setTimeout(function () {
+        location.href="login.html";
+    }, 2000);
+</script>

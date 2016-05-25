@@ -1,0 +1,251 @@
+html, body {
+    background: #d9d9d9;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#ironing {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -5em;
+    margin-left: -15em;
+    width: 30em;
+    height: 10em;
+    background-color: transparent;
+    overflow: hidden;
+    transform: scale(.75, .75);
+}
+
+#cloth {
+    position: absolute;
+    bottom: 3em;
+    width: 30em;
+    border-bottom: .1em solid rgba(34, 34, 34, 0.5);
+    animation: load 3s cubic-bezier(.87, .30, .45, 1) infinite;
+}
+
+#steam_cloud {
+    position: absolute;
+    top: .5em;
+    left: 3.8em;
+    width: 2em;
+    height: 2em;
+    background-color: #d9d9d9;
+    opacity: 0;
+    animation: steam 2s ease-in-out 1s infinite;
+}
+
+#stripe1 {
+    position: absolute;
+    left: -.1em;
+    bottom: .5em;
+    width: .8em;
+    height: .2em;
+    background-color: #222;
+    transform: rotate(-70deg) skew(-50deg);
+}
+
+#stripe2 {
+    position: absolute;
+    left: .2em;
+    bottom: .1em;
+    width: .9em;
+    height: .2em;
+    background-color: #222;
+    transform: rotate(-25deg) skew(60deg);
+}
+
+#puff1 {
+    position: absolute;
+    left: .3em;
+    bottom: 1em;
+    width: .6em;
+    height: .6em;
+    background-color: #d9d9d9;
+    border-left: .2em solid #222;
+    border-top: .2em solid #222;
+    border-bottom: .2em solid #222;
+    border-radius: 50%;
+    transform: rotate(40deg) scale(1.2, 1.1);
+}
+#puff2 {
+    position: absolute;
+    left: .85em;
+    bottom: 1em;
+    width: .6em;
+    height: .6em;
+    background-color: #d9d9d9;
+    border-left: .2em solid #222;
+    border-top: .2em solid #222;
+    border-right: .2em solid transparent;
+    border-radius: 50%;
+    transform: rotate(80deg) scale(1.2, 1.2);
+}
+#puff3 {
+    position: absolute;
+    left: 1.2em;
+    bottom: .3em;
+    width: .6em;
+    height: .6em;
+    background-color: #d9d9d9;
+    border-top: .2em solid #222;
+    border-right: .2em solid #222;
+    border-bottom: .2em solid #222;
+    border-radius: 50%;
+    transform: rotate(-10deg) scale(1.2, 1.1);
+}
+
+#iron {
+    position: absolute;
+    bottom: 2em;
+    left: 0;
+    width: 6em;
+    height: 5em;
+    background-color: #d9d9d9;
+    overflow: hidden;
+    animation: iron 3s cubic-bezier(.87, .30, .45, 1) infinite;
+}
+
+#curve {
+    position: absolute;
+    width: 10em;
+    height: 10em;
+    margin-top: .5em;
+    margin-left: -4.7em;
+    background-color: #222;
+    border-radius: 50%;
+    transform: rotateX(30deg);
+    overflow: hidden;
+}
+
+#grip {
+    position: relative;
+    top: 1.8em;
+    left: 1em;
+    width: 2em;
+    height: 1.2em;
+    background-color: #d9d9d9;
+    border-radius: 35% 45% 20% 15%;
+    transform: rotate(15deg);
+}
+#grip:before {
+    position: absolute;
+    content: '';
+    bottom: .35em;
+    left: .65em;
+    width: .75em;
+    height: .15em;
+    border-radius: 30% 30% 10% 10%;
+    background-color: #222;
+    transform: rotate(-15deg);
+}
+#grip:after {
+    position: absolute;
+    content: '';
+    bottom: -.7em;
+    left: 0;
+    height: 1em;
+    width: 2.5em;
+    background-color: #222;
+    transform: rotate(-15deg);
+}
+
+#hide1 {
+    position: absolute;
+    top: .75em;
+    left: -.6em;
+    width: 1em;
+    height: 3em;
+    background-color: #d9d9d9;
+    transform: rotate(25deg);
+}
+#hide2 {
+    position: absolute;
+    top: 3em;
+    left: -1.2em;
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    background-color: #d9d9d9;
+    transform: rotateY(30deg);
+}
+#hide3 {
+    position: absolute;
+    bottom: -.2em;
+    right: 0;
+    width: 6em;
+    height: 1.2em;
+    background-color: #d9d9d9;
+}
+
+#part1 {
+    position: absolute;
+    top: 2.25em;
+    right: 1.9em;
+    width: 1em;
+    height: 1em;
+    background-color: #222;
+    border-radius: 35%;
+    transform: rotate(-5deg);
+}
+
+#part2 {
+    position: absolute;
+    left: .6em;
+    bottom: 1.6em;
+    width: .5em;
+    height: .5em;
+    background-color: #d9d9d9;
+    border-radius: 50%;
+}
+
+#basis {
+    position: absolute;
+    bottom: 1.15em;
+    left: 0;
+    width: 5.5em;
+    height: .12em;
+    background-color: #d9d9d9;
+    transform: rotateX(20deg);
+}
+
+@keyframes iron {
+    0% {
+        left: 0;
+    }
+    50% {
+        left: 24em;
+    }
+    100% {
+        left: 0;
+    }
+}
+
+@keyframes load {
+    0% {
+        width: 0;
+    }
+    50% {
+        width: 24em;
+    }
+    100% {
+        width: 0;
+    }
+}
+
+@keyframes steam {
+    0% {
+        opacity : 0;
+        transform: scale(.75, .75);
+    }
+    10% {
+        opacity: .7;
+        transform: scale(1, 1);
+    }
+    20% {
+        opacity: 0;
+        transform: scale(.75, .75);
+    }
+}

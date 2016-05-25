@@ -6,7 +6,7 @@
  * Time: 上午1:22
  */
 
-include_once('../../db.php');
+include_once('../../front/db.php');
 
 $deleteid = '';
 
@@ -20,10 +20,20 @@ $result = $con->query('delete from user where id = '.$deleteid.';');
 if ($result != null) {
     // 首先有一段动画
     // 再跳转到登录界面,给人一种
-    header('Location: userinfo.php');
+//    header('Location: userinfo.php');
 //    echo 'success';
+    $arr = range(1, 8);
+    shuffle($arr);
+
+    include_once ("../wait/wait".$arr[0].".html");
 } else {
     echo 'fail';
 }
 
 ?>
+
+<script>
+    setTimeout(function () {
+        location.href="userinfo.php";
+    }, 2000);
+</script>

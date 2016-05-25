@@ -20,9 +20,20 @@ $result = $con->query('update user set rate = 1 where id = '.$improveid.';');
 if ($result != null) {
     // 首先有一段动画
     // 再跳转到登录界面,给人一种
-    header('Location: admininfo.php');
+//    header('Location: admininfo.php');
+    $arr = range(1, 8);
+    shuffle($arr);
+
+    include_once ("../wait/wait".$arr[0].".html");
+    
 //    echo 'success';
 } else {
     echo 'fail';
 }
 ?>
+
+<script>
+    setTimeout(function () {
+        location.href="admininfo.php";
+    }, 2000);
+</script>

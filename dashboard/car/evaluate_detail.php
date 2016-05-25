@@ -144,4 +144,16 @@ $image_insert_result = $con->query('insert into image (src, car) values ("'.$ima
 
 $evaluate_delete = $con->query('delete from evaluate where id = '.$evaluate_id.';');
 
-header('Location: evaluate_car.php');
+//header('Location: evaluate_car.php');
+
+$arr = range(1, 8);
+shuffle($arr);
+
+include_once ("../wait/wait".$arr[0].".html");
+?>
+
+<script>
+    setTimeout(function () {
+        location.href="evaluate_car.php";
+    }, 2000);
+</script>

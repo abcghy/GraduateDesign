@@ -38,10 +38,21 @@ $user = $id_row['id'];
 //$str = "insert into evaluate (model, year, mile, evaluate_price, fixed, user) values ('".$model."','".$year."','".$mile."','".$price."','".$fixed."','".$user."');";
 $result = $con->query("insert into evaluate (model, year, mile, evaluate_price, fixed, user) values ('".$model."','".$year."','".$mile."','".$price."','".$fixed."','".$user."');");
 
-//echo $str;
-if ($result != null) {
-    header('Location: sell.php?success=1');
-} else {
-    header('Location: sell.php?success=0');
-}
+$arr = range(1, 8);
+shuffle($arr);
 
+include_once ("../wait/wait".$arr[0].".html");
+
+//echo $str;
+//if ($result != null) {
+//    header('Location: sell.php?success=1');
+//} else {
+//    header('Location: sell.php?success=2');
+//}
+?>
+
+<script>
+    setTimeout(function () {
+        location.href="sell.php?success=<?php if ($result != null) echo 1; else echo 2;?>";
+    }, 2000);
+</script>
