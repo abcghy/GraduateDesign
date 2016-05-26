@@ -234,30 +234,60 @@ if (isset($_COOKIE['nickname'])) {
 		<!-- Indicators -->
 		<ol class="carousel-indicators">
 			<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-			<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-			<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+			<?php
+			$index_pic_result = $con->query('select count(*) from index_pic');
+			$index_pic_row = $index_pic_result->fetch_array();
+			$num = $index_pic_row['0'] - 1;
+//			echo var_dump($index_pic_row);
+			for ($i = 0; $i < $num; $i++) {
+			?>
+				<li data-target="#carousel-example-generic" data-slide-to="<?php echo $i + 1;?>"></li>
+			<?php
+			}
+			?>
 		</ol>
 
 		<!-- Wrapper for slides -->
 		<div class="carousel-inner" role="listbox">
+			<?php
+			$index_pic_result = $con->query("select * from index_pic");
+			$index_pic_row = $index_pic_result->fetch_array();
+			?>
 			<div class="item active">
-				<img class="first-slide" src="../dist/img/background.jpg" alt="...">
+				<img class="first-slide" src="<?php echo $index_pic_row['url'];?>" alt="...">
 				<div class="carousel-caption">
-					...
 				</div>
 			</div>
-			<div class="item">
-				<img class="second-slide" src="../dist/img/whitecar.png" alt="...">
+			<?php
+			while ($index_pic_row = $index_pic_result->fetch_array()) {
+				?>
+				<div class="item">
+				<img class="second-slide" src="<?php echo $index_pic_row['url']; ?>" alt="...">
 				<div class="carousel-caption">
-					...
 				</div>
 			</div>
-			<div class="item">
-				<img class="third-slide" src="../dist/img/whitecar.png" alt="...">
-				<div class="carousel-caption">
-					...
-				</div>
-			</div>
+			<?php
+			}
+			?>
+
+<!--			<div class="item active">-->
+<!--				<img class="first-slide" src="../dist/img/background.jpg" alt="...">-->
+<!--				<div class="carousel-caption">-->
+<!--					...-->
+<!--				</div>-->
+<!--			</div>-->
+<!--			<div class="item">-->
+<!--				<img class="second-slide" src="../dist/img/whitecar.png" alt="...">-->
+<!--				<div class="carousel-caption">-->
+<!--					...-->
+<!--				</div>-->
+<!--			</div>-->
+<!--			<div class="item">-->
+<!--				<img class="third-slide" src="../dist/img/whitecar.png" alt="...">-->
+<!--				<div class="carousel-caption">-->
+<!--					...-->
+<!--				</div>-->
+<!--			</div>-->
 		</div>
 
 		<!-- Controls -->

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>用户管理</title>
+    <title>滑动版</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -159,26 +159,26 @@ if (isset($_COOKIE['nickname'])) {
                         <span>信息概览</span>
                     </a>
                 </li>
-                <li class="treeview">
+                <li class="active treeview">
                     <a href="#">
                         <i class="fa fa-home"></i>
                         <span>主页管理</span>
                         <span class="label label-primary pull-right">3</span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="../index/carousel.php"><i class="fa fa-circle-o"></i> 滑动板</a></li>
+                        <li class="active"><a href="carousel.php"><i class="fa fa-circle-o"></i> 滑动板</a></li>
                         <li><a href="../../pages/layout/boxed.html"><i class="fa fa-circle-o"></i> 广告栏</a></li>
                         <li><a href="../../pages/layout/fixed.html"><i class="fa fa-circle-o"></i> 栏目修改</a></li>
                     </ul>
                 </li>
-                <li class="active treeview">
+                <li class="treeview">
                     <a href="#">
                         <i class="fa fa-user"></i>
                         <span>用户管理</span>
                         <span class="label label-primary pull-right">2</span>
                     </a>
                     <ul class="treeview-menu">
-                        <li class="active"><a href="userinfo.php"><i class="fa fa-circle-o"></i> 用户信息</a></li>
+                        <li><a href="userinfo.php"><i class="fa fa-circle-o"></i> 用户信息</a></li>
                         <li><a href="../../pages/layout/boxed.html"><i class="fa fa-circle-o"></i> 用户查询</a></li>
                         <li><a href="admininfo.php"><i class="fa fa-circle-o"></i> 管理员信息</a></li>
                     </ul>
@@ -211,134 +211,87 @@ if (isset($_COOKIE['nickname'])) {
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                用户管理
-                <small>用户信息</small>
+                主页管理
+                <small>滑动版</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="../../front/index.php"><i class="fa fa-dashboard"></i> 首页</a></li>
                 <li class="active"><a href="#">后台管理</a></li>
-                <li class="active">用户信息</li>
+                <li class="active">滑动版</li>
             </ol>
         </section>
 
         <!-- Main content -->
         <section class="content">
 
-            <div class="box">
-                <div class="box-header">
-                    <h3 class="box-title">普通用户表</h3>
-                </div><!-- /.box-header -->
-                <div class="box-body">
-                    <table id="example1" class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                            <th>用户 ID</th>
-                            <th>Email</th>
-                            <th>昵称</th>
-                            <th>手机</th>
-                            <th>省份</th>
-                            <th>城市</th>
-                            <th>地址</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                        $result = $con->query('select * from user where rate = 0;');
-                        while ($row = $result->fetch_array()) {
-                            echo '<tr><td>'.$row['id'].'</td>';
-                            echo '<td>'.$row['email'].'</td>';
-                            echo '<td>'.$row['nickname'].'</td>';
-                            echo '<td>'.$row['phone'].'</td>';
-                            echo '<td>'.$row['province'].'</td>';
-                            echo '<td>'.$row['city'].'</td>';
-                            echo '<td>'.$row['address'].'</td>';
-                            echo    '<td>
-                                        <a href="userinfo.php?id=';
-                            echo $row['id'];
-                            echo '"><button type="button" class="btn-xs btn-info">
-                                        <i class="fa fa-car"></i>
-                                        </button></a>
-                                        <a href="deleteuser.php?deleteid=';
-                            echo $row['id'];
-                            echo '"><button type="button" class="btn-xs btn-danger">
-                                            <i class="fa fa-trash"></i>
-                                        </button></a>
-                                    </td></tr>';
-                        }
-                        ?>
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <th>用户 ID</th>
-                            <th>Email</th>
-                            <th>昵称</th>
-                            <th>手机</th>
-                            <th>省份</th>
-                            <th>城市</th>
-                            <th>地址</th>
-                            <th>操作</th>
-                        </tr>
-                        </tfoot>
-                    </table>
-                </div><!-- /.box-body -->
-            </div><!-- /.box -->
-
-            <?php
-            if (isset($userid)) {
-            ?>
+            <div class="col-md-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">用户车辆表 <small>车主 ID:<?php echo $userid;?></small></h3>
+                        <h3 class="box-title">滑动版图片</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th>车辆 ID</th>
-                                <th>品牌</th>
-                                <th>型号</th>
-                                <th>类型</th>
-                                <th>价格</th>
-                                <th>年份</th>
-                                <th>距离</th>
-                                <th>维修</th>
+                                <th>图片 ID</th>
+                                <th>图片地址</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php
-                            $result = $con->query('select * from car where user ='.$userid.';');
-                            while ($row = $result->fetch_array()) {
-                                $modelresult = $con->query('select * from model where id ='.$row['model']);
-                                $modelrow = $modelresult->fetch_array();
-                                $makeresult = $con->query('select * from make where id ='.$modelrow['make']);
-                                $makerow = $makeresult->fetch_array();
-                                echo '<tr><td>'.$row['id'].'</td>';
-                                echo '<td>'.$makerow['make'].'</td>';
-                                echo '<td>'.$modelrow['model'].'</td>';
-                                echo '<td>'.$type[$row['type']].'</td>';
-                                echo '<td>'.$row['price'].'</td>';
-                                echo '<td>'.$row['year'].'</td>';
-                                echo '<td>'.$row['mile'].'</td>';
-                                echo '<td>';
-                                if ($row['fixed'] == 0) {
-                                    echo '无';
+                            $index_pic_num_result = $con->query('select count(*) from index_pic');
+                            $index_pic_num_row = $index_pic_num_result->fetch_array();
+                            $num = $index_pic_num_row['0'];
+                            $index_pic_result = $con->query("select * from index_pic");
+                            while ($index_pic_row = $index_pic_result->fetch_array()) {
+                                echo "<tr><td>".$index_pic_row['id']."</td>";
+                                echo "<td>".$index_pic_row['url']."</td>";
+                                if ($num > 1) {
+                                    echo "<td><a href='delete_pic.php?id=".$index_pic_row['id']."'><button type='button' class='btn-xs btn-danger'><i class='fa fa-trash'></i></button></a></td>";
                                 } else {
-                                    echo '有';
+                                    echo "<td></td>";
                                 }
-                                echo '</td>';
-
+                                echo "</tr>";
                             }
                             ?>
                             </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>图片 ID</th>
+                                <th>图片地址</th>
+                                <th>操作</th>
+                            </tr>
+                            </tfoot>
                         </table>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
-            <?php
-            }
-            ?>
+            </div>
 
 
+            <div class="col-md-4">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">添加图片</h3>
+                    </div><!-- /.box-header -->
+                    <!-- form start -->
+                    <form class="form-horizontal" method="POST" action="add_pic.php">
+                        <div class="box-body">
+
+                            <div class="form-group">
+                                <label for="url" class="col-sm-2 control-label">图片 url:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="url" class="form-control" id="url" placeholder="">
+                                </div>
+                            </div>
+
+                        </div><!-- /.box-body -->
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-info pull-right">提  交</button>
+                        </div><!-- /.box-footer -->
+                    </form>
+                </div><!-- /.box -->
+            </div>
 
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
