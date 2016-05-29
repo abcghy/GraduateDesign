@@ -3,32 +3,22 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>后台管理</title>
+    <title>栏目修改</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
-    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="//cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="../plugins/iCheck/flat/blue.css">
-    <!-- Morris chart -->
-    <link rel="stylesheet" href="../plugins/morris/morris.css">
-    <!-- jvectormap -->
-    <link rel="stylesheet" href="../plugins/jvectormap/jquery-jvectormap-1.2.2.css">
-    <!-- Date Picker -->
-    <link rel="stylesheet" href="../plugins/datepicker/datepicker3.css">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker-bs3.css">
-    <!-- bootstrap wysihtml5 - text editor -->
-    <link rel="stylesheet" href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -38,23 +28,43 @@
     <![endif]-->
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-    <?php
-    $email = $nickname = '';
-    if (isset($_COOKIE['email'])) {
-        $email = $_COOKIE['email'];
-    }
-    if (isset($_COOKIE['nickname'])) {
-        $nickname = $_COOKIE['nickname'];
-    }
-    include_once ('../front/db.php');
-    $evaluate_num_result = $con->query('select COUNT(*) from evaluate;');
-    $evaluate_num_row = $evaluate_num_result->fetch_array();
+<?php
+include_once('../../front/db.php');
 
-    ?>
+$id = null;
+
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+}
+
+// 创建一个字典, 存储类型 ID 与 description 的关系
+$result = $con->query("select * from type;");
+$type = null;
+while ($row = $result->fetch_array()) {
+    $type[$row['id']] = $row['description'];
+}
+
+$email = $nickname = '';
+if (isset($_COOKIE['email'])) {
+    $email = $_COOKIE['email'];
+}
+if (isset($_COOKIE['nickname'])) {
+    $nickname = $_COOKIE['nickname'];
+}
+
+$car_result = $con->query('select * from car');
+$car_id_array = null;
+while ($car_row = $car_result->fetch_array()) {
+    $car_id_array[] = $car_row['id'];
+}
+
+//echo var_dump($car_id_array);
+?>
+<div class="wrapper">
+
     <header class="main-header">
         <!-- Logo -->
-        <a href="../front/index.php" class="logo">
+        <a href="../../front/index.php" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>闪腾</b></span>
             <!-- logo for regular state and mobile devices -->
@@ -67,7 +77,7 @@
                 <span class="sr-only">Toggle navigation</span>
             </a>
             <div class="navbar-custom-menu">
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav">
                     <!-- Messages: style can be found in dropdown.less-->
 
                     <!-- Notifications: style can be found in dropdown.less -->
@@ -78,13 +88,13 @@
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!--todo:这里放用户的照片,和用户名-->
-                            <img src="../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                            <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
                             <span class="hidden-xs"><?php echo $nickname;?></span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                                 <p>
                                     <!--todo:用户名和职位-->
                                     <?php echo $nickname;?>
@@ -94,25 +104,29 @@
                             <!-- Menu Body -->
                             <li class="user-body">
                                 <div class="col-xs-4 text-center">
-                                    <a href="../front/my_favourite.php">收藏</a>
+                                    <a href="#">收藏</a>
                                 </div>
                                 <div class="col-xs-4 text-center">
-                                    <a href="../front/my_post_car.php">发布</a>
+                                    <a href="#">发布</a>
                                 </div>
                                 <div class="col-xs-4 text-center">
-                                    <a href="../front/search.php">购买</a>
+                                    <a href="#">购买</a>
                                 </div>
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="../front/profile_index.php" class="btn btn-default btn-flat">资料</a>
+                                    <a href="#" class="btn btn-default btn-flat">资料</a>
                                 </div>
                                 <div class="pull-right">
                                     <a href="#" class="btn btn-default btn-flat">退出</a>
                                 </div>
                             </li>
                         </ul>
+                    </li>
+                    <!-- Control Sidebar Toggle Button -->
+                    <li>
+                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                     </li>
                 </ul>
             </div>
@@ -125,7 +139,7 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
                     <!--todo:用户名-->
@@ -146,23 +160,23 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
                 <li class="header">导航</li>
-                <li class="active">
+                <li class="">
                     <!--todo:网页需要修改-->
-                    <a href="dashboard.php">
+                    <a href="../dashboard.php">
                         <i class="fa fa-dashboard"></i>
                         <span>信息概览</span>
                     </a>
                 </li>
-                <li class="treeview">
+                <li class="active treeview">
                     <a href="#">
                         <i class="fa fa-home"></i>
                         <span>主页管理</span>
                         <span class="label label-primary pull-right">3</span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="index/carousel.php"><i class="fa fa-circle-o"></i> 滑动板</a></li>
-                        <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> 广告栏</a></li>
-                        <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> 栏目修改</a></li>
+                        <li><a href="carousel.php"><i class="fa fa-circle-o"></i> 滑动板</a></li>
+                        <li><a href="../../pages/layout/boxed.html"><i class="fa fa-circle-o"></i> 广告栏</a></li>
+                        <li class="active"><a href="column_edit.php"><i class="fa fa-circle-o"></i> 栏目修改</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -172,9 +186,9 @@
                         <span class="label label-primary pull-right">2</span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="user/userinfo.php"><i class="fa fa-circle-o"></i> 用户信息</a></li>
-                        <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> 用户查询</a></li>
-                        <li><a href="user/userinfo.php"><i class="fa fa-circle-o"></i> 管理员信息</a></li>
+                        <li><a href="../user/userinfo.php"><i class="fa fa-circle-o"></i> 用户信息</a></li>
+                        <li><a href="../../pages/layout/boxed.html"><i class="fa fa-circle-o"></i> 用户查询</a></li>
+                        <li><a href="../user/admininfo.php"><i class="fa fa-circle-o"></i> 管理员信息</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -184,17 +198,10 @@
                         <span class="label label-primary pull-right">2</span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="car/carinfo.php"><i class="fa fa-circle-o"></i> 车辆信息</a></li>
-                        <li><a href="car/evaluate_car.php"><i class="fa fa-circle-o"></i> 车辆评估</a></li>
+                        <li><a href="../car/carinfo.php"><i class="fa fa-circle-o"></i> 车辆信息</a></li>
+                        <li><a href="../car/evaluate_car.php"><i class="fa fa-circle-o"></i> 车辆评估</a></li>
                     </ul>
                 </li>
-
-
-                <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-                <li class="header">LABELS</li>
-                <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -205,151 +212,114 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                后台管理
-                <small>信息概览</small>
+                主页管理
+                <small>栏目修改</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="../front/index.php"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li class="active">后台管理</li>
+                <li><a href="../../front/index.php"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li class="active"><a href="#">后台管理</a></li>
+                <li class="active">栏目修改</li>
             </ol>
         </section>
 
         <!-- Main content -->
         <section class="content">
-            <!-- Small boxes (Stat box) -->
-            <div class="row">
-                <div class="col-lg-4 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-aqua">
-                        <div class="inner">
-                            <h3>150</h3>
-                            <p>新订单</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-bag"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div><!-- ./col -->
 
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">栏目</h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>栏目 ID</th>
+                                <th>栏目名称</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                            $board_result = $con->query("select * from board");
+                            while ($board_row = $board_result->fetch_array()) {
+                                echo '<tr>';
+                                echo '<td>'.$board_row['id'].'</td>';
+                                echo '<td>'.$board_row['description'].'</td>';
+                                echo "<td><a href='column_edit.php?id=".$board_row['id']."'><button type='button' class='btn-xs btn-info'><i class='fa fa-cog'></i></button></a></td>";
+                                echo '</tr>';
+                            }
+                            ?>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>栏目 ID</th>
+                                <th>栏目名称</th>
+                                <th>操作</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
+            </div>
 
-                <div class="col-lg-4 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-yellow">
-                        <div class="inner">
-                            <!--todo: 这里改成数据库里的数据-->
-                            <h3>44</h3>
-                            <p>新用户注册</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-person-add"></i>
-                        </div>
-                        <a href="user/userinfo.php" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div><!-- ./col -->
-                <div class="col-lg-4 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-red">
-                        <div class="inner">
-                            <h3><?php echo $evaluate_num_row['0'];?></h3>
-                            <p>新申请认证车辆</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-car"></i>
-                        </div>
-                        <a href="car/evaluate_car.php" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div><!-- ./col -->
-            </div><!-- /.row -->
-            <!-- Main row -->
-            <div class="row">
-                <!-- Left col -->
-                <section class="col-lg-7 connectedSortable">
-                    <!-- Custom tabs (Charts with tabs)-->
-                    <!--todo:这里是用户\车辆增长表格-->
-                    <div class="nav-tabs-custom">
-                        <!-- Tabs within a box -->
-                        <ul class="nav nav-tabs pull-right">
-                            <li class="active"><a href="#revenue-chart" data-toggle="tab">用户</a></li>
-                            <li><a href="#sales-chart" data-toggle="tab">车辆</a></li>
-                            <li class="pull-left header"><i class="fa fa-inbox"></i> 增长数</li>
-                        </ul>
-                        <div class="tab-content no-padding">
-                            <!-- Morris chart - Sales -->
-                            <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;"></div>
-                            <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
-                        </div>
-                    </div><!-- /.nav-tabs-custom -->
-
-
-
-                    <!-- quick email widget -->
+            <?php
+            if ($id != null) {
+            ?>
+                <div class="col-md-12">
                     <div class="box box-info">
-                        <div class="box-header">
-                            <i class="fa fa-envelope"></i>
-                            <h3 class="box-title">快捷 Email</h3>
-                            <!-- tools box -->
-                            <div class="pull-right box-tools">
-                                <button class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
-                            </div><!-- /. tools -->
-                        </div>
+                        <div class="box-header with-border">
+                            <h3 class="box-title">栏目车辆 <small>栏目 ID:<?php echo $id; ?></small></h3>
+                        </div><!-- /.box-header -->
+                        <!-- form start -->
+
                         <div class="box-body">
-                            <form action="#" method="post">
-                                <div class="form-group">
-                                    <input type="email" class="form-control" name="emailto" placeholder="发给:">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="subject" placeholder="主题">
-                                </div>
-                                <div>
-                                    <textarea class="textarea" placeholder="消息" style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="box-footer clearfix">
-                            <button class="pull-right btn btn-default" id="sendEmail">发送 <i class="fa fa-arrow-circle-right"></i></button>
-                        </div>
-                    </div>
 
-                </section><!-- /.Left col -->
-                <!-- right col (We are only adding the ID to make the widgets sortable)-->
-                <section class="col-lg-5 connectedSortable">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>展示 ID</th>
+                                    <th>车辆 ID</th>
+                                    <th>目标车辆 ID</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                $display_result = $con->query("select * from display where board = ".$id.";");
 
-                    <!-- solid sales graph -->
-                    <div class="box box-solid bg-teal-gradient">
-                        <div class="box-header">
-                            <i class="fa fa-th"></i>
-                            <h3 class="box-title">销售图</h3>
-                            <div class="box-tools pull-right">
-                                <button class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                <button class="btn bg-teal btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>
-                            </div>
-                        </div>
-                        <div class="box-body border-radius-none">
-                            <div class="chart" id="line-chart" style="height: 250px;"></div>
+                                while ($display_row = $display_result->fetch_array()) {
+                                    echo '<tr>';
+                                    echo '<td>'.$display_row['id'].'</td>';
+                                    echo '<td>'.$display_row['car'].'</td>';
+                                    echo '<td>';
+                                    echo '<select name="option_car'.$display_row['id'].'" onchange="update('.$display_row['id'].', this.value)">';
+                                    foreach ($car_id_array as $car_id) {
+                                        echo '<option value="'.$car_id.'">'.$car_id.'</option>';
+                                    }
+                                    echo '</select>';
+                                    echo '</td>';
+
+                                    echo '</tr>';
+                                }
+
+                                ?>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>展示 ID</th>
+                                    <th>车辆 ID</th>
+                                    <th>目标车辆 ID</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+
                         </div><!-- /.box-body -->
-                        <div class="box-footer no-border">
-                            <div class="row">
-                                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                                    <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60" data-fgColor="#39CCCC">
-                                    <div class="knob-label">Mail-Orders</div>
-                                </div><!-- ./col -->
-                                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                                    <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60" data-fgColor="#39CCCC">
-                                    <div class="knob-label">Online</div>
-                                </div><!-- ./col -->
-                                <div class="col-xs-4 text-center">
-                                    <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgColor="#39CCCC">
-                                    <div class="knob-label">In-Store</div>
-                                </div><!-- ./col -->
-                            </div><!-- /.row -->
-                        </div><!-- /.box-footer -->
+
                     </div><!-- /.box -->
-
-
-
-                </section><!-- right col -->
-            </div><!-- /.row (main row) -->
+                </div>
+            <?php
+            }
+            ?>
 
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
@@ -526,43 +496,66 @@
          immediately after the control sidebar -->
     <div class="control-sidebar-bg"></div>
 </div><!-- ./wrapper -->
-
 <!-- jQuery 2.1.4 -->
-<script src="../plugins/jQuery/jQuery-2.1.4.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-    $.widget.bridge('uibutton', $.ui.button);
-</script>
+<script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <!-- Bootstrap 3.3.5 -->
-<script src="../bootstrap/js/bootstrap.min.js"></script>
-<!-- Morris.js charts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="../plugins/morris/morris.min.js"></script>
-<!-- Sparkline -->
-<script src="../plugins/sparkline/jquery.sparkline.min.js"></script>
-<!-- jvectormap -->
-<script src="../plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="../plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="../plugins/knob/jquery.knob.js"></script>
-<!-- daterangepicker -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
-<script src="../plugins/daterangepicker/daterangepicker.js"></script>
-<!-- datepicker -->
-<script src="../plugins/datepicker/bootstrap-datepicker.js"></script>
-<!-- Bootstrap WYSIHTML5 -->
-<script src="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-<!-- Slimscroll -->
-<script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="../../bootstrap/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="../plugins/fastclick/fastclick.min.js"></script>
+<script src="../../plugins/fastclick/fastclick.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../dist/js/app.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="../dist/js/pages/dashboard.js"></script>
+<script src="../../dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../dist/js/demo.js"></script>
+<script src="../../dist/js/demo.js"></script>
+<script>
+    $(function () {
+        $("#example1").DataTable();
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false
+        });
+    });
+
+    var xmlHttp;
+
+    function update(id, car) {
+        xmlHttp = new XMLHttpRequest();
+        var url = 'column_car_edit.php';
+        url = url + '?id=' + id + '&car=' + car;
+        xmlHttp.onreadystatechange = stateChanged;
+        xmlHttp.open("GET", url, true);
+        xmlHttp.send();
+    }
+
+    function stateChanged() {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+            // var json = xmlHttp.responseText;
+            // jsonObj = JSON.parse(json);
+            // // 如果 data 为 true 就说明数据库没有相同邮箱, 那么这一步就没有错误, 设置 submit 为可以按
+            // // 如果为 false 就说明有相同邮箱, 那么按钮应该不能按,并且有提示信息
+            // if (jsonObj.data == false) {
+            //     document.getElementById('emailsignup_error').innerHTML = '邮箱已存在';
+            //     document.getElementById('submitsignup').setAttribute('disabled', 'disabled');
+            //     emailValidate = false;
+            // } else {
+            //     document.getElementById('emailsignup_error').innerHTML = '';
+            //     // document.getElementById('submitsignup').setAttribute('disabled', 'abled');
+            //     emailValidate = true;
+            //     validate_button();
+            // }
+            // alert('success');
+//            header();
+            window.location.href = 'column_edit.php?id=<?php echo $id; ?>';
+        }
+    }
+</script>
 </body>
 </html>

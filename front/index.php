@@ -52,6 +52,11 @@ if (isset($_COOKIE['email'])) {
 if (isset($_COOKIE['nickname'])) {
 	$nickname = $_COOKIE['nickname'];
 }
+
+function changemile($length) {
+	$llength = $length / 10000 ;
+	return $llength.'万';
+}
 ?>
 
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -323,68 +328,49 @@ if (isset($_COOKIE['nickname'])) {
 				<img src="../dist/img/three_left_side.jpg" alt="左侧展示栏">
 			</div>
 
-			<div class="col-md-8 col-xs-12">
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="goods.php<?php ?>"><img src="../dist/img/cars/three_car_1.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/three_car_2.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/three_car_3.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/three_car_4.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/three_car_5.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/three_car_6.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
+			<?php
+			$board_result = $con->query("select * from display where board = 1;");
+			?>
 
+			<div class="col-md-8 col-xs-12">
+				<?php
+				while ($board_row = $board_result->fetch_array()) {
+					$car_id = $board_row['car'];
+					$image_result = $con->query("select * from image where car = ".$car_id.";");
+					$image_row = $image_result->fetch_array();
+					$car_result = $con->query('select * from car where id = '.$car_id.';');
+					$car_row = $car_result->fetch_array();
+//					echo '<div class="col-md-4">';
+//					echo '	<div class="thumbnail">';
+//					echo '		<a href="goods.php?id='.$car_id.'"><img src="'.$image_row['src'].'" alt="雪弗兰" /></a>';
+//					echo '		<div class="caption">';
+//					echo '			<a href=""><h3>'.$car_row['model'].' 2012款</h3></a>';
+//					echo '			<a href=""><p>'.$car_row['title'].'</p></a>';
+//					echo '			<p class="priceforcar">￥'.changemile($car_row['price']).'万</p>';
+//					echo '		</div>';
+//					echo '	</div>';
+//					echo '</div>';
+
+					echo '<div class="col-md-4">
+                        <div class="thumbnail">
+                            <a href="';
+					echo 'goods.php?id='.$car_id.'"><img src="'.$image_row['src'].'" alt="雪弗兰" /></a>
+                            <div class="caption">
+                                <a href="';
+					echo 'goods.php?id='.$car_id.'"><p>'.$car_row['title'].'</p></a>
+                                <p>'.$car_row['year'].'上牌 | '.changemile($car_row['mile']);
+					$userresult = $con->query("select * from user where id=".$car_row['user']);
+					$userrow = $userresult->fetch_array();
+					if ($userrow['city']) {
+						echo ' | '.$userrow['city'];
+					}
+					echo '</p>
+                                <p class="priceforcar">￥'.changemile($car_row['price']).'</p>
+                            </div>
+                        </div>
+                    </div>';
+				}
+				?>
 			</div>
 		</div>
 		
@@ -394,68 +380,49 @@ if (isset($_COOKIE['nickname'])) {
 				<img src="../dist/img/individual_left_side.jpg" alt="左侧展示栏">
 			</div>
 
-			<div class="col-md-8 col-xs-12">
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/individual_car_1.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/individual_car_2.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/individual_car_3.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/individual_car_4.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/individual_car_5.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/individual_car_6.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
+			<?php
+			$board_result = $con->query("select * from display where board = 2;");
+			?>
 
+			<div class="col-md-8 col-xs-12">
+				<?php
+				while ($board_row = $board_result->fetch_array()) {
+					$car_id = $board_row['car'];
+					$image_result = $con->query("select * from image where car = ".$car_id.";");
+					$image_row = $image_result->fetch_array();
+					$car_result = $con->query('select * from car where id = '.$car_id.';');
+					$car_row = $car_result->fetch_array();
+//					echo '<div class="col-md-4">';
+//					echo '	<div class="thumbnail">';
+//					echo '		<a href="goods.php?id='.$car_id.'"><img src="'.$image_row['src'].'" alt="雪弗兰" /></a>';
+//					echo '		<div class="caption">';
+//					echo '			<a href=""><h3>'.$car_row['model'].' 2012款</h3></a>';
+//					echo '			<a href=""><p>'.$car_row['title'].'</p></a>';
+//					echo '			<p class="priceforcar">￥'.changemile($car_row['price']).'万</p>';
+//					echo '		</div>';
+//					echo '	</div>';
+//					echo '</div>';
+
+					echo '<div class="col-md-4">
+                        <div class="thumbnail">
+                            <a href="';
+					echo 'goods.php?id='.$car_id.'"><img src="'.$image_row['src'].'" alt="雪弗兰" /></a>
+                            <div class="caption">
+                                <a href="';
+					echo 'goods.php?id='.$car_id.'"><p>'.$car_row['title'].'</p></a>
+                                <p>'.$car_row['year'].'上牌 | '.changemile($car_row['mile']);
+					$userresult = $con->query("select * from user where id=".$car_row['user']);
+					$userrow = $userresult->fetch_array();
+					if ($userrow['city']) {
+						echo ' | '.$userrow['city'];
+					}
+					echo '</p>
+                                <p class="priceforcar">￥'.changemile($car_row['price']).'</p>
+                            </div>
+                        </div>
+                    </div>';
+				}
+				?>
 			</div>
 		</div>
 		<div role="tabpanel" class="tab-pane fade" id="source">
@@ -463,68 +430,49 @@ if (isset($_COOKIE['nickname'])) {
 				<img src="../dist/img/left-side.jpg" alt="左侧展示栏">
 			</div>
 
-			<div class="col-md-8 col-xs-12">
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/car_1.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/car_2.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/car_3.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>s
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/car_4.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/car_5.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/car_6.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
+			<?php
+			$board_result = $con->query("select * from display where board = 3;");
+			?>
 
+			<div class="col-md-8 col-xs-12">
+				<?php
+				while ($board_row = $board_result->fetch_array()) {
+					$car_id = $board_row['car'];
+					$image_result = $con->query("select * from image where car = ".$car_id.";");
+					$image_row = $image_result->fetch_array();
+					$car_result = $con->query('select * from car where id = '.$car_id.';');
+					$car_row = $car_result->fetch_array();
+//					echo '<div class="col-md-4">';
+//					echo '	<div class="thumbnail">';
+//					echo '		<a href="goods.php?id='.$car_id.'"><img src="'.$image_row['src'].'" alt="雪弗兰" /></a>';
+//					echo '		<div class="caption">';
+//					echo '			<a href=""><h3>'.$car_row['model'].' 2012款</h3></a>';
+//					echo '			<a href=""><p>'.$car_row['title'].'</p></a>';
+//					echo '			<p class="priceforcar">￥'.changemile($car_row['price']).'万</p>';
+//					echo '		</div>';
+//					echo '	</div>';
+//					echo '</div>';
+
+					echo '<div class="col-md-4">
+                        <div class="thumbnail">
+                            <a href="';
+					echo 'goods.php?id='.$car_id.'"><img src="'.$image_row['src'].'" alt="雪弗兰" /></a>
+                            <div class="caption">
+                                <a href="';
+					echo 'goods.php?id='.$car_id.'"><p>'.$car_row['title'].'</p></a>
+                                <p>'.$car_row['year'].'上牌 | '.changemile($car_row['mile']);
+					$userresult = $con->query("select * from user where id=".$car_row['user']);
+					$userrow = $userresult->fetch_array();
+					if ($userrow['city']) {
+						echo ' | '.$userrow['city'];
+					}
+					echo '</p>
+                                <p class="priceforcar">￥'.changemile($car_row['price']).'</p>
+                            </div>
+                        </div>
+                    </div>';
+				}
+				?>
 			</div>
 		</div>
 	</div>
@@ -546,68 +494,49 @@ if (isset($_COOKIE['nickname'])) {
 				<img src="../dist/img/suv_left_side.jpg" alt="左侧展示栏">
 			</div>
 
-			<div class="col-md-8 col-xs-12">
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/suv_car_1.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/suv_car_2.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/suv_car_3.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/suv_car_4.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/suv_car_5.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/suv_car_6.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
+			<?php
+			$board_result = $con->query("select * from display where board = 4;");
+			?>
 
+			<div class="col-md-8 col-xs-12">
+				<?php
+				while ($board_row = $board_result->fetch_array()) {
+					$car_id = $board_row['car'];
+					$image_result = $con->query("select * from image where car = ".$car_id.";");
+					$image_row = $image_result->fetch_array();
+					$car_result = $con->query('select * from car where id = '.$car_id.';');
+					$car_row = $car_result->fetch_array();
+//					echo '<div class="col-md-4">';
+//					echo '	<div class="thumbnail">';
+//					echo '		<a href="goods.php?id='.$car_id.'"><img src="'.$image_row['src'].'" alt="雪弗兰" /></a>';
+//					echo '		<div class="caption">';
+//					echo '			<a href=""><h3>'.$car_row['model'].' 2012款</h3></a>';
+//					echo '			<a href=""><p>'.$car_row['title'].'</p></a>';
+//					echo '			<p class="priceforcar">￥'.changemile($car_row['price']).'万</p>';
+//					echo '		</div>';
+//					echo '	</div>';
+//					echo '</div>';
+
+					echo '<div class="col-md-4">
+                        <div class="thumbnail">
+                            <a href="';
+					echo 'goods.php?id='.$car_id.'"><img src="'.$image_row['src'].'" alt="雪弗兰" /></a>
+                            <div class="caption">
+                                <a href="';
+					echo 'goods.php?id='.$car_id.'"><p>'.$car_row['title'].'</p></a>
+                                <p>'.$car_row['year'].'上牌 | '.changemile($car_row['mile']);
+					$userresult = $con->query("select * from user where id=".$car_row['user']);
+					$userrow = $userresult->fetch_array();
+					if ($userrow['city']) {
+						echo ' | '.$userrow['city'];
+					}
+					echo '</p>
+                                <p class="priceforcar">￥'.changemile($car_row['price']).'</p>
+                            </div>
+                        </div>
+                    </div>';
+				}
+				?>
 			</div>
 		</div>
 		<div role="tabpanel" class="tab-pane fade" id="businesstype">
@@ -615,68 +544,49 @@ if (isset($_COOKIE['nickname'])) {
 				<img src="../dist/img/business_left_side.jpg" alt="左侧展示栏">
 			</div>
 
-			<div class="col-md-8 col-xs-12">
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/business_car_1.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/business_car_2.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/business_car_3.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/business_car_4.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/business_car_5.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/business_car_6.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
+			<?php
+			$board_result = $con->query("select * from display where board = 5;");
+			?>
 
+			<div class="col-md-8 col-xs-12">
+				<?php
+				while ($board_row = $board_result->fetch_array()) {
+					$car_id = $board_row['car'];
+					$image_result = $con->query("select * from image where car = ".$car_id.";");
+					$image_row = $image_result->fetch_array();
+					$car_result = $con->query('select * from car where id = '.$car_id.';');
+					$car_row = $car_result->fetch_array();
+//					echo '<div class="col-md-4">';
+//					echo '	<div class="thumbnail">';
+//					echo '		<a href="goods.php?id='.$car_id.'"><img src="'.$image_row['src'].'" alt="雪弗兰" /></a>';
+//					echo '		<div class="caption">';
+//					echo '			<a href=""><h3>'.$car_row['model'].' 2012款</h3></a>';
+//					echo '			<a href=""><p>'.$car_row['title'].'</p></a>';
+//					echo '			<p class="priceforcar">￥'.changemile($car_row['price']).'万</p>';
+//					echo '		</div>';
+//					echo '	</div>';
+//					echo '</div>';
+
+					echo '<div class="col-md-4">
+                        <div class="thumbnail">
+                            <a href="';
+					echo 'goods.php?id='.$car_id.'"><img src="'.$image_row['src'].'" alt="雪弗兰" /></a>
+                            <div class="caption">
+                                <a href="';
+					echo 'goods.php?id='.$car_id.'"><p>'.$car_row['title'].'</p></a>
+                                <p>'.$car_row['year'].'上牌 | '.changemile($car_row['mile']);
+					$userresult = $con->query("select * from user where id=".$car_row['user']);
+					$userrow = $userresult->fetch_array();
+					if ($userrow['city']) {
+						echo ' | '.$userrow['city'];
+					}
+					echo '</p>
+                                <p class="priceforcar">￥'.changemile($car_row['price']).'</p>
+                            </div>
+                        </div>
+                    </div>';
+				}
+				?>
 			</div>
 		</div>
 		<div role="tabpanel" class="tab-pane fade" id="forstep">
@@ -684,68 +594,49 @@ if (isset($_COOKIE['nickname'])) {
 				<img src="../dist/img/forstep_left_side.jpg" alt="左侧展示栏">
 			</div>
 
-			<div class="col-md-8 col-xs-12">
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/forstep_car_1.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/forstep_car_2.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/forstep_car_3.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/forstep_car_4.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/forstep_car_5.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/forstep_car_6.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
+			<?php
+			$board_result = $con->query("select * from display where board = 6;");
+			?>
 
+			<div class="col-md-8 col-xs-12">
+				<?php
+				while ($board_row = $board_result->fetch_array()) {
+					$car_id = $board_row['car'];
+					$image_result = $con->query("select * from image where car = ".$car_id.";");
+					$image_row = $image_result->fetch_array();
+					$car_result = $con->query('select * from car where id = '.$car_id.';');
+					$car_row = $car_result->fetch_array();
+//					echo '<div class="col-md-4">';
+//					echo '	<div class="thumbnail">';
+//					echo '		<a href="goods.php?id='.$car_id.'"><img src="'.$image_row['src'].'" alt="雪弗兰" /></a>';
+//					echo '		<div class="caption">';
+//					echo '			<a href=""><h3>'.$car_row['model'].' 2012款</h3></a>';
+//					echo '			<a href=""><p>'.$car_row['title'].'</p></a>';
+//					echo '			<p class="priceforcar">￥'.changemile($car_row['price']).'万</p>';
+//					echo '		</div>';
+//					echo '	</div>';
+//					echo '</div>';
+
+					echo '<div class="col-md-4">
+                        <div class="thumbnail">
+                            <a href="';
+					echo 'goods.php?id='.$car_id.'"><img src="'.$image_row['src'].'" alt="雪弗兰" /></a>
+                            <div class="caption">
+                                <a href="';
+					echo 'goods.php?id='.$car_id.'"><p>'.$car_row['title'].'</p></a>
+                                <p>'.$car_row['year'].'上牌 | '.changemile($car_row['mile']);
+					$userresult = $con->query("select * from user where id=".$car_row['user']);
+					$userrow = $userresult->fetch_array();
+					if ($userrow['city']) {
+						echo ' | '.$userrow['city'];
+					}
+					echo '</p>
+                                <p class="priceforcar">￥'.changemile($car_row['price']).'</p>
+                            </div>
+                        </div>
+                    </div>';
+				}
+				?>
 			</div>
 		</div>
 		<div role="tabpanel" class="tab-pane fade" id="capi">
@@ -753,67 +644,49 @@ if (isset($_COOKIE['nickname'])) {
 				<img src="../dist/img/capi_left_side.jpg" alt="左侧展示栏">
 			</div>
 
+			<?php
+			$board_result = $con->query("select * from display where board = 7;");
+			?>
+
 			<div class="col-md-8 col-xs-12">
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/capi_car_1.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/capi_car_2.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/capi_car_3.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/capi_car_4.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/capi_car_5.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="thumbnail">
-						<a href="#<?php ?>"><img src="../dist/img/cars/capi_car_6.jpg" alt="雪弗兰" /></a>
-						<div class="caption">
-							<a href="#<?php ?>"><h3>雪弗兰 2012款</h3></a>
-							<a href="#<?php ?>"><p>科帕奇 2.4 手自一体 7座豪华导航版</p></a>
-							<p class="priceforcar">￥15.28万</p>
-						</div>
-					</div>
-				</div>
+				<?php
+				while ($board_row = $board_result->fetch_array()) {
+					$car_id = $board_row['car'];
+					$image_result = $con->query("select * from image where car = ".$car_id.";");
+					$image_row = $image_result->fetch_array();
+					$car_result = $con->query('select * from car where id = '.$car_id.';');
+					$car_row = $car_result->fetch_array();
+//					echo '<div class="col-md-4">';
+//					echo '	<div class="thumbnail">';
+//					echo '		<a href="goods.php?id='.$car_id.'"><img src="'.$image_row['src'].'" alt="雪弗兰" /></a>';
+//					echo '		<div class="caption">';
+//					echo '			<a href=""><h3>'.$car_row['model'].' 2012款</h3></a>';
+//					echo '			<a href=""><p>'.$car_row['title'].'</p></a>';
+//					echo '			<p class="priceforcar">￥'.changemile($car_row['price']).'万</p>';
+//					echo '		</div>';
+//					echo '	</div>';
+//					echo '</div>';
+
+					echo '<div class="col-md-4">
+                        <div class="thumbnail">
+                            <a href="';
+					echo 'goods.php?id='.$car_id.'"><img src="'.$image_row['src'].'" alt="雪弗兰" /></a>
+                            <div class="caption">
+                                <a href="';
+					echo 'goods.php?id='.$car_id.'"><p>'.$car_row['title'].'</p></a>
+                                <p>'.$car_row['year'].'上牌 | '.changemile($car_row['mile']);
+					$userresult = $con->query("select * from user where id=".$car_row['user']);
+					$userrow = $userresult->fetch_array();
+					if ($userrow['city']) {
+						echo ' | '.$userrow['city'];
+					}
+					echo '</p>
+                                <p class="priceforcar">￥'.changemile($car_row['price']).'</p>
+                            </div>
+                        </div>
+                    </div>';
+				}
+				?>
 			</div>
 		</div>
 	</div>

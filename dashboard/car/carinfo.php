@@ -157,7 +157,7 @@ if (isset($_COOKIE['nickname'])) {
                     <ul class="treeview-menu">
                         <li><a href="../index/carousel.php"><i class="fa fa-circle-o"></i> 滑动板</a></li>
                         <li><a href="../../pages/layout/boxed.html"><i class="fa fa-circle-o"></i> 广告栏</a></li>
-                        <li><a href="../../pages/layout/fixed.html"><i class="fa fa-circle-o"></i> 栏目修改</a></li>
+                        <li><a href="../index/column_edit.php"><i class="fa fa-circle-o"></i> 栏目修改</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
