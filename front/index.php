@@ -162,17 +162,17 @@ function changemile($length) {
 <div class="jumbotron">
 	<div class="container">
 		<h1>寻找适合你的二手车</h1>
-		<form class="form-inline">
-			<div class="form-group">
-				<label for="make" class="sr-only">品牌:</label>
-				<input type="text" class="form-control" name="make" id="make" placeholder="搜索品牌" />
-			</div>
-			<div class="form-group">
-				<label for="model" class="sr-only">型号:</label>
-				<input type="text" class="form-control" name="model" id="model" placeholder="搜索型号" />
-			</div>
-			<input type="submit" class="btn btn-default"/>
-		</form>
+<!--		<form class="form-inline">-->
+<!--			<div class="form-group">-->
+<!--				<label for="make" class="sr-only">品牌:</label>-->
+<!--				<input type="text" class="form-control" name="make" id="make" placeholder="搜索品牌" />-->
+<!--			</div>-->
+<!--			<div class="form-group">-->
+<!--				<label for="model" class="sr-only">型号:</label>-->
+<!--				<input type="text" class="form-control" name="model" id="model" placeholder="搜索型号" />-->
+<!--			</div>-->
+<!--			<input type="submit" class="btn btn-default"/>-->
+<!--		</form>-->
 		<br /><br />
 		<div class="container">
 			<ul class="list-inline">
@@ -307,11 +307,11 @@ function changemile($length) {
 	</div>
 </div>
 
-<div class="container">
-	<div class="col-md-4">广告栏1</div>
-	<div class="col-md-4">广告栏2</div>
-	<div class="col-md-4">广告栏3</div>
-</div>
+<!--<div class="container">-->
+<!--	<div class="col-md-4">广告栏1</div>-->
+<!--	<div class="col-md-4">广告栏2</div>-->
+<!--	<div class="col-md-4">广告栏3</div>-->
+<!--</div>-->
 
 <div class="container">
 	<!-- Nav tabs -->

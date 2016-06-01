@@ -152,11 +152,10 @@ if (isset($_COOKIE['nickname'])) {
                     <a href="#">
                         <i class="fa fa-home"></i>
                         <span>主页管理</span>
-                        <span class="label label-primary pull-right">3</span>
+                        <span class="label label-primary pull-right">2</span>
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="../index/carousel.php"><i class="fa fa-circle-o"></i> 滑动板</a></li>
-                        <li><a href="../../pages/layout/boxed.html"><i class="fa fa-circle-o"></i> 广告栏</a></li>
                         <li><a href="../index/column_edit.php"><i class="fa fa-circle-o"></i> 栏目修改</a></li>
                     </ul>
                 </li>
@@ -168,7 +167,6 @@ if (isset($_COOKIE['nickname'])) {
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="../user/userinfo.php"><i class="fa fa-circle-o"></i> 用户信息</a></li>
-                        <li><a href="../../pages/layout/boxed.html"><i class="fa fa-circle-o"></i> 用户查询</a></li>
                         <li><a href="../user/admininfo.php"><i class="fa fa-circle-o"></i> 管理员信息</a></li>
                     </ul>
                 </li>
@@ -183,13 +181,6 @@ if (isset($_COOKIE['nickname'])) {
                         <li><a href="evaluate_car.php"><i class="fa fa-circle-o"></i> 车辆评估</a></li>
                     </ul>
                 </li>
-
-
-                <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-                <li class="header">LABELS</li>
-                <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
             </ul>
         </section>
         <!-- /.sidebar -->

@@ -66,6 +66,8 @@ function changemile($length) {
 $user_result = $con->query('select * from user WHERE email="'.$email.'";');
 $user_row = $user_result->fetch_array();
 $user_id = $user_row['id'];
+
+
 ?>
 
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -228,13 +230,16 @@ $image_result = $con->query('select * from image where car = '.$row['id'].';');
         </a>
     </div>
 </div>
-
+<?php
+$owner_result = $con->query('select * from user where id ='.$row['user'].';');
+$own_row = $owner_result->fetch_array();
+?>
 <div class="container">
     <div class="col-md-8">
         <h1><?php echo $row['title']; ?></h1>
     </div>
     <div class="col-md-4" style="margin-top: 15px">
-        <button type="button" class="btn btn-lg btn-danger">
+        <button type="button" class="btn btn-lg btn-danger" onclick="alert('<?php echo '车主电话: '.$own_row['phone']; ?>')">
             <i class="fa fa-phone"></i>
             预约看车
         </button>
@@ -303,8 +308,7 @@ $image_result = $con->query('select * from image where car = '.$row['id'].';');
             </div>
             <div class="box-body">
                 <?php
-                $owner_result = $con->query('select * from user where id ='.$row['user'].';');
-                $own_row = $owner_result->fetch_array();
+
                 echo '姓名:'.$own_row['nickname'].'&nbsp;&nbsp;城市:';
                 if ($own_row['city'] == '') {
                     echo '无';
@@ -439,7 +443,7 @@ $image_result = $con->query('select * from image where car = '.$row['id'].';');
 
 <footer class="footer">
     <div class="container">
-        <p class="text-muted">这是footer,写一些版权信息什么的</p>
+        <p class="text-muted"><?include_once ('footer.php'); ?></p>
     </div>
 </footer>
 
