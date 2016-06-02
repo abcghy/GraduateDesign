@@ -260,7 +260,7 @@ if (isset($_COOKIE['nickname'])) {
             </div>
 
 
-            <div class="col-md-4">
+            <div class="col-md-8">
                 <div class="box box-info">
                     <div class="box-header with-border">
                         <h3 class="box-title">添加图片</h3>
